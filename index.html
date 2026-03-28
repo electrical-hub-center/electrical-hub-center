@@ -108,13 +108,39 @@ function orderProduct(product, price) {
 <div class="grid">
 
 <div class="card">
-<img src="https://via.placeholder.com/150">
-<h4>Fan</h4>
-<p>₹1500</p>
-<a href="https://api.whatsapp.com/send?phone=919434852965&text=I%20want%20to%20order%20Fan" target="_blank">
-  <button>Order Now</button>
-</a>
+  <img src="https://via.placeholder.com/150">
+  <h4>Fan</h4>
+  <p>₹1500</p>
+
+  <input type="text" id="name" placeholder="Your Name">
+  <input type="tel" id="phone" placeholder="Phone Number">
+
+  <button onclick="sendOrder('Fan','1500')">Order Now</button>
 </div>
+
+<script>
+function sendOrder(product, price) {
+
+  var name = document.getElementById("name").value;
+  var phone = document.getElementById("phone").value;
+
+  if(name=="" || phone==""){
+    alert("Please fill all details");
+    return;
+  }
+
+  // WhatsApp message
+  var message = "New Order:%0AName: " + name + "%0APhone: " + phone + "%0AProduct: " + product + "%0APrice: " + price;
+
+  var whatsappURL = "https://api.whatsapp.com/send?phone=919434852965&text=" + message;
+
+  window.open(whatsappURL, "_blank");
+
+  // Email send
+  window.location.href = "https://formsubmit.co/YOUR-EMAIL@gmail.com?name="+name+"&phone="+phone+"&product="+product+"&price="+price;
+
+}
+</script>
 
 <div class="card">
 <img src="https://via.placeholder.com/150">
