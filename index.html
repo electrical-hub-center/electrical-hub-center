@@ -142,33 +142,60 @@ function sendOrder(product, price) {
 
 }
 </script>
-
 <div class="card">
-<img src="https://via.placeholder.com/150">
-<h4>Light</h4>
-<p>₹500</p>
-<a href="https://api.whatsapp.com/send?phone=919434852965&text=I%20want%20to%20order%20Light" target="_blank">
-  <button>Order Now</button>
-</a>
+  <img src="https://via.placeholder.com/150">
+  <h4>Light</h4>
+  <p>₹500</p>
+
+  <input type="text" id="name1" placeholder="Your Name">
+  <input type="tel" id="phone1" placeholder="Phone Number">
+
+  <button onclick="sendOrder('Light','500','name1','phone1')">Order Now</button>
+</div>
+<div class="card">
+  <img src="https://via.placeholder.com/150">
+  <h4>AC</h4>
+  <p>₹30000</p>
+
+  <input type="text" id="name2" placeholder="Your Name">
+  <input type="tel" id="phone2" placeholder="Phone Number">
+
+  <button onclick="sendOrder('AC','30000','name2','phone2')">Order Now</button>
+</div>
+<div class="card">
+  <img src="https://via.placeholder.com/150">
+  <h4>Refrigerator</h4>
+  <p>₹20000</p>
+
+  <input type="text" id="name3" placeholder="Your Name">
+  <input type="tel" id="phone3" placeholder="Phone Number">
+
+  <button onclick="sendOrder('Refrigerator','20000','name3','phone3')">Order Now</button>
 </div>
 
-<div class="card">
-<img src="https://via.placeholder.com/150">
-<h4>AC</h4>
-<p>₹30000</p>
-<a href="https://api.whatsapp.com/send?phone=919434852965&text=I%20want%20to%20order%20AC" target="_blank">
-  <button>Order Now</button>
-</a>
-</div>
+<script>
+function sendOrder(product, price, nameId, phoneId) {
 
-<div class="card">
-<img src="https://via.placeholder.com/150">
-<h4>Refrigerator</h4>
-<p>₹20000</p>
-<a href="https://api.whatsapp.com/send?phone=919434852965&text=I%20want%20to%20order%20Refrigerator" target="_blank">
-  <button>Order Now</button>
-</a>
-</div>
+  var name = document.getElementById(nameId).value;
+  var phone = document.getElementById(phoneId).value;
+
+  if(name=="" || phone==""){
+    alert("Please fill all details");
+    return;
+  }
+
+  // WhatsApp Message
+  var message = "New Order:%0AName: " + name + "%0APhone: " + phone + "%0AProduct: " + product + "%0APrice: " + price;
+
+  var whatsappURL = "https://api.whatsapp.com/send?phone=919434852965&text=" + message;
+
+  window.open(whatsappURL, "_blank");
+
+  // Email Send
+  window.location.href = "https://formsubmit.co/YOUR-EMAIL@gmail.com?name="+name+"&phone="+phone+"&product="+product+"&price="+price;
+
+}
+</script>
 
 </div>
 
