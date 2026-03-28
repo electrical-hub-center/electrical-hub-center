@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Electrical Hub Center</title>
+
+<style>
+body {font-family: Arial; margin:0;}
+header {
+  background:#0a3d62;
+  color:white;
+  padding:10px;
+  text-align:center;
+}
+section {padding:20px;}
+h2 {color:#0a3d62;}
+
+.grid {
+  display:grid;
+  grid-template-columns: repeat(auto-fit,minmax(160px,1fr));
+  gap:15px;
+}
+
+.card {
+  border:1px solid #ccc;
+  padding:10px;
+  text-align:center;
+  border-radius:10px;
+}
+
+.card img {
+  width:100%;
+  height:120px;
+  object-fit:cover;
+  border-radius:10px;
+}
+
+button {
+  background:#0a3d62;
+  color:white;
+  padding:10px;
+  border:none;
+  margin-top:5px;
+  cursor:pointer;
+}
+
+input, select {
+  width:100%;
+  padding:8px;
+  margin:5px 0;
+}
+</style>
+
+<script>
+// WhatsApp Order
+function orderProduct(product, price) {
+  var message = "New Order:%0AProduct: " + product + "%0APrice: ₹" + price;
+  window.open("https://wa.me/91XXXXXXXXXX?text=" + message);
+}
+</script>
+
+</head>
+
+<body>
+
+<header>
+<h1>Electrical Hub Center</h1>
+<p>All Electrical & Electronics Solutions in One Place</p>
+</header>
+
+<!-- SERVICES -->
+<section>
+<h2>Electrical Services & Price</h2>
+
+<div class="grid">
+<div class="card">Fan Repair - ₹150</div>
+<div class="card">Light Installation - ₹100</div>
+<div class="card">Switch Repair - ₹80</div>
+<div class="card">AC Service - ₹500</div>
+<div class="card">Refrigerator Repair - ₹400</div>
+<div class="card">House Wiring - ₹3000+</div>
+</div>
+
+<h3>Book Service</h3>
+
+<form action="https://formsubmit.co/YOUR-EMAIL@gmail.com" method="POST">
+<input type="text" name="name" placeholder="Your Name" required>
+<input type="tel" name="phone" placeholder="Phone Number" required>
+
+<select name="service">
+<option>Fan Repair</option>
+<option>Light Installation</option>
+<option>AC Service</option>
+<option>Refrigerator Repair</option>
+<option>House Wiring</option>
+</select>
+
+<button type="submit">Submit Booking</button>
+</form>
+
+</section>
+
+<!-- PRODUCTS -->
+<section>
+<h2>Shopping Products</h2>
+
+<div class="grid">
+
+<div class="card">
+<img src="https://via.placeholder.com/150">
+<h4>Fan</h4>
+<p>₹1500</p>
+<button onclick="orderProduct('Fan','1500')">Order Now</button>
+</div>
+
+<div class="card">
+<img src="https://via.placeholder.com/150">
+<h4>Light</h4>
+<p>₹500</p>
+<button onclick="orderProduct('Light','500')">Order Now</button>
+</div>
+
+<div class="card">
+<img src="https://via.placeholder.com/150">
+<h4>AC</h4>
+<p>₹30000</p>
+<button onclick="orderProduct('AC','30000')">Order Now</button>
+</div>
+
+<div class="card">
+<img src="https://via.placeholder.com/150">
+<h4>Refrigerator</h4>
+<p>₹20000</p>
+<button onclick="orderProduct('Refrigerator','20000')">Order Now</button>
+</div>
+
+</div>
+
+</section>
+
+<!-- CONTACT -->
+<section>
+<h2>Contact</h2>
+<p>📍 Nandigram, Purba Medinipur, West Bengal - 721631</p>
+<p>📞 91XXXXXXXXXX</p>
+</section>
+
+</body>
+</html>
