@@ -117,7 +117,14 @@ function orderProduct(product, price) {
   <input type="text" id="name" placeholder="Your Name">
   <input type="tel" id="phone" placeholder="Phone Number">
 
-  <button onclick="sendOrder('Fan','1500')">Order Now</button>
+<button onclick="openForm(
+'Fan',
+'1500',
+'https://i.ibb.co/abcd123/fan.jpg',
+'High speed ceiling fan'
+)">
+Order Now
+</button>
 </div>
 
 <script>
@@ -139,7 +146,7 @@ function sendOrder(product, price) {
   window.open(whatsappURL, "_blank");
 
   // Email send
-  window.location.href = "https://formsubmit.co/YOUR-EMAIL@gmail.com?name="+name+"&phone="+phone+"&product="+product+"&price="+price;
+  window.location.href = "https://formsubmit.co/khutiyanayan@gmail.com?name="+name+"&phone="+phone+"&product="+product+"&price="+price;
 
 }
 </script>
@@ -151,7 +158,7 @@ function sendOrder(product, price) {
   <input type="text" id="name1" placeholder="Your Name">
   <input type="tel" id="phone1" placeholder="Phone Number">
 
-  <button onclick="sendOrder('Light','500','name1','phone1')">Order Now</button>
+<button onclick="openForm('Light','500')">Order Now</button>
 </div>
 <div class="card">
 <img src="https://i.ibb.co/7dV5PSRC/569756d1309432370-home-office-air-conditioner-thread-idu-1.jpg">
@@ -161,7 +168,7 @@ function sendOrder(product, price) {
   <input type="text" id="name2" placeholder="Your Name">
   <input type="tel" id="phone2" placeholder="Phone Number">
 
-  <button onclick="sendOrder('AC','30000','name2','phone2')">Order Now</button>
+ <button onclick="openForm('AC','25000')">Order Now</button>
 </div>
 <div class="card">
   <img src="https://i.ibb.co/6cF5dByz/domestic-refrigerator-489.jpg">
@@ -171,31 +178,57 @@ function sendOrder(product, price) {
   <input type="text" id="name3" placeholder="Your Name">
   <input type="tel" id="phone3" placeholder="Phone Number">
 
-  <button onclick="sendOrder('Refrigerator','20000','name3','phone3')">Order Now</button>
+ <button onclick="openForm('Refrigerator','15000')">Order Now</button>
 </div>
 
+<div id="orderForm" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#000000aa;">
+
+<div style="background:white; padding:20px; margin:50px; border-radius:10px;">
+
+<h3>Confirm Order</h3>
+
+<input type="text" id="custName" placeholder="Your Name">
+<input type="tel" id="custPhone" placeholder="Phone Number">
+<textarea id="custAddress" placeholder="Full Address"></textarea>
+
+<button onclick="submitOrder()">Confirm Order</button>
+<button onclick="closeForm()">Cancel</button>
+
+</div>
 <script>
-function sendOrder(product, price, nameId, phoneId) {
 
-  var name = document.getElementById(nameId).value;
-  var phone = document.getElementById(phoneId).value;
+var productName = "";
+var productPrice = "";
 
-  if(name=="" || phone==""){
-    alert("Please fill all details");
+function openForm(name, price){
+  productName = name;
+  productPrice = price;
+  document.getElementById("orderForm").style.display = "block";
+}
+
+function closeForm(){
+  document.getElementById("orderForm").style.display = "none";
+}
+
+function submitOrder(){
+
+  var name = document.getElementById("custName").value;
+  var phone = document.getElementById("custPhone").value;
+  var address = document.getElementById("custAddress").value;
+
+  if(name=="" || phone=="" || address==""){
+    alert("Fill all details");
     return;
   }
 
-  // WhatsApp Message
-  var message = "New Order:%0AName: " + name + "%0APhone: " + phone + "%0AProduct: " + product + "%0APrice: " + price;
+  var msg = "New Order:%0AName:"+name+"%0APhone:"+phone+"%0AAddress:"+address+"%0AProduct:"+productName+"%0APrice:"+productPrice;
 
-  var whatsappURL = "https://api.whatsapp.com/send?phone=919434852965&text=" + message;
+  window.open("https://api.whatsapp.com/send?phone=919434852965&text="+msg);
 
-  window.open(whatsappURL, "_blank");
-
-  // Email Send
-  window.location.href = "https://formsubmit.co/YOUR-EMAIL@gmail.com?name="+name+"&phone="+phone+"&product="+product+"&price="+price;
+  window.location.href="https://formsubmit.co/khutiyanayan@gmail.com?Name="+name+"&Phone="+phone+"&Address="+address+"&Product="+productName+"&Price="+productPrice;
 
 }
+
 </script>
 
 </div>
