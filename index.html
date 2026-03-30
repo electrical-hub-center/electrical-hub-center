@@ -226,6 +226,63 @@ window.location.href="https://formsubmit.co/khutiyanayan@gmail.com?Name="+encode
  </div>
 
 </section>
+<script type="module">
 
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCm-lsMV-W9uNLRibsQalox13QHccgPFMc",
+  authDomain: "electrical-hub-center.firebaseapp.com",
+  projectId: "electrical-hub-center",
+  storageBucket: "electrical-hub-center.firebasestorage.app",
+  messagingSenderId: "128609071756",
+  appId: "1:128609071756:web:c821ff6616b4edd2c581a9"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+window.saveData = async function(){
+
+var fname = document.getElementById("fname").value;
+var lname = document.getElementById("lname").value;
+var email = document.getElementById("email").value;
+var phone = document.getElementById("phone").value;
+
+var village = document.getElementById("village").value;
+var city = document.getElementById("city").value;
+var district = document.getElementById("district").value;
+var state = document.getElementById("state").value;
+var pin = document.getElementById("pin").value;
+
+if(fname=="" || lname==""){
+alert("Enter Name");
+return;
+}
+
+if(email=="" && phone==""){
+alert("Enter Email or Phone");
+return;
+}
+
+await addDoc(collection(db, "customers"), {
+  firstName: fname,
+  lastName: lname,
+  email: email,
+  phone: phone,
+  village: village,
+  city: city,
+  district: district,
+  state: state,
+  pin: pin,
+  time: new Date()
+});
+
+alert("Data Saved ✅");
+
+}
+
+</script>
 </body>
 </html>
