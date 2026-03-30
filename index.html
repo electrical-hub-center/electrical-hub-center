@@ -56,19 +56,6 @@ input, select {
 <title>Electrical Hub Center</title>
 </head>
 <body>
-<h1>Electrical Hub Center</h1>
-
-<button onclick="openLogin()">Sign In</button>
-
-<script>
-function openLogin(){
-  window.location.href = "login.html";
-}
-</script>
-
-<head>
-<title>Login</title>
-</head>
 
 
 <h2>Customer Sign In</h2>
@@ -76,48 +63,17 @@ function openLogin(){
 <input type="text" id="fname" placeholder="First Name">
 <input type="text" id="lname" placeholder="Last Name">
 
-<input type="email" id="email" placeholder="Email">
-<input type="tel" id="phone" placeholder="Phone">
+<input type="email" id="email" placeholder="Email (optional)">
+<input type="tel" id="phone" placeholder="Phone (optional)">
 
-<button onclick="login()">Sign In</button>
+<input type="text" id="village" placeholder="Village (optional)">
+<input type="text" id="city" placeholder="City (optional)">
+<input type="text" id="district" placeholder="District (optional)">
+<input type="text" id="state" placeholder="State">
+<input type="text" id="pin" placeholder="Pin Code">
 
-<script>
-function login(){
+<button onclick="saveData()">Sign In</button>
 
-var fname = document.getElementById("fname").value;
-var lname = document.getElementById("lname").value;
-var email = document.getElementById("email").value;
-var phone = document.getElementById("phone").value;
-
-if(fname=="" || lname==""){
-alert("Enter Name");
-return;
-}
-
-if(email=="" && phone==""){
-alert("Enter Email or Phone");
-return;
-}
-
-// 🔥 Login save
-localStorage.setItem("userLoggedIn","true");
-
-// 🔥 Redirect
-window.location.href = "dashboard.html";
-}
-</script>
-
-<title>Dashboard</title>
-</head>
-
-
-<h1>Welcome to Electrical Hub Center</h1>
-// 🔴 LOGIN CHECK
-if(localStorage.getItem("userLoggedIn") !== "true"){
-  alert("Please Sign In First");
-  window.location.href = "login.html";
-}
-</script>
 <script>
 // WhatsApp Order
 function orderProduct(product, price) {
