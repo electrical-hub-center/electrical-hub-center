@@ -69,6 +69,23 @@ function orderProduct(product, price) {
 <p>All Electrical & Electronics Solutions in One Place</p>
 </header>
 
+
+<h2>Customer Sign In</h2>
+
+<input type="text" id="fname" placeholder="First Name">
+<input type="text" id="lname" placeholder="Last Name">
+
+<input type="email" id="email" placeholder="Email (optional)">
+<input type="tel" id="phone" placeholder="Phone (optional)">
+
+<input type="text" id="village" placeholder="Village (optional)">
+<input type="text" id="city" placeholder="City (optional)">
+<input type="text" id="district" placeholder="District (optional)">
+<input type="text" id="state" placeholder="State (optional)">
+<input type="text" id="pin" placeholder="Pin Code (optional)">
+
+<button onclick="saveData()">Sign In</button>
+
 <!-- SERVICES -->
 <section>
 <h2>Electrical Services & Price</h2>
@@ -279,7 +296,7 @@ await addDoc(collection(db, "customers"), {
   time: new Date()
 });
 
-alert("Data Saved ✅");
+alert("Sine-in Successfully ✅");
 
 }
 
