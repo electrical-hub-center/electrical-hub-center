@@ -67,6 +67,61 @@ function openLogin(){
 </script>
 </body>
 
+<head>
+<title>Login</title>
+</head>
+
+<body>
+
+<h2>Customer Sign In</h2>
+
+<input type="text" id="fname" placeholder="First Name">
+<input type="text" id="lname" placeholder="Last Name">
+
+<input type="email" id="email" placeholder="Email">
+<input type="tel" id="phone" placeholder="Phone">
+
+<button onclick="login()">Sign In</button>
+
+<script>
+function login(){
+
+var fname = document.getElementById("fname").value;
+var lname = document.getElementById("lname").value;
+var email = document.getElementById("email").value;
+var phone = document.getElementById("phone").value;
+
+if(fname=="" || lname==""){
+alert("Enter Name");
+return;
+}
+
+if(email=="" && phone==""){
+alert("Enter Email or Phone");
+return;
+}
+
+// 🔥 Login save
+localStorage.setItem("userLoggedIn","true");
+
+// 🔥 Redirect
+window.location.href = "dashboard.html";
+}
+</script>
+
+</body>
+<title>Dashboard</title>
+</head>
+
+<body>
+
+<h1>Welcome to Electrical Hub Center</h1>
+// 🔴 LOGIN CHECK
+if(localStorage.getItem("userLoggedIn") !== "true"){
+  alert("Please Sign In First");
+  window.location.href = "login.html";
+}
+</script>
 <script>
 // WhatsApp Order
 function orderProduct(product, price) {
