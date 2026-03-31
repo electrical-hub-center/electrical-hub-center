@@ -1,7 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Electrical Hub Center</title>
+
 <style>
+
+/* 🔥 Animated Gradient Background */
 body {
   margin: 0;
   height: 100vh;
@@ -12,34 +18,68 @@ body {
 
   background: linear-gradient(-45deg, #0a3d62, #3c6382, #60a3bc, #82ccdd);
   background-size: 400% 400%;
-  animation: gradientBG 8s ease infinite;
+  animation: bg 8s ease infinite;
 }
 
-@keyframes gradientBG {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+@keyframes bg {
+  0% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
+  100% {background-position: 0% 50%;}
 }
 
+/* 🔥 Glass container */
 .container {
   text-align: center;
+  padding: 30px;
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  background: rgba(255,255,255,0.1);
   color: white;
 }
+
+/* 🔥 Title */
+h1 {
+  margin-bottom: 20px;
+}
+
+/* 🔥 Button animation */
+button {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 25px;
+  background: #ffffff;
+  color: #0a3d62;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* Hover effect */
+button:hover {
+  background: #0a3d62;
+  color: white;
+  transform: scale(1.1);
+}
+
+/* Click animation */
+button:active {
+  transform: scale(0.95);
+}
+
 </style>
-<title>Electrical Hub Center</title>
 </head>
 
 <body>
-<div class="container">
-  <h1>Electrical Hub Center</h1>
-  <button onclick="window.location.href='login.html'">Sign In</button>
-</div>
 
-<script>
-function goLogin(){
-  window.location.href = "login.html";
-}
-</script>
+<div class="container">
+
+<h1>⚡ Electrical Hub Center</h1>
+
+<button onclick="window.location.href='login.html'">
+Sign In
+</button>
+
+</div>
 
 </body>
 </html>
