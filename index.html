@@ -2,7 +2,6 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Electrical Hub Center</title>
 
 <style>
@@ -14,6 +13,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   font-family: Arial;
 
   background: linear-gradient(-45deg, #0a3d62, #3c6382, #60a3bc, #82ccdd);
@@ -27,6 +27,17 @@ body {
   100% {background-position: 0% 50%;}
 }
 
+/* 🔥 Top Tagline */
+.top-text {
+  position: absolute;
+  top: 20px;
+  width: 100%;
+  text-align: center;
+  color: white;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
 /* 🔥 Glass Card */
 .container {
   text-align: center;
@@ -38,16 +49,16 @@ body {
   width: 300px;
 }
 
-/* 🔥 Logo Image */
+/* 🔥 Logo */
 .logo {
   width: 80px;
   margin-bottom: 10px;
 }
 
-/* 🔥 Typing text */
+/* 🔥 Typing Text */
 #typing {
-  font-size: 14px;
-  margin-bottom: 20px;
+  font-size: 18px;
+  margin: 15px 0;
   min-height: 40px;
 }
 
@@ -78,15 +89,17 @@ button:active {
 
 <body>
 
+<!-- 🔝 Top Text -->
+<div class="top-text">
+  All Electrical Services ⚡ & Products 🛒 in One Place
+</div>
+
+<!-- 🔥 Main Card -->
 <div class="container">
 
-<!-- 🔥 Image (logo) -->
 <img src="https://i.ibb.co/G4fWgcNk/Watts-To-Lumen-hero.jpg" class="logo">
 
-<h1>⚡ Electrical Hub Center</h1>
-
-<!-- 🔥 Auto typing text -->
-<p id="typing"></p>
+<h2 id="typing"></h2>
 
 <button onclick="window.location.href='login.html'">
 ⚡ Sign In
@@ -94,16 +107,16 @@ button:active {
 
 </div>
 
-<!-- 🔥 Typing Script -->
+<!-- 🔥 Typing Animation -->
 <script>
-const text = "Welcome to Electrical Hub Center 🚀 All Electrical Services & Products in One Place";
+const text = "Welcome to Electrical Hub Center ⚡";
 let i = 0;
 
 function typing(){
   if(i < text.length){
     document.getElementById("typing").innerHTML += text.charAt(i);
     i++;
-    setTimeout(typing, 40);
+    setTimeout(typing, 50);
   }
 }
 
