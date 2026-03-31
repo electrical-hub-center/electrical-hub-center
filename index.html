@@ -1,10 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial;
+
+  background: linear-gradient(-45deg, #0a3d62, #3c6382, #60a3bc, #82ccdd);
+  background-size: 400% 400%;
+  animation: gradientBG 8s ease infinite;
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.container {
+  text-align: center;
+  color: white;
+}
+</style>
 <title>Electrical Hub Center</title>
 </head>
 
-<body bgcolor="pink" text="red">
+<body>
 
 <h1><p align="center">Electrical Hub Center</p></h1>
 
