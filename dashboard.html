@@ -282,30 +282,43 @@ const db = getFirestore(app);
 
 window.findTech = async function(){
 
-var loc = document.getElementById("location").value.trim().toLowerCase();
+let loc = document.getElementById("location").value;
+
+if(loc == ""){
+alert("Select location");
+return;
+}
 
 const querySnapshot = await getDocs(collection(db, "technicians"));
 
 let output = "";
 
+// 🔥 DEBUG
+console.log("Selected:", loc);
+
 querySnapshot.forEach((doc) => {
-  let data = doc.data();
 
-  let dbLoc = data.location.trim().toLowerCase();
+let data = doc.data();
 
-  if(dbLoc === loc){
-    output += `
-      <div style="border:1px solid #ccc; padding:10px; margin:10px;">
-        <h3>${data.name}</h3>
-        <p>Service: ${data.service}</p>
-        <p>Phone: ${data.phone}</p>
-      </div>
-    `;
-  }
+console.log("Firebase data:", data.location);
+
+// 🔥 FIX MATCH
+if(data.location.trim().toLowerCase() === loc.trim().toLowerCase()){
+
+output += `
+<div style="border:1px solid #ccc; padding:10px; margin:10px;">
+<h3>${data.name}</h3>
+<p>Service: ${data.service}</p>
+<p>Phone: ${data.phone}</p>
+</div>
+`;
+
+}
+
 });
 
 if(output === ""){
-  output = "<p>No technician found ❌</p>";
+output = "<p>No technician found ❌</p>";
 }
 
 document.getElementById("result").innerHTML = output;
