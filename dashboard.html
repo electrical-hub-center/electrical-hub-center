@@ -70,7 +70,7 @@ function orderProduct(product, price) {
 
 </head>
 
-<body style="text-align:center;padding:50px;font-family:Arial">
+<body>
 
 <header>
 <h1>Electrical Hub Center</h1>
@@ -270,46 +270,41 @@ window.location.href="https://formsubmit.co/khutiyanayan@gmail.com?Name="+encode
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyCm-lsMV-W9uNLRibsQalox13QHccgPFMc",
-  authDomain: "electrical-hub-center.firebaseapp.com",
-  projectId: "electrical-hub-center",
-  appId: "1:128609071756:web:c821ff6616b4edd2c581a9"
-};
+const app = initializeApp({
+apiKey: "XXXX",
+authDomain: "XXXX",
+projectId: "XXXX",
+appId: "XXXX"
+});
 
-const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+
+// 🔧 FIXED FIND TECHNICIAN
 window.findTech = async function(){
 
-let loc = document.getElementById("location").value;
+let loc = document.getElementById("location").value.trim().toLowerCase();
 
-if(loc == ""){
+if(loc==""){
 alert("Select location");
 return;
 }
 
-const querySnapshot = await getDocs(collection(db, "technicians"));
+let snapshot = await getDocs(collection(db,"technicians"));
 
-let output = "";
+let output="";
 
-// 🔥 DEBUG
-console.log("Selected:", loc);
+snapshot.forEach(doc=>{
 
-querySnapshot.forEach((doc) => {
+let d = doc.data();
 
-let data = doc.data();
-
-console.log("Firebase data:", data.location);
-
-// 🔥 FIX MATCH
-if(data.location.trim().toLowerCase() === loc.trim().toLowerCase()){
+if(d.location && d.location.toLowerCase().trim() === loc){
 
 output += `
-<div style="border:1px solid #ccc; padding:10px; margin:10px;">
-<h3>${data.name}</h3>
-<p>Service: ${data.service}</p>
-<p>Phone: ${data.phone}</p>
+<div style="background:white;margin:10px;padding:10px;">
+<b>${d.name}</b><br>
+${d.service}<br>
+📞 ${d.phone}
 </div>
 `;
 
@@ -317,15 +312,10 @@ output += `
 
 });
 
-if(output === ""){
-output = "<p>No technician found ❌</p>";
-}
-
-document.getElementById("result").innerHTML = output;
+document.getElementById("result").innerHTML = output || "No technician found ❌";
 
 }
 
-</script>
 
 </body>
 </html>
