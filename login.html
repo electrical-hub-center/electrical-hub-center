@@ -6,54 +6,81 @@
 
 <style>
 
-/* 🔥 Circuit Board Background */
+/* 🔥 Body */
 body {
   margin: 0;
   height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center;   /* ✅ PERFECT CENTER */
   font-family: Arial;
   overflow: hidden;
   background: #0a3d62;
 }
 
-/* 🔥 Moving circuit lines */
-body::before {
-  content: "";
+/* 🔝 Top Tagline */
+.top-text {
   position: absolute;
-  width: 200%;
-  height: 200%;
-  background-image:
-    linear-gradient(90deg, rgba(0,255,255,0.2) 1px, transparent 1px),
-    linear-gradient(rgba(0,255,255,0.2) 1px, transparent 1px);
-  background-size: 40px 40px;
-  animation: moveBG 10s linear infinite;
+  top: 15px;
+  left: 4px;
+  right: 4px;
+  text-align: center;
+  color: white;
+  font-size: 16px;
 }
 
-@keyframes moveBG {
-  from { transform: translate(0,0); }
-  to { transform: translate(-40px,-40px); }
+/* 🔥 Circuit SVG */
+.circuit {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
 }
 
-/* 🔥 Floating icons (bulb + wire) */
+/* 🔥 Circuit lines */
+.line {
+  fill: none;
+  stroke: #00ffff;
+  stroke-width: 2;
+  stroke-dasharray: 300;
+  stroke-dashoffset: 300;
+  animation: draw 5s linear infinite;
+}
+
+@keyframes draw {
+  to { stroke-dashoffset: 0; }
+}
+
+/* 🔥 Nodes */
+.node {
+  fill: #00ffff;
+  animation: blink 1s infinite alternate;
+}
+
+@keyframes blink {
+  from { opacity: 0.3; }
+  to { opacity: 1; }
+}
+
+/* 🔥 Floating icons */
 .icon {
   position: absolute;
-  font-size: 25px;
-  opacity: 0.7;
+  font-size: 22px;
+  opacity: 0.8;
   animation: float 6s infinite ease-in-out;
 }
 
-.icon:nth-child(1){ top: 10%; left: 20%; }
-.icon:nth-child(2){ top: 70%; left: 80%; }
-.icon:nth-child(3){ top: 40%; left: 10%; }
+.icon1 { top: 10%; left: 10%; }
+.icon2 { top: 20%; left: 85%; }
+.icon3 { top: 75%; left: 15%; }
+.icon4 { top: 80%; left: 80%; }
 
 @keyframes float {
   0%,100% { transform: translateY(0); }
   50% { transform: translateY(-20px); }
 }
 
-/* 🔥 Glass login box */
+/* 🔥 Login box (CENTER) */
 .container {
   position: relative;
   z-index: 2;
@@ -66,11 +93,17 @@ body::before {
   width: 300px;
 }
 
+/* 🔥 Typing text */
+#typing {
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
 /* 🔥 Input */
 input {
   width: 100%;
   padding: 10px;
-  margin: 8px 0;
+  margin: 6px 0;
   border-radius: 8px;
   border: none;
 }
@@ -94,37 +127,62 @@ button:hover {
   transform: scale(1.05);
 }
 
-/* 🔥 Title */
-h2 {
-  margin-bottom: 15px;
-}
-
 </style>
 </head>
 
 <body>
 
-<!-- 🔥 Floating icons -->
-<div class="icon">💡</div>
-<div class="icon">⚡</div>
-<div class="icon">🔌</div>
+<!-- 🔝 Tagline -->
+<div class="top-text">
+  All Electrical Services ⚡ & Products 🛒 in One Place
+</div>
 
-<!-- 🔥 Login Box -->
+<!-- 🧠 Real Circuit -->
+<svg class="circuit" viewBox="0 0 800 600">
+  <path d="M50 100 H300 V200 H500" class="line"/>
+  <path d="M100 300 H400 V400 H700" class="line"/>
+  <path d="M200 50 V250 H600" class="line"/>
+
+  <circle cx="300" cy="100" r="5" class="node"/>
+  <circle cx="500" cy="200" r="5" class="node"/>
+  <circle cx="400" cy="300" r="5" class="node"/>
+  <circle cx="700" cy="400" r="5" class="node"/>
+</svg>
+
+<!-- 🔥 Floating icons -->
+<div class="icon icon1">💡</div>
+<div class="icon icon2">⚡</div>
+<div class="icon icon3">🔌</div>
+<div class="icon icon4">🔧</div>
+
+<!-- 🔥 Login Form (CENTER) -->
 <div class="container">
 
-<h2>⚡ Sign In</h2>
+<h2 id="typing"></h2>
 
 <input type="text" id="fname" placeholder="First Name">
-<input type="text" id="lname" placeholder="Last Name">
-
-<input type="email" id="email" placeholder="Email (optional)">
-<input type="tel" id="phone" placeholder="Phone (optional)">
+<input type="tel" id="phone" placeholder="Phone">
 
 <button onclick="saveData()">Sign In</button>
 
 </div>
 
-<!-- 🔥 Firebase Script -->
+<!-- 🔥 Typing -->
+<script>
+const text = "Welcome to Electrical Hub Center ⚡";
+let i = 0;
+
+function typing(){
+  if(i < text.length){
+    document.getElementById("typing").innerHTML += text.charAt(i);
+    i++;
+    setTimeout(typing, 50);
+  }
+}
+typing();
+</script>
+
+<!-- 🔥 Firebase -->
 <script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
