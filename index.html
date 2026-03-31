@@ -7,7 +7,7 @@
 
 <style>
 
-/* 🔥 Animated Gradient Background */
+/* 🔥 Animated Background */
 body {
   margin: 0;
   height: 100vh;
@@ -27,7 +27,7 @@ body {
   100% {background-position: 0% 50%;}
 }
 
-/* 🔥 Glass container */
+/* 🔥 Glass Card */
 .container {
   text-align: center;
   padding: 30px;
@@ -35,14 +35,23 @@ body {
   backdrop-filter: blur(10px);
   background: rgba(255,255,255,0.1);
   color: white;
+  width: 300px;
 }
 
-/* 🔥 Title */
-h1 {
+/* 🔥 Logo Image */
+.logo {
+  width: 80px;
+  margin-bottom: 10px;
+}
+
+/* 🔥 Typing text */
+#typing {
+  font-size: 14px;
   margin-bottom: 20px;
+  min-height: 40px;
 }
 
-/* 🔥 Button animation */
+/* 🔥 Button */
 button {
   padding: 12px 25px;
   border: none;
@@ -54,14 +63,12 @@ button {
   transition: 0.3s;
 }
 
-/* Hover effect */
 button:hover {
   background: #0a3d62;
   color: white;
   transform: scale(1.1);
 }
 
-/* Click animation */
 button:active {
   transform: scale(0.95);
 }
@@ -73,13 +80,35 @@ button:active {
 
 <div class="container">
 
+<!-- 🔥 Image (logo) -->
+<img src="https://i.ibb.co/G4fWgcNk/Watts-To-Lumen-hero.jpg" class="logo">
+
 <h1>⚡ Electrical Hub Center</h1>
 
+<!-- 🔥 Auto typing text -->
+<p id="typing"></p>
+
 <button onclick="window.location.href='login.html'">
-Sign In
+⚡ Sign In
 </button>
 
 </div>
+
+<!-- 🔥 Typing Script -->
+<script>
+const text = "Welcome to Electrical Hub Center 🚀 All Electrical Services & Products in One Place";
+let i = 0;
+
+function typing(){
+  if(i < text.length){
+    document.getElementById("typing").innerHTML += text.charAt(i);
+    i++;
+    setTimeout(typing, 40);
+  }
+}
+
+typing();
+</script>
 
 </body>
 </html>
