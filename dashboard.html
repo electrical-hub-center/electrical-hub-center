@@ -114,7 +114,7 @@ function orderProduct(product, price) {
 <select id="location">
   <option value="">Select Location</option>
   <option value="Nandigram">Nandigram</option>
-  <option value="haldia">haldia</option>
+  <option value="Haldia">Haldia</option>
 <option value="Naynan">Naynan</option>
 <option value="Kamalpur">Kamalpur</option>
 </select>
@@ -292,7 +292,7 @@ let output = "";
 querySnapshot.forEach((doc) => {
   let data = doc.data();
 
-  if(data.location == loc){
+  if(data.location.toLowerCase() == loc.toLowerCase()){
     output += `
       <div style="border:1px solid #ccc; padding:10px; margin:10px;">
         <h3>${data.name}</h3>
