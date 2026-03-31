@@ -41,6 +41,8 @@ localStorage.setItem("userLoggedIn","true");
 window.location.href = "dashboard.html";
 }
 </script>
+<button onclick="saveData()">Sign In</button>
+
 <script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
@@ -48,7 +50,7 @@ import { getFirestore, collection, addDoc } from "https://www.gstatic.com/fireba
 
 const firebaseConfig = {
   apiKey: "AIzaSyCm-lsMV-W9uNLRibsQalox13QHccgPFMc",
-  authDomain: "https://electrical-hub-center.firebaseapp.com",
+  authDomain: "electrical-hub-center.firebaseapp.com",
   projectId: "electrical-hub-center",
   appId: "1:128609071756:web:c821ff6616b4edd2c581a9"
 };
@@ -58,15 +60,28 @@ const db = getFirestore(app);
 
 window.saveData = async function(){
 
+var fname = document.getElementById("fname").value;
+var phone = document.getElementById("phone").value;
+
+if(fname=="" || phone==""){
+alert("Fill details");
+return;
+}
+
 try {
 
+// 🔥 Firebase save
 await addDoc(collection(db, "customers"), {
-  name: document.getElementById("fname").value,
-  phone: document.getElementById("phone").value,
+  name: fname,
+  phone: phone,
   time: new Date()
 });
 
-alert("Saved ✅");
+// 🔐 Login save
+localStorage.setItem("userLoggedIn","true");
+
+// 🔥 Redirect (IMPORTANT)
+window.location.href = "dashboard.html";
 
 } catch (e) {
 alert("Error: " + e);
