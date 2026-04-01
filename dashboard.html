@@ -314,11 +314,10 @@ View Details
 <div style="background:white; margin:40px auto; padding:20px; border-radius:15px; max-width:400px; text-align:center;">
 
 <h3 id="dName"></h3>
-<img id="dImage" style="width:100%; height:200px; object-fit:cover;">
+<img id="dImage" style="width:100%; height:200px;">
 <p id="dPrice"></p>
 <p id="dDesc"></p>
 
-<button onclick="orderFromDetails()">Order Now</button>
 <button onclick="closeDetails()">Close</button>
 
 </div>
@@ -514,6 +513,23 @@ let msg="New Order:\nProduct:"+dName+"\nPrice:"+dPrice+"\nDescription:"+dDesc+"\
 
 window.open("https://wa.me/919434852965?text="+encodeURIComponent(msg));
 }
+
+</script>
+<script>
+
+function showDetails(name, price, image, desc){
+document.getElementById("dName").innerText=name;
+document.getElementById("dPrice").innerText="Price: ₹"+price;
+document.getElementById("dImage").src=image;
+document.getElementById("dDesc").innerText=desc;
+
+document.getElementById("productDetails").style.display="block";
+}
+
+function closeDetails(){
+document.getElementById("productDetails").style.display="none";
+}
+
 </script>
 
 </body>
