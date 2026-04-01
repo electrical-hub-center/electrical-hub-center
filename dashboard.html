@@ -6,13 +6,15 @@
 <title>Electrical Hub Center</title>
 
 <style>
-body {font-family: Arial; margin:0;}
+body {font-family: Arial; margin:0; background:#f5f6fa;}
+
 header {
   background:#0a3d62;
   color:white;
   padding:10px;
   text-align:center;
 }
+
 section {padding:20px;}
 h2 {color:#0a3d62;}
 
@@ -27,6 +29,7 @@ h2 {color:#0a3d62;}
   padding:10px;
   text-align:center;
   border-radius:10px;
+  background:#fff;
 }
 
 .card img {
@@ -42,6 +45,7 @@ button {
   padding:10px;
   border:none;
   margin-top:5px;
+  cursor:pointer;
 }
 
 input, select, textarea {
@@ -50,29 +54,14 @@ input, select, textarea {
   margin:5px 0;
 }
 
-/* Popup */
-#orderForm{
-  display:none;
-  position:fixed;
-  top:0;left:0;width:100%;height:100%;
-  background:#000000aa;
-}
-.orderBox{
-  background:white;
-  margin:50px;
-  padding:20px;
-  border-radius:10px;
-}
-
-
-/* FLEX LAYOUT */
+/* 🔥 FLEX LAYOUT */
 .main-flex{
   display:flex;
   gap:20px;
   flex-wrap:wrap;
 }
 
-/* CARD BOX */
+/* 🔥 CARD BOX */
 .box{
   flex:1;
   min-width:300px;
@@ -80,64 +69,19 @@ input, select, textarea {
   padding:20px;
   border-radius:15px;
   box-shadow:0 5px 15px rgba(0,0,0,0.1);
-  transition:0.3s;
+
+  /* ✅ Animation */
+  animation: fadeInUp 0.8s ease forwards;
+  opacity:0;
 }
 
-/* HOVER ANIMATION */
+/* 🔥 Hover effect */
 .box:hover{
   transform:translateY(-5px);
   box-shadow:0 10px 25px rgba(0,0,0,0.2);
 }
 
-/* BUTTON STYLE */
-.box button{
-  width:100%;
-  border-radius:8px;
-}
-
-/* MOBILE RESPONSIVE */
-@media(max-width:768px){
-  .main-flex{
-    flex-direction:column;
-  }
-}
-
-.box{
-  animation:fadeInUp 0.6s ease;
-}
-
-@keyframes fadeInUp{
-  from{
-    opacity:0;
-    transform:translateY(30px);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
-}
-
-
-.main-flex{
-  display:flex;
-  gap:20px;
-  flex-wrap:wrap;
-}
-
-.box{
-  flex:1;
-  min-width:300px;
-  background:#fff;
-  padding:20px;
-  border-radius:15px;
-  box-shadow:0 5px 15px rgba(0,0,0,0.1);
-
-  /* 🔥 Animation */
-  animation: fadeInUp 0.8s ease forwards;
-  opacity:0;
-}
-
-/* 🔥 Animation Keyframe */
+/* 🔥 Animation */
 @keyframes fadeInUp{
   from{
     opacity:0;
@@ -149,11 +93,16 @@ input, select, textarea {
   }
 }
 
-.box{
-  background:red;
+/* 📱 Mobile */
+@media(max-width:768px){
+  .main-flex{
+    flex-direction:column;
+  }
 }
 </style>
+
 </head>
+
 
 <body>
 
