@@ -151,6 +151,11 @@ textarea::placeholder{
   }
 }
 
+.card button{
+  width:48%;
+  margin:2px;
+}
+
 </style>
 
 </head>
@@ -263,6 +268,9 @@ textarea::placeholder{
   <p>₹1500</p>
 
 <button onclick="openForm('Fan','1500','https://i.ibb.co/zVm77pQ6/41-Uui-OFpbi-L.jpg','High speed ceiling fan')">Order Now</button>
+<button onclick="showDetails('Fan','1500','https://i.ibb.co/zVm77pQ6/41-Uui-OFpbi-L.jpg','High speed ceiling fan with low power consumption')">
+View Details
+</button>
 </div>
 
 <div class="card">
@@ -413,6 +421,21 @@ closeForm();
 }
 </script>
 
+<div id="productDetails" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#000000cc;">
+
+<div style="background:white; margin:40px auto; padding:20px; border-radius:15px; max-width:400px; text-align:center;">
+
+<h3 id="dName"></h3>
+<img id="dImage" style="width:100%; height:200px; object-fit:cover;">
+<p id="dPrice"></p>
+<p id="dDesc"></p>
+
+<button onclick="orderFromDetails()">Order Now</button>
+<button onclick="closeDetails()">Close</button>
+
+</div>
+</div>
+
 <!-- 🔥 FIREBASE -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
@@ -465,6 +488,32 @@ alert("Booking Done ✅");
 
 document.getElementById("bookingForm").reset();
 });
+
+let dName="", dPrice="", dImage="", dDesc="";
+
+function showDetails(name, price, image, desc){
+dName=name;
+dPrice=price;
+dImage=image;
+dDesc=desc;
+
+document.getElementById("dName").innerText=name;
+document.getElementById("dPrice").innerText="Price: ₹"+price;
+document.getElementById("dImage").src=image;
+document.getElementById("dDesc").innerText=desc;
+
+document.getElementById("productDetails").style.display="block";
+}
+
+function closeDetails(){
+document.getElementById("productDetails").style.display="none";
+}
+
+function orderFromDetails(){
+let msg="New Order:\nProduct:"+dName+"\nPrice:"+dPrice+"\nDescription:"+dDesc+"\nImage:"+dImage;
+
+window.open("https://wa.me/919434852965?text="+encodeURIComponent(msg));
+}
 </script>
 
 </body>
