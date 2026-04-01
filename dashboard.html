@@ -185,14 +185,11 @@ function orderProduct(product, price) {
 <div class="card-box">
  <h2>Book Service</h2>
 
-<form id="bookingForm" action="https://formsubmit.co/khutiyanayan@gmail.com" method="POST">
-
-<input type="hidden" name="_next" value="https://github.com/electrical-hub-center/electrical-hub-center/blob/main/dashboard.html">
-<input type="hidden" name="_captcha" value="false">
+<form id="bookingForm">
 
 <input type="text" name="name" placeholder="Your Name" required>
 <input type="tel" name="phone" placeholder="Phone Number" required>
-<input type="text" name=" address" placeholder=" full address " required>
+<input type="text" name="address" placeholder="Full Address" required>
 
 <select name="service">
 <option>Select Required Services</option>
@@ -202,9 +199,11 @@ function orderProduct(product, price) {
 <option>Refrigerator Repair</option>
 <option>House Wiring</option>
 </select>
-<textarea name="details" placeholder="extra details (optional)">
-</textarea>
-<button type="submit">Submit Booking</button>
+
+<textarea name="details" placeholder="Extra details"></textarea>
+
+<button type="button" onclick="submitBooking()">Submit Booking</button>
+
 </form>
 </div>
 </div>
@@ -385,17 +384,18 @@ document.getElementById("result").innerHTML = output || "No technician found ❌
 }
 import { addDoc, collection } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-const bookingForm = document.getElementById("bookingForm");
+window.submitBooking = async function(){
 
-bookingForm.addEventListener("submit", async function(e){
+let name = document.querySelector('[name="name"]').value;
+let phone = document.querySelector('[name="phone"]').value;
+let address = document.querySelector('[name="address"]').value;
+let service = document.querySelector('[name="service"]').value;
+let details = document.querySelector('[name="details"]').value;
 
-e.preventDefault(); // 🔥 formsubmit stop
-
-let name = bookingForm.name.value;
-let phone = bookingForm.phone.value;
-let address = bookingForm.address.value;
-let service = bookingForm.service.value;
-let details = bookingForm.details.value;
+if(name=="" || phone=="" || address==""){
+alert("Fill all details");
+return;
+}
 
 try{
 
@@ -409,16 +409,29 @@ await addDoc(collection(db, "bookings"), {
   time: new Date()
 });
 
+// 🔥 WhatsApp / Email message
+let msg = "New Booking:\n"
++ "Name: " + name + "\n"
++ "Phone: " + phone + "\n"
++ "Address: " + address + "\n"
++ "Service: " + service + "\n"
++ "Details: " + details;
+
+// 🔥 Email (formsubmit fallback)
+window.open("https://formsubmit.co/khutiyanayan@gmail.com?subject=New Booking&name="+name+"&phone="+phone+"&address="+address+"&service="+service+"&details="+details);
+
+// 🔥 WhatsApp (optional BEST)
+window.open("https://wa.me/919434852965?text="+encodeURIComponent(msg));
+
 alert("Booking Successful ✅");
 
-// 🔥 Email send (optional)
-bookingForm.submit();
+document.getElementById("bookingForm").reset();
 
 }catch(err){
-alert("Error: " + err);
+alert("Error ❌ " + err);
 }
 
-});
+}
 </script>
 
 </body>
