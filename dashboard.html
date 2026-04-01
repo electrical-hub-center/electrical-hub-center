@@ -309,22 +309,33 @@ View Details
 <button onclick="closeForm()">Cancel</button>
 </div>
 </div>
-<div id="productDetails" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#000000cc;">
 
+<div id="productDetails" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#000000cc;">
 <div style="background:white; margin:40px auto; padding:20px; border-radius:15px; max-width:400px; text-align:center;">
 
 <h2 id="dName"></h2>
-
-<img id="dImage" style="width:100%; height:200px; object-fit:cover; border-radius:10px;">
-
+<img id="dImage" style="width:100%; height:200px;">
 <h3 id="dPrice"></h3>
-
 <p id="dDesc"></p>
 
 <button onclick="closeDetails()">Close</button>
 
 </div>
 </div>
+
+<script>
+function showDetails(name, price, image, desc){
+document.getElementById("dName").innerText = name;
+document.getElementById("dPrice").innerText = "Price: ₹" + price;
+document.getElementById("dDesc").innerText = desc;
+document.getElementById("dImage").src = image;
+document.getElementById("productDetails").style.display = "block";
+}
+
+function closeDetails(){
+document.getElementById("productDetails").style.display = "none";
+}
+</script>
 <script>
 
 var productName="", productPrice="", productImage="", productDesc="";
@@ -515,23 +526,6 @@ function orderFromDetails(){
 let msg="New Order:\nProduct:"+dName+"\nPrice:"+dPrice+"\nDescription:"+dDesc+"\nImage:"+dImage;
 
 window.open("https://wa.me/919434852965?text="+encodeURIComponent(msg));
-}
-
-</script>
-<script>
-
-function showDetails(name, price, image, desc){
-
-document.getElementById("dName").innerText = name;
-document.getElementById("dPrice").innerText = "Price: ₹" + price;
-document.getElementById("dDesc").innerText = desc;
-document.getElementById("dImage").src = image;
-
-document.getElementById("productDetails").style.display = "block";
-}
-
-function closeDetails(){
-document.getElementById("productDetails").style.display = "none";
 }
 
 </script>
