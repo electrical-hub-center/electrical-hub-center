@@ -42,7 +42,6 @@ button {
   padding:10px;
   border:none;
   margin-top:5px;
-  cursor:pointer;
 }
 
 input, select, textarea {
@@ -61,9 +60,9 @@ input, select, textarea {
 <p>All Electrical & Electronics Solutions in One Place</p>
 </header>
 
-<!-- SERVICES -->
+<!-- 🔥 SERVICES -->
 <section>
-<h2>Electrical Services & Price</h2>
+<h2>Electrical Services</h2>
 
 <div class="grid">
 
@@ -99,7 +98,7 @@ input, select, textarea {
 
 </div>
 
-<!-- FIND TECH -->
+<!-- 🔍 FIND TECH -->
 <h2>Find Technician</h2>
 
 <select id="location">
@@ -114,7 +113,7 @@ input, select, textarea {
 
 <div id="result"></div>
 
-<!-- BOOKING -->
+<!-- 📋 BOOKING -->
 <h2>Book Service</h2>
 
 <form id="bookingForm">
@@ -140,7 +139,7 @@ input, select, textarea {
 
 </section>
 
-<!-- PRODUCTS -->
+<!-- 🛒 PRODUCTS -->
 <section>
 <h2>Shopping Products</h2>
 
@@ -155,14 +154,14 @@ input, select, textarea {
 
 <div class="card">
 <img src="https://i.ibb.co/JwThk2X6/160111-Primary-Image.png">
-<h4>Light</h4>
+<h4>LED Light</h4>
 <p>₹500</p>
 <button onclick="orderProduct('Light','500')">Order Now</button>
 </div>
 
 <div class="card">
 <img src="https://i.ibb.co/7dV5PSRC/569756d1309432370-home-office-air-conditioner-thread-idu-1.jpg">
-<h4>AC</h4>
+<h4>Air Conditioner</h4>
 <p>₹25000</p>
 <button onclick="orderProduct('AC','25000')">Order Now</button>
 </div>
@@ -175,17 +174,18 @@ input, select, textarea {
 </div>
 
 </div>
+
 </section>
 
 <script>
-// WhatsApp Product Order
+// 🟢 WhatsApp Order
 function orderProduct(name, price){
 let msg = "New Order:%0AProduct: "+name+"%0APrice: ₹"+price;
 window.open("https://wa.me/919434852965?text="+msg);
 }
 </script>
 
-<!-- FIREBASE -->
+<!-- 🔥 FIREBASE -->
 <script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
@@ -200,21 +200,21 @@ appId:"1:128609071756:web:c821ff6616b4edd2c581a9"
 
 const db = getFirestore(app);
 
-// FIND TECH
+// 🔍 FIND TECH
 document.getElementById("searchBtn").addEventListener("click", async ()=>{
 let loc=document.getElementById("location").value;
 let snap=await getDocs(collection(db,"technicians"));
 let out="";
 snap.forEach(doc=>{
 let d=doc.data();
-if(d.location.toLowerCase().trim()==loc.toLowerCase().trim()){
-out+=`<div><h3>${d.name}</h3><p>${d.service}</p><p>${d.phone}</p></div>`;
+if(d.location && d.location.toLowerCase().includes(loc.toLowerCase())){
+out+=`<div class="card"><h3>${d.name}</h3><p>${d.service}</p><p>${d.phone}</p></div>`;
 }
 });
 document.getElementById("result").innerHTML=out||"No technician found ❌";
 });
 
-// BOOKING
+// 📋 BOOKING
 document.getElementById("submitBtn").addEventListener("click", async ()=>{
 let name=document.querySelector('[name="name"]').value;
 let phone=document.querySelector('[name="phone"]').value;
