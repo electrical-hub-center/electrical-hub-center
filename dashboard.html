@@ -50,62 +50,6 @@ input, select {
   padding:8px;
   margin:5px 0;
 }
-#bookingForm {
-  max-width: 350px;   /* 👉 box choto korbe */
-  margin: auto;       /* 👉 center e anbe */
-}
-
-#bookingForm input,
-#bookingForm select,
-#bookingForm textarea {
-  width: 100%;        /* 👉 form er moddhe thik thakbe */
-  padding: 6px;
-  font-size: 14px;
-}
-/* 🔥 Find Technician box */
-#techBox {
-  max-width: 350px;
-  margin: auto;
-  background: #f5f5f5;
-  padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-
-/* inputs inside tech */
-#techBox select,
-#techBox button {
-  width: 100%;
-  padding: 8px;
-  margin-top: 8px;
-}
-/* 🔥 Container */
-.form-container {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap; /* mobile e niche chole jabe */
-}
-
-/* 🔥 Card Style */
-.card-box {
-  flex: 1;
-  min-width: 280px;
-  background: #f5f5f5;
-  padding: 15px;
-  border-radius: 12px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-
-/* 🔥 Inputs */
-.card-box input,
-.card-box select,
-.card-box textarea,
-.card-box button {
-  width: 100%;
-  padding: 8px;
-  margin-top: 8px;
-  font-size: 14px;
-}
 </style>
 
 <head>
@@ -165,9 +109,6 @@ function orderProduct(product, price) {
 </div>
 
 <h3>Book Service</h3>
-<div class="form-container">
-<!-- Find Technician -->
-<div class="card-box">
 <h2>Find Technician</h2>
 
 <select id="location">
@@ -180,16 +121,11 @@ function orderProduct(product, price) {
 <button onclick="findTech()">Search</button>
 
 <div id="result"></div>
-</div>
-<!-- Booking From-->
-<div class="card-box">
- <h2>Book Service</h2>
 
 <form action="https://formsubmit.co/khutiyanayan@gmail.com" method="POST">
-
 <input type="text" name="name" placeholder="Your Name" required>
 <input type="tel" name="phone" placeholder="Phone Number" required>
-<input type="text" name="address" placeholder="Full Address" required>
+<input type="text" name=" address" placeholder=" full address " required>
 
 <select name="service">
 <option>Select Required Services</option>
@@ -199,14 +135,11 @@ function orderProduct(product, price) {
 <option>Refrigerator Repair</option>
 <option>House Wiring</option>
 </select>
-
-<textarea name="details" placeholder="Extra details"></textarea>
-
-<button type="button" onclick="submitBooking()">Submit Booking</button>
-
+<textarea name="details" placeholder="extra details (optional)">
+</textarea>
+<button type="submit">Submit Booking</button>
 </form>
-</div>
-</div>
+
 </section>
 
 <!-- PRODUCTS -->
@@ -337,41 +270,46 @@ window.location.href="https://formsubmit.co/khutiyanayan@gmail.com?Name="+encode
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-const app = initializeApp({
-apiKey: "AIzaSyCm-lsMV-W9uNLRibsQalox13QHccgPFMc",
-authDomain: "https://electrical-hub-center.firebaseapp.com",
-projectId: "electrical-hub-center",
-appId: "1:128609071756:web:c821ff6616b4edd2c581a9"
-});
+const firebaseConfig = {
+  apiKey: "AIzaSyCm-lsMV-W9uNLRibsQalox13QHccgPFMc",
+  authDomain: "electrical-hub-center.firebaseapp.com",
+  projectId: "electrical-hub-center",
+  appId: "1:128609071756:web:c821ff6616b4edd2c581a9"
+};
 
+const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-
-// 🔧 FIXED FIND TECHNICIAN
 window.findTech = async function(){
 
-let loc = document.getElementById("location").value.trim().toLowerCase();
+let loc = document.getElementById("location").value;
 
-if(loc==""){
+if(loc == ""){
 alert("Select location");
 return;
 }
 
-let snapshot = await getDocs(collection(db,"technicians"));
+const querySnapshot = await getDocs(collection(db, "technicians"));
 
-let output="";
+let output = "";
 
-snapshot.forEach(doc=>{
+// 🔥 DEBUG
+console.log("Selected:", loc);
 
-let d = doc.data();
+querySnapshot.forEach((doc) => {
 
-if(d.location && d.location.toLowerCase().trim() === loc){
+let data = doc.data();
+
+console.log("Firebase data:", data.location);
+
+// 🔥 FIX MATCH
+if(data.location.trim().toLowerCase() === loc.trim().toLowerCase()){
 
 output += `
-<div style="background:white;margin:10px;padding:10px;">
-<b>${d.name}</b><br>
-${d.service}<br>
-📞 ${d.phone}
+<div style="border:1px solid #ccc; padding:10px; margin:10px;">
+<h3>${data.name}</h3>
+<p>Service: ${data.service}</p>
+<p>Phone: ${data.phone}</p>
 </div>
 `;
 
@@ -379,62 +317,12 @@ ${d.service}<br>
 
 });
 
-document.getElementById("result").innerHTML = output || "No technician found ❌";
-
-}
-import { addDoc, collection } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-window.submitBooking = async function(){
-
-let name = document.querySelector('[name="name"]').value;
-let phone = document.querySelector('[name="phone"]').value;
-let address = document.querySelector('[name="address"]').value;
-let service = document.querySelector('[name="service"]').value;
-let details = document.querySelector('[name="details"]').value;
-
-if(name=="" || phone=="" || address==""){
-alert("Fill all details");
-return;
+if(output === ""){
+output = "<p>No technician found ❌</p>";
 }
 
-try{
+document.getElementById("result").innerHTML = output;
 
-// 🔥 Firebase save
-await addDoc(collection(db, "bookings"), {
-  name,
-  phone,
-  address,
-  service,
-  details,
-  time: new Date()
-});
-
-// 🔥 WhatsApp / Email message
-let msg = "New Booking:\n"
-+ "Name: " + name + "\n"
-+ "Phone: " + phone + "\n"
-+ "Address: " + address + "\n"
-+ "Service: " + service + "\n"
-+ "Details: " + details;
-
-// 🔥 Email (formsubmit fallback)
-window.open("https://formsubmit.co/khutiyanayan@gmail.com?subject=New Booking&name="+name+"&phone="+phone+"&address="+address+"&service="+service+"&details="+details);
-
-// 🔥 WhatsApp (optional BEST)
-window.open("https://wa.me/919434852965?text="+encodeURIComponent(msg));
-
-alert("Booking Successful ✅");
-
-document.getElementById("bookingForm").reset();
-
-}catch(err){
-alert("Error ❌ " + err);
-}
-
-}
-
-window.submitBooking = function(){
-  alert("Button Working ✅");
 }
 
 </script>
