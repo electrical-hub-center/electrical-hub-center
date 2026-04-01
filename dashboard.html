@@ -313,15 +313,14 @@ View Details
 
 <div style="background:white; margin:40px auto; padding:20px; border-radius:15px; max-width:400px; text-align:center;">
 
-<h2 id="dName">Product Name</h2>
+<h2 id="dName"></h2>
 
 <img id="dImage" style="width:100%; height:200px; object-fit:cover; border-radius:10px;">
 
-<h3 id="dPrice">Price</h3>
+<h3 id="dPrice"></h3>
 
-<p id="dDesc">Description</p>
+<p id="dDesc"></p>
 
-<button onclick="orderFromDetails()">Order Now</button>
 <button onclick="closeDetails()">Close</button>
 
 </div>
@@ -521,42 +520,18 @@ window.open("https://wa.me/919434852965?text="+encodeURIComponent(msg));
 </script>
 <script>
 
-let dName="", dPrice="", dImage="", dDesc="";
-
 function showDetails(name, price, image, desc){
 
-// 🔥 TEXT SET
 document.getElementById("dName").innerText = name;
 document.getElementById("dPrice").innerText = "Price: ₹" + price;
 document.getElementById("dDesc").innerText = desc;
-
-// 🔥 IMAGE SET
 document.getElementById("dImage").src = image;
 
-// 🔥 STORE
-dName=name;
-dPrice=price;
-dImage=image;
-dDesc=desc;
-
-// 🔥 SHOW POPUP
-document.getElementById("productDetails").style.display="block";
+document.getElementById("productDetails").style.display = "block";
 }
 
 function closeDetails(){
-document.getElementById("productDetails").style.display="none";
-}
-
-function orderFromDetails(){
-
-let msg="New Order:\n"
-+ "Product: "+dName+"\n"
-+ "Price: ₹"+dPrice+"\n"
-+ "Description: "+dDesc+"\n"
-+ "Image: "+dImage;
-
-window.open("https://wa.me/919434852965?text="+encodeURIComponent(msg));
-
+document.getElementById("productDetails").style.display = "none";
 }
 
 </script>
