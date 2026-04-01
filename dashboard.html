@@ -63,6 +63,44 @@ input, select, textarea {
   padding:20px;
   border-radius:10px;
 }
+
+
+/* FLEX LAYOUT */
+.main-flex{
+  display:flex;
+  gap:20px;
+  flex-wrap:wrap;
+}
+
+/* CARD BOX */
+.box{
+  flex:1;
+  min-width:300px;
+  background:#ffffff;
+  padding:20px;
+  border-radius:15px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.1);
+  transition:0.3s;
+}
+
+/* HOVER ANIMATION */
+.box:hover{
+  transform:translateY(-5px);
+  box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+/* BUTTON STYLE */
+.box button{
+  width:100%;
+  border-radius:8px;
+}
+
+/* MOBILE RESPONSIVE */
+@media(max-width:768px){
+  .main-flex{
+    flex-direction:column;
+  }
+}
 </style>
 </head>
 
