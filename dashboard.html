@@ -79,6 +79,33 @@ input, select {
   padding: 8px;
   margin-top: 8px;
 }
+/* 🔥 Container */
+.form-container {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap; /* mobile e niche chole jabe */
+}
+
+/* 🔥 Card Style */
+.card-box {
+  flex: 1;
+  min-width: 280px;
+  background: #f5f5f5;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* 🔥 Inputs */
+.card-box input,
+.card-box select,
+.card-box textarea,
+.card-box button {
+  width: 100%;
+  padding: 8px;
+  margin-top: 8px;
+  font-size: 14px;
+}
 </style>
 
 <head>
@@ -138,7 +165,9 @@ function orderProduct(product, price) {
 </div>
 
 <h3>Book Service</h3>
-<div id="techBox">
+<div class="form-container">
+<!-- Find Technician -->
+<div class="card-box">
 <h2>Find Technician</h2>
 
 <select id="location">
@@ -152,6 +181,9 @@ function orderProduct(product, price) {
 
 <div id="result"></div>
 </div>
+<!-- Booking From-->
+<div class="card-box">
+ <h2>Book Service</h2>
 
 <form id="bookingForm" action="https://formsubmit.co/khutiyanayan@gmail.com" method="POST">
 <input type="text" name="name" placeholder="Your Name" required>
@@ -170,7 +202,8 @@ function orderProduct(product, price) {
 </textarea>
 <button type="submit">Submit Booking</button>
 </form>
-
+</div>
+</div>
 </section>
 
 <!-- PRODUCTS -->
