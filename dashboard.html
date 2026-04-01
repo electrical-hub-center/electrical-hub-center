@@ -49,18 +49,31 @@ input, select, textarea {
   padding:8px;
   margin:5px 0;
 }
-</style>
 
+/* Popup */
+#orderForm{
+  display:none;
+  position:fixed;
+  top:0;left:0;width:100%;height:100%;
+  background:#000000aa;
+}
+.orderBox{
+  background:white;
+  margin:50px;
+  padding:20px;
+  border-radius:10px;
+}
+</style>
 </head>
 
 <body>
 
 <header>
 <h1>Electrical Hub Center</h1>
-<p>All Electrical & Electronics Solutions in One Place</p>
+<p>All Electrical Services & Products in One Place</p>
 </header>
 
-<!-- 🔥 SERVICES -->
+<!-- 🔧 SERVICES -->
 <section>
 <h2>Electrical Services</h2>
 
@@ -118,9 +131,9 @@ input, select, textarea {
 
 <form id="bookingForm">
 
-<input type="text" name="name" placeholder="Your Name" required>
-<input type="tel" name="phone" placeholder="Phone Number" required>
-<input type="text" name="address" placeholder="Full Address" required>
+<input type="text" name="name" placeholder="Your Name">
+<input type="tel" name="phone" placeholder="Phone Number">
+<input type="text" name="address" placeholder="Full Address">
 
 <select name="service">
 <option>Select Service</option>
@@ -141,7 +154,7 @@ input, select, textarea {
 
 <!-- 🛒 PRODUCTS -->
 <section>
-<h2>Shopping Products</h2>
+<h2>Products</h2>
 
 <div class="grid">
 
@@ -149,59 +162,121 @@ input, select, textarea {
 <img src="https://i.ibb.co/zVm77pQ6/41-Uui-OFpbi-L.jpg">
 <h4>Fan</h4>
 <p>₹1500</p>
-<button onclick="orderProduct('Fan','1500')">Order Now</button>
+<button onclick="openForm('Fan','1500','https://i.ibb.co/zVm77pQ6/41-Uui-OFpbi-L.jpg','High speed fan')">Order</button>
 </div>
 
 <div class="card">
 <img src="https://i.ibb.co/JwThk2X6/160111-Primary-Image.png">
 <h4>LED Light</h4>
 <p>₹500</p>
-<button onclick="orderProduct('Light','500')">Order Now</button>
+<button onclick="openForm('Light','500','https://i.ibb.co/JwThk2X6/160111-Primary-Image.png','LED Light')">Order</button>
 </div>
 
 <div class="card">
 <img src="https://i.ibb.co/7dV5PSRC/569756d1309432370-home-office-air-conditioner-thread-idu-1.jpg">
-<h4>Air Conditioner</h4>
+<h4>AC</h4>
 <p>₹25000</p>
-<button onclick="orderProduct('AC','25000')">Order Now</button>
+<button onclick="openForm('AC','25000','https://i.ibb.co/7dV5PSRC/569756d1309432370-home-office-air-conditioner-thread-idu-1.jpg','Split AC')">Order</button>
 </div>
 
 <div class="card">
 <img src="https://i.ibb.co/6cF5dByz/domestic-refrigerator-489.jpg">
 <h4>Refrigerator</h4>
 <p>₹15000</p>
-<button onclick="orderProduct('Refrigerator','15000')">Order Now</button>
+<button onclick="openForm('Fridge','15000','https://i.ibb.co/6cF5dByz/domestic-refrigerator-489.jpg','Double door fridge')">Order</button>
 </div>
 
 </div>
 
 </section>
 
+<!-- 🧾 ORDER POPUP -->
+<div id="orderForm">
+<div class="orderBox">
+<h3>Confirm Order</h3>
+
+<input id="custName" placeholder="Your Name">
+<input id="custPhone" placeholder="Phone">
+<textarea id="custAddress" placeholder="Address"></textarea>
+
+<button onclick="submitOrder()">Confirm Order</button>
+<button onclick="closeForm()">Cancel</button>
+</div>
+</div>
+
+<!-- 📞 CONTACT -->
+<section>
+<h2>Contact</h2>
+
+<div style="text-align:center;">
+
+<a href="tel:9434852965">
+<button style="background:green;">📞 Call Now</button>
+</a>
+
+<a href="https://wa.me/919434852965" target="_blank">
+<button style="background:#25D366;">💬 WhatsApp</button>
+</a>
+
+<a href="mailto:khutiyanayan@gmail.com">
+<button>📧 Email</button>
+</a>
+
+<p>Nandigram, Purba Medinipur, West Bengal - 721631</p>
+
+</div>
+</section>
+
+<!-- 🔧 ORDER SCRIPT -->
 <script>
-// 🟢 WhatsApp Order
-function orderProduct(name, price){
-let msg = "New Order:%0AProduct: "+name+"%0APrice: ₹"+price;
-window.open("https://wa.me/919434852965?text="+msg);
+let productName="",productPrice="",productImage="",productDesc="";
+
+function openForm(n,p,i,d){
+productName=n;
+productPrice=p;
+productImage=i;
+productDesc=d;
+document.getElementById("orderForm").style.display="block";
+}
+
+function closeForm(){
+document.getElementById("orderForm").style.display="none";
+}
+
+function submitOrder(){
+let name=document.getElementById("custName").value;
+let phone=document.getElementById("custPhone").value;
+let address=document.getElementById("custAddress").value;
+
+if(name==""||phone==""||address==""){
+alert("Fill all details");
+return;
+}
+
+let msg="New Order:\nName:"+name+"\nPhone:"+phone+"\nAddress:"+address+"\nProduct:"+productName+"\nPrice:"+productPrice+"\nDesc:"+productDesc+"\nImage:"+productImage;
+
+window.open("https://wa.me/919434852965?text="+encodeURIComponent(msg));
+
+alert("Order Sent ✅");
+closeForm();
 }
 </script>
 
 <!-- 🔥 FIREBASE -->
 <script type="module">
-
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getFirestore, collection, getDocs, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-const app = initializeApp({
-apiKey:"AIzaSyCm-lsMV-W9uNLRibsQalox13QHccgPFMc",
+const app=initializeApp({
+apiKey:"AIzaSy...",
 authDomain:"electrical-hub-center.firebaseapp.com",
-projectId:"electrical-hub-center",
-appId:"1:128609071756:web:c821ff6616b4edd2c581a9"
+projectId:"electrical-hub-center"
 });
 
-const db = getFirestore(app);
+const db=getFirestore(app);
 
 // 🔍 FIND TECH
-document.getElementById("searchBtn").addEventListener("click", async ()=>{
+document.getElementById("searchBtn").addEventListener("click",async()=>{
 let loc=document.getElementById("location").value;
 let snap=await getDocs(collection(db,"technicians"));
 let out="";
@@ -215,7 +290,7 @@ document.getElementById("result").innerHTML=out||"No technician found ❌";
 });
 
 // 📋 BOOKING
-document.getElementById("submitBtn").addEventListener("click", async ()=>{
+document.getElementById("submitBtn").addEventListener("click",async()=>{
 let name=document.querySelector('[name="name"]').value;
 let phone=document.querySelector('[name="phone"]').value;
 let address=document.querySelector('[name="address"]').value;
@@ -231,15 +306,14 @@ await addDoc(collection(db,"bookings"),{
 name,phone,address,service,details,time:new Date()
 });
 
-let msg="New Booking:%0AName:"+name+"%0APhone:"+phone+"%0AAddress:"+address+"%0AService:"+service;
+let msg="New Booking:\nName:"+name+"\nPhone:"+phone+"\nAddress:"+address+"\nService:"+service;
 
-window.open("https://wa.me/919434852965?text="+msg);
+window.open("https://wa.me/919434852965?text="+encodeURIComponent(msg));
 
-alert("Booking Successful ✅");
+alert("Booking Done ✅");
 
 document.getElementById("bookingForm").reset();
 });
-
 </script>
 
 </body>
