@@ -516,6 +516,20 @@ let msg="New Order:\nProduct:"+dName+"\nPrice:"+dPrice+"\nDescription:"+dDesc+"\
 window.open("https://wa.me/919434852965?text="+encodeURIComponent(msg));
 }
 
+
+window.showDetails=function(name,price,image,desc){
+document.getElementById("dName").innerText=name;
+document.getElementById("dPrice").innerText="Price: ₹"+price;
+document.getElementById("dImage").src=image;
+document.getElementById("dDesc").innerText=desc;
+document.getElementById("productDetails").style.display="block";
+}
+
+window.closeDetails=function(){
+document.getElementById("productDetails").style.display="none";
+}
+
+
 </script>
 
 </body>
