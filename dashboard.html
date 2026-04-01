@@ -217,40 +217,107 @@ input, select, textarea {
 </section>
 
 <!-- 🛒 PRODUCTS -->
-<section>
-<h2>Products</h2>
+ <section>
+<h2>Shopping Products</h2>
 
 <div class="grid">
 
 <div class="card">
-<img src="https://i.ibb.co/zVm77pQ6/41-Uui-OFpbi-L.jpg">
-<h4>Fan</h4>
-<p>₹1500</p>
-<button onclick="openForm('Fan','1500','https://i.ibb.co/zVm77pQ6/41-Uui-OFpbi-L.jpg','High speed fan')">Order</button>
+ <img src="https://i.ibb.co/zVm77pQ6/41-Uui-OFpbi-L.jpg"></a>
+  <h4>Fan</h4>
+  <p>₹1500</p>
+
+<button onclick="openForm('Fan','1500','https://i.ibb.co/zVm77pQ6/41-Uui-OFpbi-L.jpg','High speed ceiling fan')">Order Now</button>
 </div>
 
 <div class="card">
-<img src="https://i.ibb.co/JwThk2X6/160111-Primary-Image.png">
-<h4>LED Light</h4>
-<p>₹500</p>
-<button onclick="openForm('Light','500','https://i.ibb.co/JwThk2X6/160111-Primary-Image.png','LED Light')">Order</button>
-</div>
+  <img src="https://i.ibb.co/JwThk2X6/160111-Primary-Image.png">
+  <h4>Light</h4>
+  <p>₹500</p>
 
+<button onclick="openForm('Light','500','https://i.ibb.co/JwThk2X6/160111-Primary-Image.png','9 watt 5A LED light')">Order Now</button>
+</div>
 <div class="card">
 <img src="https://i.ibb.co/7dV5PSRC/569756d1309432370-home-office-air-conditioner-thread-idu-1.jpg">
-<h4>AC</h4>
-<p>₹25000</p>
-<button onclick="openForm('AC','25000','https://i.ibb.co/7dV5PSRC/569756d1309432370-home-office-air-conditioner-thread-idu-1.jpg','Split AC')">Order</button>
-</div>
+  <h4>AC</h4>
+  <p>₹25000</p>
 
+ <button onclick="openForm('AC','25000','https://i.ibb.co/7dV5PSRC/569756d1309432370-home-office-air-conditioner-thread-idu-1.jpg','Split AC Home & Office Cover')">Order Now</button>
+</div>
 <div class="card">
-<img src="https://i.ibb.co/6cF5dByz/domestic-refrigerator-489.jpg">
-<h4>Refrigerator</h4>
-<p>₹15000</p>
-<button onclick="openForm('Fridge','15000','https://i.ibb.co/6cF5dByz/domestic-refrigerator-489.jpg','Double door fridge')">Order</button>
+  <img src="https://i.ibb.co/6cF5dByz/domestic-refrigerator-489.jpg">
+  <h4>Refrigerator</h4>
+  <p>₹15000</p>
+
+ <button onclick="openForm('Refrigerator','15000','https://i.ibb.co/6cF5dByz/domestic-refrigerator-489.jpg','Double door fridge')">Order Now</button>
 </div>
 
+<div id="orderForm" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#000000aa;">
+
+<div style="background:white; padding:20px; margin:50px; border-radius:10px;">
+
+<h3>Confirm Order</h3>
+
+<input type="text" id="custName" placeholder="Your Name">
+<input type="tel" id="custPhone" placeholder="Phone Number">
+<textarea id="custAddress" placeholder="Full Address"></textarea>
+
+<button onclick="submitOrder()">Confirm Order</button>
+<button onclick="closeForm()">Cancel</button>
 </div>
+</div>
+<script>
+
+var productName="", productPrice="", productImage="", productDesc="";
+
+function openForm(name, price, image, desc){
+productName=name;
+productPrice=price;
+productImage=image;
+productDesc=desc;
+document.getElementById("orderForm").style.display="block";
+}
+
+function closeForm(){
+document.getElementById("orderForm").style.display="none";
+}
+
+function submitOrder(){
+
+var name=document.getElementById("custName").value;
+var phone=document.getElementById("custPhone").value;
+var address=document.getElementById("custAddress").value;
+
+if(name==""||phone==""||address==""){
+alert("Fill all details");
+return;
+}
+
+// 🔥 IMPORTANT FIX (encode)
+var msg = "New Order:\n"
++ "Name: " + name + "\n"
++ "Phone: " + phone + "\n"
++ "Address: " + address + "\n"
++ "Product: " + productName + "\n"
++ "Price: " + productPrice + "\n"
++ "Description: " + productDesc + "\n"
++ "Image: " + productImage;
+
+var finalMsg = encodeURIComponent(msg);
+
+// WhatsApp
+window.open("https://api.whatsapp.com/send?phone=919434852965&text="+finalMsg);
+
+// Email
+window.location.href="https://formsubmit.co/khutiyanayan@gmail.com?Name="+encodeURIComponent(name)+"&Phone="+encodeURIComponent(phone)+"&Address="+encodeURIComponent(address)+"&Product="+encodeURIComponent(productName)+"&Price="+encodeURIComponent(productPrice)+"&Description="+encodeURIComponent(productDesc)+"&Image="+encodeURIComponent(productImage);
+
+}
+
+</script>
+
+</div>
+
+</section>
 
 
 <!-- 🧾 ORDER POPUP -->
