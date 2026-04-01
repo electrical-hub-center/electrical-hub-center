@@ -325,6 +325,46 @@ document.getElementById("result").innerHTML = output;
 
 }
 
+
+
+
+import { addDoc, collection } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+const bookingForm = document.getElementById("bookingForm");
+
+bookingForm.addEventListener("submit", async function(e){
+
+e.preventDefault(); // 🔥 formsubmit stop
+
+let name = bookingForm.name.value;
+let phone = bookingForm.phone.value;
+let address = bookingForm.address.value;
+let service = bookingForm.service.value;
+let details = bookingForm.details.value;
+
+try{
+
+// 🔥 Firebase save
+await addDoc(collection(db, "bookings"), {
+  name,
+  phone,
+  address,
+  service,
+  details,
+  time: new Date()
+});
+
+alert("Booking Successful ✅");
+
+// 🔥 Email send (optional)
+bookingForm.submit();
+
+}catch(err){
+alert("Error: " + err);
+}
+
+});
+
 </script>
 
 </body>
