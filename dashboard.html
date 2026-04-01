@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dashboard</title>
+<title>Electrical Hub Center</title>
 
 <style>
 body {font-family: Arial; margin:0;}
@@ -45,28 +45,12 @@ button {
   cursor:pointer;
 }
 
-input, select {
+input, select, textarea {
   width:100%;
   padding:8px;
   margin:5px 0;
 }
 </style>
-
-<head>
-<title>Electrical Hub Center</title>
-</head>
-<body>
-<h1>Welcome to Electrical Hub Center</h1>
-
-<button onclick="logout()">Logout</button>
-
-<script>
-// WhatsApp Order
-function orderProduct(product, price) {
-  var message = "New Order:%0AProduct: " + product + "%0APrice: ₹" + price;
-  window.open("https://wa.me/919434852965?text=" + message);
-}
-</script>
 
 </head>
 
@@ -77,50 +61,61 @@ function orderProduct(product, price) {
 <p>All Electrical & Electronics Solutions in One Place</p>
 </header>
 
-
 <!-- SERVICES -->
 <section>
 <h2>Electrical Services & Price</h2>
 
 <div class="grid">
+
 <div class="card">
-  <img src="https://i.ibb.co/JjCPzm94/om-electrician-durgapura-jaipur-electricians-98ko617c5g.jpg">
+<img src="https://i.ibb.co/JjCPzm94/om-electrician-durgapura-jaipur-electricians-98ko617c5g.jpg">
 <h4>Fan Repair - ₹150</h4>
 </div>
+
 <div class="card">
 <img src="https://i.ibb.co/v63SScMM/shutterstock-2151193337.jpg">
 <h4>Light Installation - ₹100</h4>
 </div>
+
 <div class="card">
 <img src="https://i.ibb.co/MYq2KFD/close-electrician-working-on-light-260nw-2293986793.jpg">
-<h4>Switch Repair - ₹80</4>
+<h4>Switch Repair - ₹80</h4>
 </div>
+
 <div class="card">
 <img src="https://i.ibb.co/bjdwqxn0/hm-abt-1.jpg">
 <h4>AC Service - ₹500</h4>
 </div>
-<div class="card"><img src="https://i.ibb.co/HMZVhnZ/gemini-generated-image-lfrmuolfrmuolfrm-500x500.png">
+
+<div class="card">
+<img src="https://i.ibb.co/HMZVhnZ/gemini-generated-image-lfrmuolfrmuolfrm-500x500.png">
 <h4>Refrigerator Repair - ₹400</h4>
 </div>
+
 <div class="card">
 <img src="https://i.ibb.co/S4yWXfRL/office-electrical-wiring-service.jpg">
 <h4>House Wiring - ₹3000+</h4>
 </div>
+
 </div>
 
-<h3>Book Service</h3>
+<!-- FIND TECH -->
 <h2>Find Technician</h2>
 
 <select id="location">
-  <option value="">Select Location</option>
- <option value="Nandigram">Nandigram</option>
+<option value="">Select Location</option>
+<option value="Nandigram">Nandigram</option>
 <option value="Haldia">Haldia</option>
 <option value="Naynan">Naynan</option>
 <option value="Kamalpur">Kamalpur</option>
 </select>
-<button onclick="findTech()">Search</button>
+
+<button id="searchBtn">Search</button>
 
 <div id="result"></div>
+
+<!-- BOOKING -->
+<h2>Book Service</h2>
 
 <form id="bookingForm">
 
@@ -133,6 +128,8 @@ function orderProduct(product, price) {
 <option>Fan Repair</option>
 <option>Light Installation</option>
 <option>AC Service</option>
+<option>Refrigerator Repair</option>
+<option>House Wiring</option>
 </select>
 
 <textarea name="details" placeholder="Extra details"></textarea>
@@ -150,259 +147,98 @@ function orderProduct(product, price) {
 <div class="grid">
 
 <div class="card">
- <img src="https://i.ibb.co/zVm77pQ6/41-Uui-OFpbi-L.jpg"></a>
-  <h4>Fan</h4>
-  <p>₹1500</p>
-
-<button onclick="openForm('Fan','1500','https://i.ibb.co/zVm77pQ6/41-Uui-OFpbi-L.jpg','High speed ceiling fan')">Order Now</button>
+<img src="https://i.ibb.co/zVm77pQ6/41-Uui-OFpbi-L.jpg">
+<h4>Fan</h4>
+<p>₹1500</p>
+<button onclick="orderProduct('Fan','1500')">Order Now</button>
 </div>
 
 <div class="card">
-  <img src="https://i.ibb.co/JwThk2X6/160111-Primary-Image.png">
-  <h4>Light</h4>
-  <p>₹500</p>
-
-<button onclick="openForm('Light','500','https://i.ibb.co/JwThk2X6/160111-Primary-Image.png','9 watt 5A LED light')">Order Now</button>
+<img src="https://i.ibb.co/JwThk2X6/160111-Primary-Image.png">
+<h4>Light</h4>
+<p>₹500</p>
+<button onclick="orderProduct('Light','500')">Order Now</button>
 </div>
+
 <div class="card">
 <img src="https://i.ibb.co/7dV5PSRC/569756d1309432370-home-office-air-conditioner-thread-idu-1.jpg">
-  <h4>AC</h4>
-  <p>₹25000</p>
-
- <button onclick="openForm('AC','25000','https://i.ibb.co/7dV5PSRC/569756d1309432370-home-office-air-conditioner-thread-idu-1.jpg','Split AC Home & Office Cover')">Order Now</button>
+<h4>AC</h4>
+<p>₹25000</p>
+<button onclick="orderProduct('AC','25000')">Order Now</button>
 </div>
+
 <div class="card">
-  <img src="https://i.ibb.co/6cF5dByz/domestic-refrigerator-489.jpg">
-  <h4>Refrigerator</h4>
-  <p>₹15000</p>
-
- <button onclick="openForm('Refrigerator','15000','https://i.ibb.co/6cF5dByz/domestic-refrigerator-489.jpg','Double door fridge')">Order Now</button>
+<img src="https://i.ibb.co/6cF5dByz/domestic-refrigerator-489.jpg">
+<h4>Refrigerator</h4>
+<p>₹15000</p>
+<button onclick="orderProduct('Refrigerator','15000')">Order Now</button>
 </div>
 
-<div id="orderForm" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#000000aa;">
-
-<div style="background:white; padding:20px; margin:50px; border-radius:10px;">
-
-<h3>Confirm Order</h3>
-
-<input type="text" id="custName" placeholder="Your Name">
-<input type="tel" id="custPhone" placeholder="Phone Number">
-<textarea id="custAddress" placeholder="Full Address"></textarea>
-
-<button onclick="submitOrder()">Confirm Order</button>
-<button onclick="closeForm()">Cancel</button>
 </div>
-</div>
+</section>
+
 <script>
-
-var productName="", productPrice="", productImage="", productDesc="";
-
-function openForm(name, price, image, desc){
-productName=name;
-productPrice=price;
-productImage=image;
-productDesc=desc;
-document.getElementById("orderForm").style.display="block";
+// WhatsApp Product Order
+function orderProduct(name, price){
+let msg = "New Order:%0AProduct: "+name+"%0APrice: ₹"+price;
+window.open("https://wa.me/919434852965?text="+msg);
 }
+</script>
 
-function closeForm(){
-document.getElementById("orderForm").style.display="none";
+<!-- FIREBASE -->
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getFirestore, collection, getDocs, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+const app = initializeApp({
+apiKey:"AIzaSyCm-lsMV-W9uNLRibsQalox13QHccgPFMc",
+authDomain:"electrical-hub-center.firebaseapp.com",
+projectId:"electrical-hub-center",
+appId:"1:128609071756:web:c821ff6616b4edd2c581a9"
+});
+
+const db = getFirestore(app);
+
+// FIND TECH
+document.getElementById("searchBtn").addEventListener("click", async ()=>{
+let loc=document.getElementById("location").value;
+let snap=await getDocs(collection(db,"technicians"));
+let out="";
+snap.forEach(doc=>{
+let d=doc.data();
+if(d.location.toLowerCase().trim()==loc.toLowerCase().trim()){
+out+=`<div><h3>${d.name}</h3><p>${d.service}</p><p>${d.phone}</p></div>`;
 }
+});
+document.getElementById("result").innerHTML=out||"No technician found ❌";
+});
 
-function submitOrder(){
-
-var name=document.getElementById("custName").value;
-var phone=document.getElementById("custPhone").value;
-var address=document.getElementById("custAddress").value;
+// BOOKING
+document.getElementById("submitBtn").addEventListener("click", async ()=>{
+let name=document.querySelector('[name="name"]').value;
+let phone=document.querySelector('[name="phone"]').value;
+let address=document.querySelector('[name="address"]').value;
+let service=document.querySelector('[name="service"]').value;
+let details=document.querySelector('[name="details"]').value;
 
 if(name==""||phone==""||address==""){
 alert("Fill all details");
 return;
 }
 
-// 🔥 IMPORTANT FIX (encode)
-var msg = "New Order:\n"
-+ "Name: " + name + "\n"
-+ "Phone: " + phone + "\n"
-+ "Address: " + address + "\n"
-+ "Product: " + productName + "\n"
-+ "Price: " + productPrice + "\n"
-+ "Description: " + productDesc + "\n"
-+ "Image: " + productImage;
-
-var finalMsg = encodeURIComponent(msg);
-
-// WhatsApp
-window.open("https://api.whatsapp.com/send?phone=919434852965&text="+finalMsg);
-
-// Email
-window.location.href="https://formsubmit.co/khutiyanayan@gmail.com?Name="+encodeURIComponent(name)+"&Phone="+encodeURIComponent(phone)+"&Address="+encodeURIComponent(address)+"&Product="+encodeURIComponent(productName)+"&Price="+encodeURIComponent(productPrice)+"&Description="+encodeURIComponent(productDesc)+"&Image="+encodeURIComponent(productImage);
-
-}
-
-</script>
-
-</div>
-
-</section>
-
-<!-- CONTACT -->
-<section>
-<h2>Contact</h2>
-  <div style="text-align:center; margin-top:20px;">
-
-<a href="tel:9434852965">
-  <button style="background:green;">📞 Call Now</button>
-</a>
-
-<a href="https://api.whatsapp.com/send?phone=919434852965" target="_blank">
-  <button style="background:#25D366;">💬 WhatsApp</button>
-</a>
-
-<a href="khutiyanayan@gmail.com">
-  <button style="background:#0a3d62;">📧 Email</button>
-</a>
-<p>Nandigram, Purba Medinipur, West Bengal - 721631</p>
- </div>
-
-</section>
-<script type="module">
-
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyCm-lsMV-W9uNLRibsQalox13QHccgPFMc",
-  authDomain: "electrical-hub-center.firebaseapp.com",
-  projectId: "electrical-hub-center",
-  appId: "1:128609071756:web:c821ff6616b4edd2c581a9"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-window.findTech = async function(){
-
-let loc = document.getElementById("location").value;
-
-if(loc == ""){
-alert("Select location");
-return;
-}
-
-const querySnapshot = await getDocs(collection(db, "technicians"));
-
-let output = "";
-
-// 🔥 DEBUG
-console.log("Selected:", loc);
-
-querySnapshot.forEach((doc) => {
-
-let data = doc.data();
-
-console.log("Firebase data:", data.location);
-
-// 🔥 FIX MATCH
-if(data.location.trim().toLowerCase() === loc.trim().toLowerCase()){
-
-output += `
-<div style="border:1px solid #ccc; padding:10px; margin:10px;">
-<h3>${data.name}</h3>
-<p>Service: ${data.service}</p>
-<p>Phone: ${data.phone}</p>
-</div>
-`;
-
-}
-
-});
-
-if(output === ""){
-output = "<p>No technician found ❌</p>";
-}
-
-document.getElementById("result").innerHTML = output;
-
-}
-
-
-
-
-import { addDoc, collection } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-const bookingForm = document.getElementById("bookingForm");
-
-bookingForm.addEventListener("submit", async function(e){
-
-e.preventDefault(); // 🔥 formsubmit stop
-
-let name = bookingForm.name.value;
-let phone = bookingForm.phone.value;
-let address = bookingForm.address.value;
-let service = bookingForm.service.value;
-let details = bookingForm.details.value;
-
-try{
-
-// 🔥 Firebase save
-await addDoc(collection(db, "bookings"), {
-  name,
-  phone,
-  address,
-  service,
-  details,
-  time: new Date()
-});
-
-alert("Booking Successful ✅");
-
-// 🔥 Email send (optional)
-bookingForm.submit();
-
-}catch(err){
-alert("Error: " + err);
-}
-
-});
-
-import { addDoc, collection } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-document.getElementById("submitBtn").addEventListener("click", submitBooking);
-
-async function submitBooking(){
-
-let name = document.querySelector('[name="name"]').value;
-let phone = document.querySelector('[name="phone"]').value;
-let address = document.querySelector('[name="address"]').value;
-let service = document.querySelector('[name="service"]').value;
-let details = document.querySelector('[name="details"]').value;
-
-if(name=="" || phone=="" || address==""){
-alert("Fill all details");
-return;
-}
-
-// 🔥 Firebase save
 await addDoc(collection(db,"bookings"),{
-name, phone, address, service, details, time:new Date()
+name,phone,address,service,details,time:new Date()
 });
 
-// 🔥 WhatsApp message
-let msg = "New Booking:\n"
-+ "Name: " + name + "\n"
-+ "Phone: " + phone + "\n"
-+ "Address: " + address + "\n"
-+ "Service: " + service + "\n"
-+ "Details: " + details;
+let msg="New Booking:%0AName:"+name+"%0APhone:"+phone+"%0AAddress:"+address+"%0AService:"+service;
 
-window.open("https://wa.me/919434852965?text="+encodeURIComponent(msg));
+window.open("https://wa.me/919434852965?text="+msg);
 
 alert("Booking Successful ✅");
 
 document.getElementById("bookingForm").reset();
-
-}
+});
 
 </script>
 
