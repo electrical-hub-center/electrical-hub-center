@@ -366,6 +366,44 @@ alert("Error: " + err);
 
 });
 
+import { addDoc, collection } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+document.getElementById("submitBtn").addEventListener("click", submitBooking);
+
+async function submitBooking(){
+
+let name = document.querySelector('[name="name"]').value;
+let phone = document.querySelector('[name="phone"]').value;
+let address = document.querySelector('[name="address"]').value;
+let service = document.querySelector('[name="service"]').value;
+let details = document.querySelector('[name="details"]').value;
+
+if(name=="" || phone=="" || address==""){
+alert("Fill all details");
+return;
+}
+
+// 🔥 Firebase save
+await addDoc(collection(db,"bookings"),{
+name, phone, address, service, details, time:new Date()
+});
+
+// 🔥 WhatsApp message
+let msg = "New Booking:\n"
++ "Name: " + name + "\n"
++ "Phone: " + phone + "\n"
++ "Address: " + address + "\n"
++ "Service: " + service + "\n"
++ "Details: " + details;
+
+window.open("https://wa.me/919434852965?text="+encodeURIComponent(msg));
+
+alert("Booking Successful ✅");
+
+document.getElementById("bookingForm").reset();
+
+}
+
 </script>
 
 </body>
