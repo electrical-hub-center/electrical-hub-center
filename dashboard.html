@@ -122,22 +122,23 @@ function orderProduct(product, price) {
 
 <div id="result"></div>
 
-<form action="https://formsubmit.co/khutiyanayan@gmail.com" method="POST">
+<form id="bookingForm">
+
 <input type="text" name="name" placeholder="Your Name" required>
 <input type="tel" name="phone" placeholder="Phone Number" required>
-<input type="text" name=" address" placeholder=" full address " required>
+<input type="text" name="address" placeholder="Full Address" required>
 
 <select name="service">
-<option>Select Required Services</option>
+<option>Select Service</option>
 <option>Fan Repair</option>
 <option>Light Installation</option>
 <option>AC Service</option>
-<option>Refrigerator Repair</option>
-<option>House Wiring</option>
 </select>
-<textarea name="details" placeholder="extra details (optional)">
-</textarea>
-<button type="submit">Submit Booking</button>
+
+<textarea name="details" placeholder="Extra details"></textarea>
+
+<button type="button" id="submitBtn">Submit Booking</button>
+
 </form>
 
 </section>
