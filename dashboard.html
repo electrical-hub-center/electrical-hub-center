@@ -6,246 +6,580 @@
 <title>Electrical Hub Center</title>
 
 <style>
-body{font-family:Arial;margin:0;background:#0f2027;color:white;}
-header{text-align:center;padding:15px;background:#111;}
-section{padding:20px;}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;}
 
-.card{
-background:rgba(255,255,255,0.1);
-padding:10px;border-radius:10px;text-align:center;
+/* 🌌 BODY BACKGROUND */
+body{
+  font-family: Arial;
+  margin:0;
+  background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+  min-height:100vh;
+  color:white;
 }
 
-button{width:100%;padding:8px;margin-top:5px;}
-input,select,textarea{width:100%;padding:8px;margin:5px 0;}
+/* HEADER */
+header{
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  text-align:center;
+  padding:15px;
+  border-bottom:1px solid rgba(255,255,255,0.2);
+}
+
+/* SECTION */
+section{
+  padding:20px;
+}
+
+/* TITLE */
+h2{
+  color:#00f2ff;
+}
+
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit,minmax(160px,1fr));
+  gap:15px;
+}
+
+/* PRODUCT CARD */
+.card{
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  padding:10px;
+  border-radius:15px;
+  text-align:center;
+  border:1px solid rgba(255,255,255,0.2);
+  transition:0.3s;
+}
+
+.card:hover{
+  transform:scale(1.05);
+  box-shadow:0 0 20px #00f2ff;
+}
+
+.card img{
+  width:100%;
+  height:120px;
+  border-radius:10px;
+}
+
+/* 🔥 FLEX */
+.main-flex{
+  display:flex;
+  gap:20px;
+  flex-wrap:wrap;
+}
+
+/* 💎 GLASS BOX */
+.box{
+  flex:1;
+  min-width:300px;
+  padding:20px;
+  border-radius:20px;
+
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(12px);
+
+  border:1px solid rgba(255,255,255,0.2);
+
+  box-shadow:0 0 20px rgba(0,255,255,0.2);
+
+  animation:fadeInUp 0.8s ease forwards;
+  opacity:0;
+}
+
+/* ✨ GLOW HOVER */
+.box:hover{
+  transform:translateY(-8px) scale(1.02);
+  box-shadow:
+    0 0 25px #00f2ff,
+    0 0 50px rgba(0,255,255,0.6);
+}
+
+/* 🔘 BUTTON */
+button{
+  width:100%;
+  background: linear-gradient(45deg,#00c6ff,#0072ff);
+  border:none;
+  padding:10px;
+  border-radius:8px;
+  color:white;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+button:hover{
+  box-shadow:
+    0 0 10px #00f2ff,
+    0 0 20px #00f2ff;
+  transform:scale(1.05);
+}
+
+/* INPUT GLASS */
+input, select, textarea{
+  width:100%;
+  padding:8px;
+  margin:6px 0;
+  border:none;
+  border-radius:8px;
+  background: rgba(255,255,255,0.15);
+  color:white;
+}
+
+input::placeholder,
+textarea::placeholder{
+  color:#ddd;
+}
+
+/* ✨ ANIMATION */
+@keyframes fadeInUp{
+  from{
+    opacity:0;
+    transform:translateY(40px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* 📱 MOBILE */
+@media(max-width:768px){
+  .main-flex{
+    flex-direction:column;
+  }
+}
+
+.card button{
+  width:48%;
+  margin:2px;
+}
+
+
+#productDetails h2, 
+#productDetails h3, 
+#productDetails p {
+    color: black;  /* বা #000 */
+}
+
+
+/* 🔥 ORDER POPUP FIX */
+#orderForm .orderBox{
+  background:white;
+  color:black; /* 🔥 TEXT VISIBLE */
+}
+
+#orderForm input,
+#orderForm textarea{
+  background:#f1f1f1;
+  color:black;
+}
+
+#orderForm input::placeholder,
+#orderForm textarea::placeholder{
+  color:#555;
+}
+
+
+.orderBox{
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(15px);
+}
 </style>
+
 </head>
+
 
 <body>
 
 <header>
 <h1>Electrical Hub Center</h1>
+<p>All Electrical Services & Products in One Place</p>
 </header>
 
-<!-- SERVICES -->
+<!-- 🔧 SERVICES -->
 <section>
-<h2>Services</h2>
-<div class="grid">
-<div class="card">Fan Repair ₹150</div>
-<div class="card">Light Installation ₹100</div>
-<div class="card">AC Service ₹500</div>
-</div>
-</section>
+<h2>Electrical Services</h2>
 
-<!-- FIND TECH -->
+<div class="grid">
+
+<div class="card">
+<img src="https://i.ibb.co/JjCPzm94/om-electrician-durgapura-jaipur-electricians-98ko617c5g.jpg">
+<h4>Fan Repair - ₹150</h4>
+</div>
+
+<div class="card">
+<img src="https://i.ibb.co/v63SScMM/shutterstock-2151193337.jpg">
+<h4>Light Installation - ₹100</h4>
+</div>
+
+<div class="card">
+<img src="https://i.ibb.co/MYq2KFD/close-electrician-working-on-light-260nw-2293986793.jpg">
+<h4>Switch Repair - ₹80</h4>
+</div>
+
+<div class="card">
+<img src="https://i.ibb.co/bjdwqxn0/hm-abt-1.jpg">
+<h4>AC Service - ₹500</h4>
+</div>
+
+<div class="card">
+<img src="https://i.ibb.co/HMZVhnZ/gemini-generated-image-lfrmuolfrmuolfrm-500x500.png">
+<h4>Refrigerator Repair - ₹400</h4>
+</div>
+
+<div class="card">
+<img src="https://i.ibb.co/S4yWXfRL/office-electrical-wiring-service.jpg">
+<h4>House Wiring - ₹3000+</h4>
+</div>
+
+</div>
+
 <section>
+
+<div class="main-flex">
+
+<div class="box">
+<!-- 🔍 FIND TECH -->
 <h2>Find Technician</h2>
 
 <select id="location">
-<option value="">Select</option>
-<option>Nandigram</option>
-<option>Haldia</option>
+<option value="">Select Location</option>
+<option value="Nandigram">Nandigram</option>
+<option value="Haldia">Haldia</option>
+<option value="Naynan">Naynan</option>
+<option value="Kamalpur">Kamalpur</option>
 </select>
 
-<button onclick="findTech()">Search</button>
-<div id="result"></div>
-</section>
+<button id="searchBtn">Search</button>
 
-<!-- BOOKING -->
-<section>
+<div id="result"></div>
+</div>
+
+<div class="box">
+<!-- 📋 BOOKING -->
 <h2>Book Service</h2>
 
-<input id="bName" placeholder="Name">
-<input id="bPhone" placeholder="Phone">
-<input id="bAddress" placeholder="Address">
+<form id="bookingForm">
 
-<select id="bService">
+<input type="text" name="name" placeholder="Your Name">
+<input type="tel" name="phone" placeholder="Phone Number">
+<input type="text" name="address" placeholder="Full Address">
+
+<select name="service">
+<option>Select Service</option>
 <option>Fan Repair</option>
+<option>Light Installation</option>
 <option>AC Service</option>
+<option>Refrigerator Repair</option>
+<option>House Wiring</option>
 </select>
 
-<button onclick="bookService()">Book</button>
+<textarea name="details" placeholder="Extra details"></textarea>
+
+<button type="button" id="submitBtn">Submit Booking</button>
+
+</form>
+</div>
+</div>
+
 </section>
 
-<!-- PRODUCTS -->
-<section>
-<h2>Products</h2>
+<!-- 🛒 PRODUCTS -->
+ <section>
+<h2>Shopping Products</h2>
 
 <div class="grid">
 
 <div class="card">
-<h3>Fan</h3>
-<p>₹1500</p>
-<button onclick="openForm('Fan',1500)">Order</button>
+ <img src="https://i.ibb.co/zVm77pQ6/41-Uui-OFpbi-L.jpg"></a>
+  <h4>Fan</h4>
+  <p>₹1500</p>
+
+<button onclick="openForm('Fan','1500','https://i.ibb.co/zVm77pQ6/41-Uui-OFpbi-L.jpg','High speed ceiling fan with low power consumption')">Order Now</button>
+<button onclick="showDetails('Fan','1500','https://i.ibb.co/zVm77pQ6/41-Uui-OFpbi-L.jpg','High speed ceiling fan with low power consumption')">
+View Details
+</button>
 </div>
 
 <div class="card">
-<h3>Light</h3>
-<p>₹500</p>
-<button onclick="openForm('Light',500)">Order</button>
+  <img src="https://i.ibb.co/JwThk2X6/160111-Primary-Image.png">
+  <h4>Light</h4>
+  <p>₹500</p>
+
+<button onclick="openForm('Light','500','https://i.ibb.co/JwThk2X6/160111-Primary-Image.png','9 watt 5A LED light')">Order Now</button>
+<button onclick="showDetails('Light','500','https://i.ibb.co/JwThk2X6/160111-Primary-Image.png','9 watt 5A LED light')">View Details</button>
+</div>
+<div class="card">
+<img src="https://i.ibb.co/7dV5PSRC/569756d1309432370-home-office-air-conditioner-thread-idu-1.jpg">
+  <h4>AC</h4>
+  <p>₹25000</p>
+
+ <button onclick="openForm('AC','25000','https://i.ibb.co/7dV5PSRC/569756d1309432370-home-office-air-conditioner-thread-idu-1.jpg','Split AC Home & Office Cover')">Order Now</button>
+<button onclick="showDetails ('AC','25000','https://i.ibb.co/7dV5PSRC/569756d1309432370-home-office-air-conditioner-thread-idu-1.jpg','Split AC Home & Office Cover')">View Details</button>
+</div>
+<div class="card">
+  <img src="https://i.ibb.co/6cF5dByz/domestic-refrigerator-489.jpg">
+  <h4>Refrigerator</h4>
+  <p>₹15000</p>
+
+ <button onclick="openForm('Refrigerator','15000','https://i.ibb.co/6cF5dByz/domestic-refrigerator-489.jpg','Double door fridge with low power consumption')">Order Now</button>
+ <button onclick="showDetails ('Refrigerator','15000','https://i.ibb.co/6cF5dByz/domestic-refrigerator-489.jpg','Double door fridgewith low power consumption')">View Details</button>
+</div>
 </div>
 
-</div>
-</section>
+<div id="orderForm" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#000000aa;">
 
-<!-- ORDER POPUP -->
-<div id="orderForm" style="display:none;background:#0008;position:fixed;top:0;width:100%;height:100%;">
-<div style="background:white;color:black;margin:50px;padding:20px;border-radius:10px">
+<div style="background:white; padding:20px; margin:50px; border-radius:10px;">
 
 <h3>Confirm Order</h3>
 
-<select id="paymentMethod">
-<option value="">Select Payment</option>
-<option value="COD">Cash on Delivery</option>
-<option value="ONLINE">Online Payment</option>
-</select>
+<input type="text" id="custName" placeholder="Your Name">
+<input type="tel" id="custPhone" placeholder="Phone Number">
+<textarea id="custAddress" placeholder="Full Address"></textarea>
 
-<input id="custName" placeholder="Name">
-<input id="custPhone" placeholder="Phone">
-<textarea id="custAddress" placeholder="Address"></textarea>
-
-<button onclick="placeOrder()">Confirm</button>
+<button onclick="submitOrder()">Confirm Order</button>
 <button onclick="closeForm()">Cancel</button>
-
 </div>
 </div>
 
-<!-- TRACK -->
-<section>
-<h2>Track Order</h2>
-<input id="trackPhone" placeholder="Phone">
-<button onclick="trackOrder()">Track</button>
-<div id="trackResult"></div>
-</section>
+<div id="productDetails" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#000000cc;">
+<div style="background:white; margin:40px auto; padding:20px; border-radius:15px; max-width:400px; text-align:center;">
+
+<h2 id="dName"></h2>
+<img id="dImage" style="width:100%; height:200px;">
+<h3 id="dPrice"></h3>
+<p id="dDesc"></p>
+
+<button onclick="closeDetails()">Close</button>
+
+</div>
+</div>
 
 <script>
-let productName="",productPrice="";
 
-function openForm(name,price){
+var productName="", productPrice="", productImage="", productDesc="";
+
+function openForm(name, price, image, desc){
 productName=name;
 productPrice=price;
-orderForm.style.display="block";
+productImage=image;
+productDesc=desc;
+document.getElementById("orderForm").style.display="block";
 }
 
 function closeForm(){
-orderForm.style.display="none";
+document.getElementById("orderForm").style.display="none";
+}
+
+function submitOrder(){
+
+var name=document.getElementById("custName").value;
+var phone=document.getElementById("custPhone").value;
+var address=document.getElementById("custAddress").value;
+
+if(name==""||phone==""||address==""){
+alert("Fill all details");
+return;
+}
+
+// 🔥 IMPORTANT FIX (encode)
+var msg = "New Order:\n"
++ "Name: " + name + "\n"
++ "Phone: " + phone + "\n"
++ "Address: " + address + "\n"
++ "Product: " + productName + "\n"
++ "Price: " + productPrice + "\n"
++ "Description: " + productDesc + "\n"
++ "Image: " + productImage;
+
+var finalMsg = encodeURIComponent(msg);
+
+// WhatsApp
+window.open("https://api.whatsapp.com/send?phone=919434852965&text="+finalMsg);
+
+// Email
+window.location.href="https://formsubmit.co/khutiyanayan@gmail.com?Name="+encodeURIComponent(name)+"&Phone="+encodeURIComponent(phone)+"&Address="+encodeURIComponent(address)+"&Product="+encodeURIComponent(productName)+"&Price="+encodeURIComponent(productPrice)+"&Description="+encodeURIComponent(productDesc)+"&Image="+encodeURIComponent(productImage);
+
+}
+
+</script>
+
+</div>
+
+</section>
+
+
+<!-- 📞 CONTACT -->
+<section>
+<h2>Contact</h2>
+
+<div style="text-align:center;">
+
+<a href="tel:9434852965">
+<button style="background:green;">📞 Call Now</button>
+</a>
+
+<a href="https://wa.me/919434852965" target="_blank">
+<button style="background:#25D366;">💬 WhatsApp</button>
+</a>
+
+<a href="mailto:khutiyanayan@gmail.com">
+<button>📧 Email</button>
+</a>
+
+<p>Nandigram, Purba Medinipur, West Bengal - 721631</p>
+
+</div>
+</section>
+
+<!-- 🔧 ORDER SCRIPT -->
+<script>
+let productName="",productPrice="",productImage="",productDesc="";
+
+function openForm(n,p,i,d){
+productName=n;
+productPrice=p;
+productImage=i;
+productDesc=d;
+document.getElementById("orderForm").style.display="block";
+}
+
+function closeForm(){
+document.getElementById("orderForm").style.display="none";
+}
+
+function submitOrder(){
+let name=document.getElementById("custName").value;
+let phone=document.getElementById("custPhone").value;
+let address=document.getElementById("custAddress").value;
+
+if(name==""||phone==""||address==""){
+alert("Fill all details");
+return;
+}
+
+let msg="New Order:\nName:"+name+"\nPhone:"+phone+"\nAddress:"+address+"\nProduct:"+productName+"\nPrice:"+productPrice+"\nDesc:"+productDesc+"\nImage:"+productImage;
+
+window.open("https://wa.me/919434852965?text="+encodeURIComponent(msg));
+
+alert("Order Sent ✅");
+closeForm();
 }
 </script>
 
-<!-- FIREBASE -->
+
+<!-- 🔥 FIREBASE -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { getFirestore, collection, getDocs, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const app=initializeApp({
-apiKey:"YOUR_API_KEY",
-authDomain:"YOUR_DOMAIN",
-projectId:"YOUR_PROJECT"
+apiKey:"AIzaSy...",
+authDomain:"electrical-hub-center.firebaseapp.com",
+projectId:"electrical-hub-center"
 });
 
 const db=getFirestore(app);
 
-// FIND TECH
-async function findTech(){
+// 🔍 FIND TECH
+document.getElementById("searchBtn").addEventListener("click",async()=>{
 let loc=document.getElementById("location").value;
 let snap=await getDocs(collection(db,"technicians"));
 let out="";
 snap.forEach(doc=>{
 let d=doc.data();
-if(d.location && d.location.includes(loc)){
-out+=`<p>${d.name} - ${d.phone}</p>`;
+if(d.location && d.location.toLowerCase().includes(loc.toLowerCase())){
+out+=`<div class="card"><h3>${d.name}</h3><p>${d.service}</p><p>${d.phone}</p></div>`;
 }
 });
-result.innerHTML=out||"No tech";
+document.getElementById("result").innerHTML=out||"No technician found ❌";
+});
+
+// 📋 BOOKING
+document.getElementById("submitBtn").addEventListener("click",async()=>{
+let name=document.querySelector('[name="name"]').value;
+let phone=document.querySelector('[name="phone"]').value;
+let address=document.querySelector('[name="address"]').value;
+let service=document.querySelector('[name="service"]').value;
+let details=document.querySelector('[name="details"]').value;
+
+if(name==""||phone==""||address==""){
+alert("Fill all details");
+return;
 }
 
-// BOOKING
-async function bookService(){
 await addDoc(collection(db,"bookings"),{
-name:bName.value,
-phone:bPhone.value,
-address:bAddress.value,
-service:bService.value
+name,phone,address,service,details,time:new Date()
 });
-alert("Booked");
-}
 
-// MAIN ORDER
-function placeOrder(){
-let pay=paymentMethod.value;
-if(pay==="COD")submitCOD();
-else payNow();
-}
+let msg="New Booking:\nName:"+name+"\nPhone:"+phone+"\nAddress:"+address+"\nService:"+service;
 
-// COD
-async function submitCOD(){
-await addDoc(collection(db,"orders"),{
-name:custName.value,
-phone:custPhone.value,
-address:custAddress.value,
-product:productName,
-price:productPrice,
-payment:"COD",
-paymentStatus:"Pending",
-deliveryStatus:"Pending"
+window.open("https://wa.me/919434852965?text="+encodeURIComponent(msg));
+
+alert("Booking Done ✅");
+
+document.getElementById("bookingForm").reset();
 });
-alert("COD Order Done");
-closeForm();
+
+let dName="", dPrice="", dImage="", dDesc="";
+
+function showDetails(name, price, image, desc){
+dName=name;
+dPrice=price;
+dImage=image;
+dDesc=desc;
+
+document.getElementById("dName").innerText=name;
+document.getElementById("dPrice").innerText="Price: ₹"+price;
+document.getElementById("dImage").src=image;
+document.getElementById("dDesc").innerText=desc;
+
+document.getElementById("productDetails").style.display="block";
 }
 
-// ONLINE
-function payNow(){
-var options={
-key:"rzp_test_xxx",
-amount:productPrice*100,
-handler:function(res){
-saveOrder();
-}
-};
-new Razorpay(options).open();
+function closeDetails(){
+document.getElementById("productDetails").style.display="none";
 }
 
-// SAVE ONLINE
-async function saveOrder(){
-await addDoc(collection(db,"orders"),{
-name:custName.value,
-phone:custPhone.value,
-address:custAddress.value,
-product:productName,
-price:productPrice,
-payment:"ONLINE",
-paymentStatus:"Paid",
-deliveryStatus:"Pending"
-});
-alert("Payment Done");
-closeForm();
+function orderFromDetails(){
+let msg="New Order:\nProduct:"+dName+"\nPrice:"+dPrice+"\nDescription:"+dDesc+"\nImage:"+dImage;
+
+window.open("https://wa.me/919434852965?text="+encodeURIComponent(msg));
 }
 
-// TRACK
-async function trackOrder(){
-let phone=trackPhone.value;
-let snap=await getDocs(collection(db,"orders"));
-let out="";
-snap.forEach(doc=>{
-let d=doc.data();
-if(d.phone===phone){
-out+=`<p>${d.product} | ${d.paymentStatus} | ${d.deliveryStatus}</p>`;
-}
-});
-trackResult.innerHTML=out||"No Order";
+
+window.showDetails=function(name,price,image,desc){
+document.getElementById("dName").innerText=name;
+document.getElementById("dPrice").innerText="Price: ₹"+price;
+document.getElementById("dImage").src=image;
+document.getElementById("dDesc").innerText=desc;
+document.getElementById("productDetails").style.display="block";
 }
 
-// FIX
-window.placeOrder=placeOrder;
-window.trackOrder=trackOrder;
-window.openForm=openForm;
-window.closeForm=closeForm;
-window.findTech=findTech;
-window.bookService=bookService;
+window.closeDetails=function(){
+document.getElementById("productDetails").style.display="none";
+}
+
 
 </script>
+<script>
 
-<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+function showDetails(name, price, image, desc){
+document.getElementById("dName").innerText = name;
+document.getElementById("dPrice").innerText = "Price: ₹" + price;
+document.getElementById("dImage").src = image;
+document.getElementById("dDesc").innerText = desc;
+
+document.getElementById("productDetails").style.display = "block";
+}
+
+function closeDetails(){
+document.getElementById("productDetails").style.display = "none";
+}
+
+</script>
 
 </body>
 </html>
