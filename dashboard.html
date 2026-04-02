@@ -335,11 +335,17 @@ View Details
 
 <h3>Confirm Order</h3>
 
+<select id="paymentMethod">
+<option value="">Select Payment</option>
+<option value="COD">Cash on Delivery</option>
+<option value="ONLINE">Online Payment</option>
+</select>
+
 <input type="text" id="custName" placeholder="Your Name">
 <input type="tel" id="custPhone" placeholder="Phone Number">
 <textarea id="custAddress" placeholder="Full Address"></textarea>
 
-<button onclick="submitOrder()">Confirm Order</button>
+<button onclick="placeOrder()">Confirm</button>
 <button onclick="closeForm()">Cancel</button>
 </div>
 </div>
@@ -409,6 +415,27 @@ window.location.href="https://formsubmit.co/khutiyanayan@gmail.com?Name="+encode
 </div>
 
 </section>
+<!-- TRACK -->
+<section>
+<h2>Track Order</h2>
+<input id="trackPhone" placeholder="Phone">
+<button onclick="trackOrder()">Track</button>
+<div id="trackResult"></div>
+</section>
+
+<script>
+let productName="",productPrice="";
+
+function openForm(name,price){
+productName=name;
+productPrice=price;
+orderForm.style.display="block";
+}
+
+function closeForm(){
+orderForm.style.display="none";
+}
+</script>
 
 
 <!-- 📞 CONTACT -->
@@ -578,6 +605,95 @@ document.getElementById("productDetails").style.display = "block";
 function closeDetails(){
 document.getElementById("productDetails").style.display = "none";
 }
+
+
+// BOOKING
+async function bookService(){
+await addDoc(collection(db,"bookings"),{
+name:bName.value,
+phone:bPhone.value,
+address:bAddress.value,
+service:bService.value
+});
+alert("Booked");
+}
+
+// MAIN ORDER
+function placeOrder(){
+let pay=paymentMethod.value;
+if(pay==="COD")submitCOD();
+else payNow();
+}
+
+// COD
+async function submitCOD(){
+await addDoc(collection(db,"orders"),{
+name:custName.value,
+phone:custPhone.value,
+address:custAddress.value,
+product:productName,
+price:productPrice,
+payment:"COD",
+paymentStatus:"Pending",
+deliveryStatus:"Pending"
+});
+alert("COD Order Done");
+closeForm();
+}
+
+// ONLINE
+function payNow(){
+var options={
+key:"rzp_test_xxx",
+amount:productPrice*100,
+handler:function(res){
+saveOrder();
+}
+};
+new Razorpay(options).open();
+}
+
+// SAVE ONLINE
+async function saveOrder(){
+await addDoc(collection(db,"orders"),{
+name:custName.value,
+phone:custPhone.value,
+address:custAddress.value,
+product:productName,
+price:productPrice,
+payment:"ONLINE",
+paymentStatus:"Paid",
+deliveryStatus:"Pending"
+});
+alert("Payment Done");
+closeForm();
+}
+
+// TRACK
+async function trackOrder(){
+let phone=trackPhone.value;
+let snap=await getDocs(collection(db,"orders"));
+let out="";
+snap.forEach(doc=>{
+let d=doc.data();
+if(d.phone===phone){
+out+=`<p>${d.product} | ${d.paymentStatus} | ${d.deliveryStatus}</p>`;
+}
+});
+trackResult.innerHTML=out||"No Order";
+}
+
+// FIX
+window.placeOrder=placeOrder;
+window.trackOrder=trackOrder;
+window.openForm=openForm;
+window.closeForm=closeForm;
+window.findTech=findTech;
+window.bookService=bookService;
+
+</script>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
 </script>
 
