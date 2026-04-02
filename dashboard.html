@@ -468,15 +468,7 @@ function closeForm(){
 document.getElementById("orderForm").style.display="none";
 }
 
-function submitOrder(){
-let name=document.getElementById("custName").value;
-let phone=document.getElementById("custPhone").value;
-let address=document.getElementById("custAddress").value;
 
-if(name==""||phone==""||address==""){
-alert("Fill all details");
-return;
-}
 
 let msg="New Order:\nName:"+name+"\nPhone:"+phone+"\nAddress:"+address+"\nProduct:"+productName+"\nPrice:"+productPrice+"\nDesc:"+productDesc+"\nImage:"+productImage;
 
@@ -566,20 +558,6 @@ let msg="New Order:\nProduct:"+dName+"\nPrice:"+dPrice+"\nDescription:"+dDesc+"\
 
 window.open("https://wa.me/919434852965?text="+encodeURIComponent(msg));
 }
-
-
-window.showDetails=function(name,price,image,desc){
-document.getElementById("dName").innerText=name;
-document.getElementById("dPrice").innerText="Price: ₹"+price;
-document.getElementById("dImage").src=image;
-document.getElementById("dDesc").innerText=desc;
-document.getElementById("productDetails").style.display="block";
-}
-
-window.closeDetails=function(){
-document.getElementById("productDetails").style.display="none";
-}
-
 
 
 
