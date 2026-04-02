@@ -335,11 +335,20 @@ View Details
 
 <h3>Confirm Order</h3>
 
+
+<select id="paymentMethod">
+  <option value="">Select Payment Method</option>
+  <option value="COD">Cash on Delivery</option>
+  <option value="ONLINE">Online Payment</option>
+</select>
+
+
 <input type="text" id="custName" placeholder="Your Name">
 <input type="tel" id="custPhone" placeholder="Phone Number">
 <textarea id="custAddress" placeholder="Full Address"></textarea>
 
-<button onclick="submitOrder()">Confirm Order</button>
+<button onclick="placeOrder()">Confirm Order</button>
+
 <button onclick="closeForm()">Cancel</button>
 </div>
 </div>
@@ -408,6 +417,15 @@ window.location.href="https://formsubmit.co/khutiyanayan@gmail.com?Name="+encode
 
 </div>
 
+</section>
+
+<section>
+<h2>Track Order</h2>
+
+<input type="text" id="trackPhone" placeholder="Enter Phone Number">
+<button onclick="trackOrder()">Track</button>
+
+<div id="trackResult"></div>
 </section>
 
 
@@ -563,6 +581,135 @@ document.getElementById("productDetails").style.display="none";
 }
 
 
+
+
+
+// 🔥 MAIN ORDER CONTROLLER
+function placeOrder(){
+
+let payment = document.getElementById("paymentMethod").value;
+
+if(payment==""){
+  alert("Select Payment Method");
+  return;
+}
+
+if(payment==="COD"){
+  submitCOD();
+}else{
+  payNow();
+}
+
+}
+
+// 💵 COD ORDER
+async function submitCOD(){
+
+let name=document.getElementById("custName").value;
+let phone=document.getElementById("custPhone").value;
+let address=document.getElementById("custAddress").value;
+
+if(name==""||phone==""||address==""){
+  alert("Fill all details");
+  return;
+}
+
+await addDoc(collection(db,"orders"),{
+  name,
+  phone,
+  address,
+  product: productName,
+  price: productPrice,
+
+  payment:"COD",
+  paymentStatus:"Pending",
+  deliveryStatus:"Pending",
+
+  time:new Date()
+});
+
+alert("Order Placed (COD) ✅");
+closeForm();
+}
+
+// 💳 ONLINE PAYMENT
+function payNow(){
+
+let name=document.getElementById("custName").value;
+let phone=document.getElementById("custPhone").value;
+let address=document.getElementById("custAddress").value;
+
+if(name==""||phone==""||address==""){
+  alert("Fill all details");
+  return;
+}
+
+var options = {
+ "key": "YOUR_RAZORPAY_KEY",
+ "amount": productPrice * 100,
+ "currency": "INR",
+ "name": "Electrical Hub Center",
+ "description": productName,
+
+ "handler": function (response){
+    saveOrder(response.razorpay_payment_id);
+ }
+};
+
+var rzp = new Razorpay(options);
+rzp.open();
+}
+
+// 💾 SAVE ONLINE ORDER
+async function saveOrder(paymentId){
+
+await addDoc(collection(db,"orders"),{
+  name: document.getElementById("custName").value,
+  phone: document.getElementById("custPhone").value,
+  address: document.getElementById("custAddress").value,
+
+  product: productName,
+  price: productPrice,
+
+  payment:"ONLINE",
+  paymentStatus:"Paid",
+  paymentId: paymentId,
+
+  deliveryStatus:"Pending",
+
+  time:new Date()
+});
+
+alert("Payment Successful ✅");
+closeForm();
+}
+
+// 📦 TRACK ORDER
+async function trackOrder(){
+
+let phone=document.getElementById("trackPhone").value;
+
+let snap=await getDocs(collection(db,"orders"));
+let out="";
+
+snap.forEach(doc=>{
+let d=doc.data();
+
+if(d.phone===phone){
+out+=`
+<div class="card">
+<h3>${d.product}</h3>
+<p>💰 Payment: ${d.payment}</p>
+<p>💳 Payment Status: ${d.paymentStatus}</p>
+<p>🚚 Delivery Status: ${d.deliveryStatus}</p>
+</div>
+`;
+}
+});
+
+document.getElementById("trackResult").innerHTML=out||"No Order Found ❌";
+}
+
 </script>
 <script>
 
@@ -580,6 +727,7 @@ document.getElementById("productDetails").style.display = "none";
 }
 
 </script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
 </body>
 </html>
