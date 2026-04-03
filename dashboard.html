@@ -377,6 +377,7 @@ View Details
 <input type="text" id="custName" placeholder="Your Name">
 <input type="tel" id="custPhone" placeholder="Phone Number">
 <textarea id="custAddress" placeholder="Full Address"></textarea>
+<input type="text" id="custPincode" placeholder="PIN Code">
 
 <button onclick="placeOrder()">Confirm Order</button>
 <button onclick="closeForm()">Cancel</button>
@@ -646,15 +647,16 @@ async function submitCOD(){
   let name=document.getElementById("custName").value;
   let phone=document.getElementById("custPhone").value;
   let address=document.getElementById("custAddress").value;
+let pincode = document.getElementById("custPincode").value;
 
-  if(name==""||phone==""||address==""){
+  if(name==""||phone==""||address==""||pincode==""){
     alert("Fill all details");
     return;
   }
 
   // Firebase save
   await addDoc(collection(db,"orders"),{
-    name,phone,address,
+    name,phone,address,pincode, 
     product:productName,
     price:productPrice,
     image:productImage,
@@ -670,6 +672,7 @@ async function submitCOD(){
 Name: ${name}
 Phone: ${phone}
 Address: ${address}
+PIN: ${pincode}
 Product: ${productName}
 Price: ₹${productPrice}
 Description: ${productDesc}
@@ -688,8 +691,9 @@ function payNow(){
   let name=document.getElementById("custName").value;
   let phone=document.getElementById("custPhone").value;
   let address=document.getElementById("custAddress").value;
+let pincode = document.getElementById("custPincode").value;
 
-  if(name==""||phone==""||address==""){
+  if(name==""||phone==""||address==""||pincode==""){
     alert("Fill all details");
     return;
   }
@@ -716,6 +720,7 @@ async function saveOrder(paymentId){
     name: custName.value,
     phone: custPhone.value,
     address: custAddress.value,
+    pincode: pincode,
     product: productName,
     price: productPrice,
     image: productImage,
