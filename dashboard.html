@@ -3,6 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+if(!localStorage.getItem("user")){
+  window.location.href="login.html";
+}
+</script>
 <title>Electrical Hub Center</title>
 
 <style>
@@ -228,6 +233,9 @@ textarea::placeholder{
 <header>
 <h1>Electrical Hub Center</h1>
 <p>All Electrical Services & Products in One Place</p>
+<button onclick="logout()" style="position:absolute; right:10px; top:10px;">
+Logout
+</button>
 </header>
 
 <!-- 🔧 SERVICES -->
@@ -813,6 +821,13 @@ out += `
 });
 
 document.getElementById("trackResult").innerHTML = out || "❌ No Order Found";
+}
+
+
+
+function logout(){
+  localStorage.removeItem("user");
+  window.location.href="login.html";
 }
 </script>
 
