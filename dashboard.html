@@ -521,7 +521,31 @@ orderForm.style.display="none";
 
 </div>
 </section>
+<!-- 🔧 ORDER SCRIPT -->
+<script>
+function placeOrder(){
 
+let payment = document.getElementById("paymentMethod").value;
+
+if(payment==""){
+  alert("Select Payment Method");
+  return;
+}
+
+if(payment==="COD"){
+  submitCOD();
+}else{
+  payNow();
+}
+}
+let msg="New Order:\nName:"+name+"\nPhone:"+phone+"\nAddress:"+address+"\nProduct:"+productName+"\nPrice:"+productPrice+"\nDesc:"+productDesc+"\nImage:"+productImage;
+
+window.open("https://wa.me/919434852965?text="+encodeURIComponent(msg));
+
+alert("Order Sent ✅");
+closeForm();
+}
+</script>
 
 <!-- 🔥 FIREBASE -->
 <script type="module">
@@ -651,6 +675,47 @@ if(pay==="COD")submitCOD();
 else payNow();
 }
 
+function placeOrder(){
+let payment = document.getElementById("paymentMethod").value;
+
+if(payment==""){
+  alert("Select Payment Method");
+  return;
+}
+
+if(payment==="COD"){
+  submitCOD();
+}else{
+  payNow();
+}
+}
+
+async function submitCOD(){
+let name=document.getElementById("custName").value;
+let phone=document.getElementById("custPhone").value;
+let address=document.getElementById("custAddress").value;
+
+if(name==""||phone==""||address==""){
+  alert("Fill all details");
+  return;
+}
+
+await addDoc(collection(db,"orders"),{
+name,phone,address,
+product: productName,
+price: productPrice,
+payment:"COD",
+paymentStatus:"Pending",
+deliveryStatus:"Pending",
+time:new Date()
+});
+
+alert("COD Order Placed ✅");
+closeForm();
+}
+function payNow(){
+alert("Online payment working");
+}
 
 // ONLINE
 function payNow(){
