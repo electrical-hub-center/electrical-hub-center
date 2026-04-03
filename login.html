@@ -5,85 +5,17 @@
 <title>Login - Electrical Hub</title>
 
 <style>
-
-/* 🔥 Body */
 body {
   margin: 0;
   height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;   /* ✅ PERFECT CENTER */
+  align-items: center;
   font-family: Arial;
-  overflow: hidden;
   background: #0a3d62;
 }
 
-/* 🔝 Top Tagline */
-.top-text {
-  position: absolute;
-  top: 15px;
-  left: 4px;
-  right: 4px;
-  text-align: center;
-  color: white;
-  font-size: 16px;
-}
-
-/* 🔥 Circuit SVG */
-.circuit {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-}
-
-/* 🔥 Circuit lines */
-.line {
-  fill: none;
-  stroke: #00ffff;
-  stroke-width: 2;
-  stroke-dasharray: 300;
-  stroke-dashoffset: 300;
-  animation: draw 5s linear infinite;
-}
-
-@keyframes draw {
-  to { stroke-dashoffset: 0; }
-}
-
-/* 🔥 Nodes */
-.node {
-  fill: #00ffff;
-  animation: blink 1s infinite alternate;
-}
-
-@keyframes blink {
-  from { opacity: 0.3; }
-  to { opacity: 1; }
-}
-
-/* 🔥 Floating icons */
-.icon {
-  position: absolute;
-  font-size: 22px;
-  opacity: 0.8;
-  animation: float 6s infinite ease-in-out;
-}
-
-.icon1 { top: 10%; left: 10%; }
-.icon2 { top: 20%; left: 85%; }
-.icon3 { top: 75%; left: 15%; }
-.icon4 { top: 80%; left: 80%; }
-
-@keyframes float {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(-20px); }
-}
-
-/* 🔥 Login box (CENTER) */
 .container {
-  position: relative;
-  z-index: 2;
   text-align: center;
   padding: 30px;
   border-radius: 15px;
@@ -93,13 +25,6 @@ body {
   width: 300px;
 }
 
-/* 🔥 Typing text */
-#typing {
-  font-size: 20px;
-  margin-bottom: 15px;
-}
-
-/* 🔥 Input */
 input {
   width: 100%;
   padding: 10px;
@@ -108,7 +33,6 @@ input {
   border: none;
 }
 
-/* 🔥 Button */
 button {
   width: 100%;
   padding: 12px;
@@ -116,110 +40,71 @@ button {
   border: none;
   background: white;
   color: #0a3d62;
-  font-size: 16px;
   cursor: pointer;
-  transition: 0.3s;
 }
-
-button:hover {
-  background: #0a3d62;
-  color: white;
-  transform: scale(1.05);
-}
-
 </style>
 </head>
 
 <body>
 
-<!-- 🔝 Tagline -->
-<div class="top-text">
-  All Electrical Services ⚡ & Products 🛒 in One Place
-</div>
-
-<!-- 🧠 Real Circuit -->
-<svg class="circuit" viewBox="0 0 800 600">
-  <path d="M50 100 H300 V200 H500" class="line"/>
-  <path d="M100 300 H400 V400 H700" class="line"/>
-  <path d="M200 50 V250 H600" class="line"/>
-
-  <circle cx="300" cy="100" r="5" class="node"/>
-  <circle cx="500" cy="200" r="5" class="node"/>
-  <circle cx="400" cy="300" r="5" class="node"/>
-  <circle cx="700" cy="400" r="5" class="node"/>
-</svg>
-
-<!-- 🔥 Floating icons -->
-<div class="icon icon1">💡</div>
-<div class="icon icon2">⚡</div>
-<div class="icon icon3">🔌</div>
-<div class="icon icon4">🔧</div>
-
-<!-- 🔥 Login Form (CENTER) -->
 <div class="container">
 
-<h2 id="typing"></h2>
+<h2>Login / Sign Up</h2>
 
-<input type="text" id="fname" placeholder="First Name">
-<input type="text" id="lname" placeholder="Last Name">
-<input type="email" id="email" placeholder="Email">
-<input type="tel" id="phone" placeholder="Phone">
+<input type="text" id="name" placeholder="Your Name">
+<input type="text" id="contact" placeholder="Phone / Email">
 
-<button onclick="saveData()">Sign In</button>
+<button onclick="login()">Continue</button>
 
 </div>
 
-<!-- 🔥 Typing -->
-<script>
-const text = "Welcome to Electrical Hub Center ⚡";
-let i = 0;
-
-function typing(){
-  if(i < text.length){
-    document.getElementById("typing").innerHTML += text.charAt(i);
-    i++;
-    setTimeout(typing, 50);
-  }
-}
-typing();
-</script>
-
-<!-- 🔥 Firebase -->
 <script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyCm-lsMV-W9uNLRibsQalox13QHccgPFMc",
-  authDomain: "electrical-hub-center.firebaseapp.com",
-  projectId: "electrical-hub-center",
-  appId: "1:128609071756:web:c821ff6616b4edd2c581a9"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-window.saveData = async function(){
-
-var fname = document.getElementById("fname").value;
-var phone = document.getElementById("phone").value;
-
-if(fname=="" || phone==""){
-alert("Name & Phone required");
-return;
-}
-
-await addDoc(collection(db, "customers"), {
-  name: fname,
-  phone: phone,
-  time: new Date()
+const app = initializeApp({
+  apiKey:"AIzaSy...",
+  authDomain:"electrical-hub-center.firebaseapp.com",
+  projectId:"electrical-hub-center"
 });
 
-localStorage.setItem("userLoggedIn","true");
+const db = getFirestore(app);
 
-window.location.href = "dashboard.html";
+// 🔥 AUTO LOGIN
+if(localStorage.getItem("user")){
+  window.location.href = "dashboard.html";
+}
 
+// 🔥 LOGIN FUNCTION
+window.login = async function(){
+
+  let name = document.getElementById("name").value;
+  let contact = document.getElementById("contact").value;
+
+  if(name=="" || contact==""){
+    alert("Fill all details");
+    return;
+  }
+
+  let userData = {
+    name:name,
+    contact:contact
+  };
+
+  // 🔥 SAVE LOCAL
+  localStorage.setItem("user", JSON.stringify(userData));
+
+  // 🔥 SAVE FIREBASE (first time)
+  await addDoc(collection(db,"customers"),{
+    name:name,
+    contact:contact,
+    time:new Date()
+  });
+
+  alert("Login Successful ✅");
+
+  window.location.href = "dashboard.html";
 }
 
 </script>
