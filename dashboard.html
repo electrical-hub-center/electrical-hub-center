@@ -186,67 +186,6 @@ textarea::placeholder{
   background: rgba(255,255,255,0.95);
   backdrop-filter: blur(15px);
 }
-
-
-<div style="
-background:white;
-color:black;
-margin:100px auto;
-padding:20px;
-border-radius:10px;
-max-width:400px;
-">
-
-
-#orderForm select,
-#orderForm input,
-#orderForm textarea{
-  background:#f1f1f1;
-  color:black;
-}
-
-#orderForm select option{
-  color:black;
-}
-#orderForm select{
-  border:1px solid #ccc;
-}
-#orderForm h3{
-  color:black;
-}
-/* 🔥 FORCE FIX FOR POPUP */
-#orderForm *{
-  color:black !important;
-}
-
-#orderForm input,
-#orderForm textarea,
-#orderForm select{
-  background:#f1f1f1 !important;
-  color:black !important;
-}
-
-#orderForm select option{
-  color:black !important;
-  background:white !important;
-}
-
-
-body{
-  overflow-x:hidden;
-}
-
-img{
-  max-width:100%;
-  height:auto;
-}
-
-#orderForm{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
 </style>
 
 </head>
@@ -396,17 +335,11 @@ View Details
 
 <h3>Confirm Order</h3>
 
-<select id="paymentMethod">
-<option value="">Select Payment</option>
-<option value="COD">Cash on Delivery</option>
-<option value="ONLINE">Online Payment</option>
-</select>
-
 <input type="text" id="custName" placeholder="Your Name">
 <input type="tel" id="custPhone" placeholder="Phone Number">
 <textarea id="custAddress" placeholder="Full Address"></textarea>
 
-<button onclick="placeOrder()">Confirm</button>
+<button onclick="submitOrder()">Confirm Order</button>
 <button onclick="closeForm()">Cancel</button>
 </div>
 </div>
@@ -476,27 +409,6 @@ window.location.href="https://formsubmit.co/khutiyanayan@gmail.com?Name="+encode
 </div>
 
 </section>
-<!-- TRACK -->
-<section>
-<h2>Track Order</h2>
-<input id="trackPhone" placeholder="Phone">
-<button onclick="trackOrder()">Track</button>
-<div id="trackResult"></div>
-</section>
-
-<script>
-let productName="",productPrice="";
-
-function openForm(name,price){
-productName=name;
-productPrice=price;
-orderForm.style.display="block";
-}
-
-function closeForm(){
-orderForm.style.display="none";
-}
-</script>
 
 
 <!-- 📞 CONTACT -->
@@ -522,6 +434,41 @@ orderForm.style.display="none";
 </div>
 </section>
 
+<!-- 🔧 ORDER SCRIPT -->
+<script>
+let productName="",productPrice="",productImage="",productDesc="";
+
+function openForm(n,p,i,d){
+productName=n;
+productPrice=p;
+productImage=i;
+productDesc=d;
+document.getElementById("orderForm").style.display="block";
+}
+
+function closeForm(){
+document.getElementById("orderForm").style.display="none";
+}
+
+function submitOrder(){
+let name=document.getElementById("custName").value;
+let phone=document.getElementById("custPhone").value;
+let address=document.getElementById("custAddress").value;
+
+if(name==""||phone==""||address==""){
+alert("Fill all details");
+return;
+}
+
+let msg="New Order:\nName:"+name+"\nPhone:"+phone+"\nAddress:"+address+"\nProduct:"+productName+"\nPrice:"+productPrice+"\nDesc:"+productDesc+"\nImage:"+productImage;
+
+window.open("https://wa.me/919434852965?text="+encodeURIComponent(msg));
+
+alert("Order Sent ✅");
+closeForm();
+}
+</script>
+
 
 <!-- 🔥 FIREBASE -->
 <script type="module">
@@ -529,18 +476,12 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebas
 import { getFirestore, collection, getDocs, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const app=initializeApp({
-apiKey:"AIzaSyCm-lsMV-W9uNLRibsQalox13QHccgPFMc",
+apiKey:"AIzaSy...",
 authDomain:"electrical-hub-center.firebaseapp.com",
 projectId:"electrical-hub-center"
 });
 
 const db=getFirestore(app);
-window.db = db;
-window.collection = collection;
-window.addDoc = addDoc;
-window.getDocs = getDocs;
-
-</script>
 
 // 🔍 FIND TECH
 document.getElementById("searchBtn").addEventListener("click",async()=>{
@@ -638,148 +579,7 @@ function closeDetails(){
 document.getElementById("productDetails").style.display = "none";
 }
 
-
-// BOOKING
-async function bookService(){
-await addDoc(collection(db,"bookings"),{
-name:bName.value,
-phone:bPhone.value,
-address:bAddress.value,
-service:bService.value
-});
-alert("Booked");
-}
 </script>
 
-<!-- MAIN SCRIPT -->
-<script>
-
-let productName="", productPrice="";
-
-function openForm(name,price){
-productName=name;
-productPrice=price;
-orderForm.style.display="flex";
-}
-
-function closeForm(){
-orderForm.style.display="none";
-}
-
-function placeOrder(){
-
-let payment = paymentMethod.value;
-
-if(payment==""){
-alert("Select Payment");
-return;
-}
-
-if(payment==="COD"){
-submitCOD();
-}else{
-payNow();
-}
-}
-
-// COD
-async function submitCOD(){
-
-let name=custName.value;
-let phone=custPhone.value;
-let address=custAddress.value;
-
-if(name==""||phone==""||address==""){
-alert("Fill all");
-return;
-}
-
-await addDoc(collection(db,"orders"),{
-name,phone,address,
-product:productName,
-price:productPrice,
-payment:"COD",
-paymentStatus:"Pending",
-deliveryStatus:"Pending"
-});
-
-// WhatsApp
-let msg=`COD Order
-${name}
-${productName}
-₹${productPrice}`;
-
-window.open("https://wa.me/919434852965?text="+encodeURIComponent(msg));
-
-alert("COD Done");
-closeForm();
-}
-
-// ONLINE
-function payNow(){
-
-let options={
-key:"rzp_test_xxx",
-amount:productPrice*100,
-handler:function(res){
-saveOrder(res.razorpay_payment_id);
-}
-};
-
-new Razorpay(options).open();
-}
-
-async function saveOrder(pid){
-
-await addDoc(collection(db,"orders"),{
-name:custName.value,
-phone:custPhone.value,
-address:custAddress.value,
-product:productName,
-price:productPrice,
-payment:"ONLINE",
-paymentStatus:"Paid",
-deliveryStatus:"Pending",
-paymentId:pid
-});
-
-// WhatsApp
-let msg=`Online Order
-${productName}
-₹${productPrice}`;
-
-window.open("https://wa.me/919434852965?text="+encodeURIComponent(msg));
-
-alert("Payment Done");
-closeForm();
-}
-
-// TRACK
-async function trackOrder(){
-
-let phone=trackPhone.value;
-
-let snap=await getDocs(collection(db,"orders"));
-
-let out="";
-
-snap.forEach(doc=>{
-let d=doc.data();
-
-if(d.phone===phone){
-out+=`<p>${d.product} | ${d.paymentStatus} | ${d.deliveryStatus}</p>`;
-}
-});
-
-trackResult.innerHTML=out||"No Order";
-}
-
-</script>
-
-  
-
-<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-
-</script>
 </body>
 </html>
