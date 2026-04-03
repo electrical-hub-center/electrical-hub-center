@@ -655,6 +655,8 @@ async function submitCOD(){
     name,phone,address,
     product:productName,
     price:productPrice,
+    image:productImage,
+    description:productDesc,
     payment:"COD",
     paymentStatus:"Pending",
     deliveryStatus:"Pending",
@@ -667,7 +669,10 @@ Name: ${name}
 Phone: ${phone}
 Address: ${address}
 Product: ${productName}
-Price: ₹${productPrice}`;
+Price: ₹${productPrice}
+Description: ${productDesc}
+
+🖼️ Image: ${productImage}`;
 
   window.open("https://wa.me/919434852965?text="+encodeURIComponent(msg));
 
@@ -711,6 +716,8 @@ async function saveOrder(paymentId){
     address: custAddress.value,
     product: productName,
     price: productPrice,
+    image: productImage,
+    description: productDesc,
     payment:"ONLINE",
     paymentStatus:"Paid",
     paymentId: paymentId,
@@ -721,6 +728,10 @@ async function saveOrder(paymentId){
   let msg=`New ONLINE Order:
 Product: ${productName}
 Price: ₹${productPrice}
+📝 Description: ${productDesc}
+
+🖼️ Image: ${productImage}
+
 Payment ID: ${paymentId}`;
 
   window.open("https://wa.me/919434852965?text="+encodeURIComponent(msg));
