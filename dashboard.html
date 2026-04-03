@@ -233,7 +233,7 @@ textarea::placeholder{
 <header>
 <h1>Electrical Hub Center</h1>
 <p>All Electrical Services & Products in One Place</p>
-<button onclick="logout()" style="position:absolute; right:10px; top:10px;">
+<button onclick="logout()" style="position:absolute; right:10px; top:10px;background:red;">
 Logout
 </button>
 </header>
@@ -849,5 +849,19 @@ document.getElementById("productDetails").style.display = "none";
 
 </script>
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+
+<script>
+
+function logout(){
+  localStorage.removeItem("user");   // user delete
+  localStorage.removeItem("userLoggedIn"); // old data delete
+
+  alert("Logged out successfully");
+
+  window.location.href = "login.html"; // redirect
+}
+
+</script>
 </body>
 </html>
