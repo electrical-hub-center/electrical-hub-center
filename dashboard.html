@@ -187,34 +187,38 @@ textarea::placeholder{
   backdrop-filter: blur(15px);
 }
 
-/* 🔥 FORCE FIX FOR POPUP */
-#orderForm *{
-  color:black !important;
-}
-
-#orderForm input,
-#orderForm textarea,
-#orderForm select{
-  background:#f1f1f1 !important;
-  color:black !important;
-}
-
-#orderForm select option{
-  color:black !important;
-  background:white !important;
-}
-body{
-  overflow-x:hidden;
-}
-img{
-  max-width:100%;
-  height:auto;
-}
+/* 🔥 ORDER POPUP FIX FULL */
 #orderForm{
   display:flex;
   align-items:center;
   justify-content:center;
 }
+
+#orderForm div{
+  background:white !important;
+  color:black !important;
+}
+
+/* 🔥 INPUT + SELECT FIX */
+#orderForm input,
+#orderForm textarea,
+#orderForm select{
+  background:#f1f1f1 !important;
+  color:black !important;
+  border:1px solid #ccc;
+}
+
+/* 🔥 OPTION FIX */
+#orderForm select option{
+  color:black !important;
+  background:white !important;
+}
+
+/* 🔥 TITLE FIX */
+#orderForm h3{
+  color:black !important;
+}
+
 </style>
 
 </head>
