@@ -452,6 +452,16 @@ window.location.href="https://formsubmit.co/khutiyanayan@gmail.com?Name="+encode
 </section>
 
 
+<section>
+<h2>📦 Track Your Order</h2>
+
+<input type="text" id="trackInput" placeholder="Enter Order ID or Phone Number">
+
+<button onclick="trackOrder()">Track Order</button>
+
+<div id="trackResult"></div>
+</section>
+
 <!-- 📞 CONTACT -->
 <section>
 <h2>Contact</h2>
@@ -501,7 +511,8 @@ alert("Fill all details");
 return;
 }
 
-let msg="New Order:\nName:"+name+"\nPhone:"+phone+"\nAddress:"+address+"\nProduct:"+productName+"\nPrice:"+productPrice+"\nDesc:"+productDesc+"\nImage:"+productImage;
+let msg="New Order:"
+\nOrder ID:" + orderId + "\nName:"+name+"\nPhone:"+phone+"\nAddress:"+address+"\nProduct:"+productName+"\nPrice:"+productPrice+"\nDesc:"+productDesc+"\nImage:"+productImage;
 
 window.open("https://wa.me/919434852965?text="+encodeURIComponent(msg));
 
@@ -609,6 +620,9 @@ document.getElementById("productDetails").style.display="none";
 // 🔥 GLOBAL
 let productName="", productPrice="", productImage="", productDesc="";
 
+window.trackOrder = trackOrder;
+
+
 // OPEN
 window.openForm = function(name,price,image,desc){
   productName=name;
@@ -653,10 +667,12 @@ let pincode = document.getElementById("custPincode").value;
     alert("Fill all details");
     return;
   }
+ let orderId = "ORD" + Date.now();
+
 
   // Firebase save
   await addDoc(collection(db,"orders"),{
-    name,phone,address,pincode, 
+orderId,name,phone,address,pincode, 
     product:productName,
     price:productPrice,
     image:productImage,
@@ -681,7 +697,7 @@ Description: ${productDesc}
 
   window.open("https://wa.me/919434852965?text="+encodeURIComponent(msg));
 
-  alert("COD Order Placed ✅");
+  alert("COD Order Placed ✅\nOrder ID: " + orderId);
   closeForm();
 }
 
@@ -716,7 +732,10 @@ let pincode = document.getElementById("custPincode").value;
 // SAVE ONLINE
 async function saveOrder(paymentId){
 
+let orderId = "ORD" + Date.now();
+
   await addDoc(collection(db,"orders"),{
+    orderId: orderId,
     name: custName.value,
     phone: custPhone.value,
     address: custAddress.value,
@@ -743,10 +762,55 @@ Payment ID: ${paymentId}`;
 
   window.open("https://wa.me/919434852965?text="+encodeURIComponent(msg));
 
-  alert("Payment Successful ✅");
+  alert("Payment Successful ✅\nOrder ID: " + orderId);
   closeForm();
 }
 
+
+
+
+async function trackOrder(){
+
+let input = document.getElementById("trackInput").value.trim();
+
+if(input==""){
+  alert("Enter Order ID or Phone");
+  return;
+}
+
+let snap = await getDocs(collection(db,"orders"));
+let out = "";
+
+snap.forEach(doc=>{
+let d = doc.data();
+
+let statusColor = d.deliveryStatus==="Delivered" ? "green" :
+                  d.deliveryStatus==="Shipped" ? "orange" : "red";
+
+if(d.orderId === input || d.phone === input){
+
+out += `
+<div class="card">
+<h3>🆔 ${d.orderId}</h3>
+
+<p>📦 Product: ${d.product}</p>
+<p>💰 Price: ₹${d.price}</p>
+
+<p>💳 Payment: ${d.payment}</p>
+<p>💳 Status: ${d.paymentStatus}</p>
+<p style="color:${statusColor}">🚚 Delivery: ${d.deliveryStatus}</p>
+
+<p>🚚 Delivery: ${d.deliveryStatus}</p>
+
+<p>📅 Date: ${new Date(d.time.seconds*1000).toLocaleString()}</p>
+
+</div>
+`;
+}
+});
+
+document.getElementById("trackResult").innerHTML = out || "❌ No Order Found";
+}
 </script>
 
 </script>
