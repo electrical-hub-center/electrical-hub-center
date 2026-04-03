@@ -298,6 +298,7 @@ textarea::placeholder{
 <input type="text" name="name" placeholder="Your Name">
 <input type="tel" name="phone" placeholder="Phone Number">
 <input type="text" name="address" placeholder="Full Address">
+<input type="text" name="pincode" placeholder="PIN Code">
 
 <select name="service">
 <option>Select Service</option>
@@ -418,7 +419,7 @@ var name=document.getElementById("custName").value;
 var phone=document.getElementById("custPhone").value;
 var address=document.getElementById("custAddress").value;
 
-if(name==""||phone==""||address==""){
+if(name==""||phone==""||address==""||pincode==""){
 alert("Fill all details");
 return;
 }
@@ -541,6 +542,7 @@ document.getElementById("submitBtn").addEventListener("click",async()=>{
 let name=document.querySelector('[name="name"]').value;
 let phone=document.querySelector('[name="phone"]').value;
 let address=document.querySelector('[name="address"]').value;
+let pincode=document.querySelector('[name="pincode"]').value;
 let service=document.querySelector('[name="service"]').value;
 let details=document.querySelector('[name="details"]').value;
 
@@ -550,10 +552,10 @@ return;
 }
 
 await addDoc(collection(db,"bookings"),{
-name,phone,address,service,details,time:new Date()
+name,phone,address,pincode, service,details,time:new Date()
 });
 
-let msg="New Booking:\nName:"+name+"\nPhone:"+phone+"\nAddress:"+address+"\nService:"+service;
+let msg="New Booking:\nName:"+name+"\nPhone:"+phone+"\nAddress:"+address+"\nPIN:"+pincode+"\nService:"+service;
 
 window.open("https://wa.me/919434852965?text="+encodeURIComponent(msg));
 
