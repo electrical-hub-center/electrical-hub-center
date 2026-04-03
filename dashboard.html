@@ -427,6 +427,7 @@ return;
 
 // 🔥 IMPORTANT FIX (encode)
 var msg = "New Order:\n"
++ "Order ID: " + orderId + "\n"
 + "Name: " + name + "\n"
 + "Phone: " + phone + "\n"
 + "Address: " + address + "\n"
@@ -512,7 +513,7 @@ return;
 }
 
 let msg="New Order:"
-\nOrder ID:" + orderId + "\nName:"+name+"\nPhone:"+phone+"\nAddress:"+address+"\nProduct:"+productName+"\nPrice:"+productPrice+"\nDesc:"+productDesc+"\nImage:"+productImage;
+\nOrderID:"+orderId+" \nName:"+name+"\nPhone:"+phone+"\nAddress:"+address+"\nProduct:"+productName+"\nPrice:"+productPrice+"\nDesc:"+productDesc+"\nImage:"+productImage;
 
 window.open("https://wa.me/919434852965?text="+encodeURIComponent(msg));
 
@@ -685,7 +686,7 @@ orderId,name,phone,address,pincode,
 
   // WhatsApp
   let msg=`New COD Order:
-Order ID: ${orderId}
+OrderID: ${orderId}
 Name: ${name}
 Phone: ${phone}
 Address: ${address}
@@ -753,6 +754,7 @@ let orderId = "ORD" + Date.now();
   });
 
   let msg=`New ONLINE Order:
+OrderID: ${orderId}
 Product: ${productName}
 Price: ₹${productPrice}
 📝 Description: ${productDesc}
