@@ -521,31 +521,7 @@ orderForm.style.display="none";
 
 </div>
 </section>
-<!-- 🔧 ORDER SCRIPT -->
-<script>
-function placeOrder(){
 
-let payment = document.getElementById("paymentMethod").value;
-
-if(payment==""){
-  alert("Select Payment Method");
-  return;
-}
-
-if(payment==="COD"){
-  submitCOD();
-}else{
-  payNow();
-}
-}
-let msg="New Order:\nName:"+name+"\nPhone:"+phone+"\nAddress:"+address+"\nProduct:"+productName+"\nPrice:"+productPrice+"\nDesc:"+productDesc+"\nImage:"+productImage;
-
-window.open("https://wa.me/919434852965?text="+encodeURIComponent(msg));
-
-alert("Order Sent ✅");
-closeForm();
-}
-</script>
 
 <!-- 🔥 FIREBASE -->
 <script type="module">
