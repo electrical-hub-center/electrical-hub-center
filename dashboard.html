@@ -506,31 +506,21 @@ orderForm.style.display="none";
 </section>
 
 <!-- 🔧 ORDER SCRIPT -->
-<script>
-let productName="",productPrice="",productImage="",productDesc="";
+function placeOrder(){
 
-function openForm(n,p,i,d){
-productName=n;
-productPrice=p;
-productImage=i;
-productDesc=d;
-document.getElementById("orderForm").style.display="block";
+let payment = document.getElementById("paymentMethod").value;
+
+if(payment==""){
+  alert("Select Payment Method");
+  return;
 }
 
-function closeForm(){
-document.getElementById("orderForm").style.display="none";
+if(payment==="COD"){
+  submitCOD();
+}else{
+  payNow();
 }
-
-function submitOrder(){
-let name=document.getElementById("custName").value;
-let phone=document.getElementById("custPhone").value;
-let address=document.getElementById("custAddress").value;
-
-if(name==""||phone==""||address==""){
-alert("Fill all details");
-return;
 }
-
 let msg="New Order:\nName:"+name+"\nPhone:"+phone+"\nAddress:"+address+"\nProduct:"+productName+"\nPrice:"+productPrice+"\nDesc:"+productDesc+"\nImage:"+productImage;
 
 window.open("https://wa.me/919434852965?text="+encodeURIComponent(msg));
@@ -669,21 +659,53 @@ if(pay==="COD")submitCOD();
 else payNow();
 }
 
-// COD
+
 async function submitCOD(){
-await addDoc(collection(db,"orders"),{
-name:custName.value,
-phone:custPhone.value,
-address:custAddress.value,
-product:productName,
-price:productPrice,
-payment:"COD",
-paymentStatus:"Pending",
-deliveryStatus:"Pending"
-});
-alert("COD Order Done");
-closeForm();
+
+let name=document.getElementById("custName").value;
+let phone=document.getElementById("custPhone").value;
+let address=document.getElementById("custAddress").value;
+
+if(name==""||phone==""||address==""){
+  alert("Fill all details");
+  return;
 }
+
+try{
+
+await addDoc(collection(db,"orders"),{
+  name:name,
+  phone:phone,
+  address:address,
+
+  product: productName,
+  price: productPrice,
+
+  payment:"COD",
+  paymentStatus:"Pending",
+  deliveryStatus:"Pending",
+
+  time:new Date()
+});
+
+alert("COD Order Placed ✅");
+
+// WhatsApp message send
+let msg = `COD Order:
+Name: ${name}
+Phone: ${phone}
+Product: ${productName}`;
+
+window.open("https://wa.me/919434852965?text="+encodeURIComponent(msg));
+
+closeForm();
+
+}catch(e){
+alert("Error: "+e);
+}
+
+}
+
 
 // ONLINE
 function payNow(){
