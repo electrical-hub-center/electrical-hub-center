@@ -649,193 +649,133 @@ service:bService.value
 });
 alert("Booked");
 }
-
 </script>
 
-// 🔥 GLOBAL
-let productName="", productPrice="", productImage="", productDesc="";
+<!-- MAIN SCRIPT -->
+<script>
 
-// ✅ OPEN FORM
-function openForm(name, price, image, desc){
-  productName = name;
-  productPrice = price;
-  productImage = image;
-  productDesc = desc;
+let productName="", productPrice="";
 
-  document.getElementById("orderForm").style.display = "block";
+function openForm(name,price){
+productName=name;
+productPrice=price;
+orderForm.style.display="flex";
 }
 
-// ✅ CLOSE
 function closeForm(){
-  document.getElementById("orderForm").style.display = "none";
+orderForm.style.display="none";
 }
 
-// 🔥 ORDER CONTROLLER
 function placeOrder(){
 
-  let payment = document.getElementById("paymentMethod").value;
+let payment = paymentMethod.value;
 
-  if(payment==""){
-    alert("Select Payment Method");
-    return;
-  }
-
-  if(payment==="COD"){
-    submitCOD();
-  }else{
-    payNow();
-  }
+if(payment==""){
+alert("Select Payment");
+return;
 }
 
-// 💵 COD ORDER
+if(payment==="COD"){
+submitCOD();
+}else{
+payNow();
+}
+}
+
+// COD
 async function submitCOD(){
 
-  let name = document.getElementById("custName").value;
-  let phone = document.getElementById("custPhone").value;
-  let address = document.getElementById("custAddress").value;
+let name=custName.value;
+let phone=custPhone.value;
+let address=custAddress.value;
 
-  if(name==""||phone==""||address==""){
-    alert("Fill all details");
-    return;
-  }
-
-  try{
-
-    // 🔥 FIREBASE SAVE
-    await addDoc(collection(db,"orders"),{
-      name,
-      phone,
-      address,
-      product: productName,
-      price: productPrice,
-
-      payment:"COD",
-      paymentStatus:"Pending",
-      deliveryStatus:"Pending",
-
-      time:new Date()
-    });
-
-    // 🔥 WHATSAPP
-    let msg = `🛒 COD Order
-Name: ${name}
-Phone: ${phone}
-Product: ${productName}
-Price: ₹${productPrice}`;
-
-    window.open("https://wa.me/919434852965?text="+encodeURIComponent(msg));
-
-    alert("COD Order Placed ✅");
-    closeForm();
-
-  }catch(err){
-    console.error(err);
-    alert("COD Error ❌");
-  }
+if(name==""||phone==""||address==""){
+alert("Fill all");
+return;
 }
 
-// 💳 ONLINE PAYMENT
+await addDoc(collection(db,"orders"),{
+name,phone,address,
+product:productName,
+price:productPrice,
+payment:"COD",
+paymentStatus:"Pending",
+deliveryStatus:"Pending"
+});
+
+// WhatsApp
+let msg=`COD Order
+${name}
+${productName}
+₹${productPrice}`;
+
+window.open("https://wa.me/919434852965?text="+encodeURIComponent(msg));
+
+alert("COD Done");
+closeForm();
+}
+
+// ONLINE
 function payNow(){
 
-  let name = document.getElementById("custName").value;
-  let phone = document.getElementById("custPhone").value;
-  let address = document.getElementById("custAddress").value;
+let options={
+key:"rzp_test_xxx",
+amount:productPrice*100,
+handler:function(res){
+saveOrder(res.razorpay_payment_id);
+}
+};
 
-  if(name==""||phone==""||address==""){
-    alert("Fill all details");
-    return;
-  }
-
-  var options = {
-    key: "rzp_test_xxx", // নিজের key বসাও
-    amount: productPrice * 100,
-    currency: "INR",
-    name: "Electrical Hub Center",
-    description: productName,
-
-    handler: function (response){
-      saveOrder(response.razorpay_payment_id);
-    }
-  };
-
-  new Razorpay(options).open();
+new Razorpay(options).open();
 }
 
-// 💾 SAVE ONLINE
-async function saveOrder(paymentId){
+async function saveOrder(pid){
 
-  let name = document.getElementById("custName").value;
-  let phone = document.getElementById("custPhone").value;
-  let address = document.getElementById("custAddress").value;
+await addDoc(collection(db,"orders"),{
+name:custName.value,
+phone:custPhone.value,
+address:custAddress.value,
+product:productName,
+price:productPrice,
+payment:"ONLINE",
+paymentStatus:"Paid",
+deliveryStatus:"Pending",
+paymentId:pid
+});
 
-  try{
+// WhatsApp
+let msg=`Online Order
+${productName}
+₹${productPrice}`;
 
-    await addDoc(collection(db,"orders"),{
-      name,
-      phone,
-      address,
-      product: productName,
-      price: productPrice,
+window.open("https://wa.me/919434852965?text="+encodeURIComponent(msg));
 
-      payment:"ONLINE",
-      paymentStatus:"Paid",
-      paymentId: paymentId,
-      deliveryStatus:"Pending",
-
-      time:new Date()
-    });
-
-    // 🔥 WHATSAPP
-    let msg = `💳 Online Order
-Name: ${name}
-Phone: ${phone}
-Product: ${productName}
-Price: ₹${productPrice}
-Payment ID: ${paymentId}`;
-
-    window.open("https://wa.me/919434852965?text="+encodeURIComponent(msg));
-
-    alert("Payment Successful ✅");
-    closeForm();
-
-  }catch(err){
-    console.error(err);
-    alert("Payment Save Error ❌");
-  }
+alert("Payment Done");
+closeForm();
 }
 
-// 📦 TRACK ORDER
+// TRACK
 async function trackOrder(){
 
-  let phone = document.getElementById("trackPhone").value;
+let phone=trackPhone.value;
 
-  let snap = await getDocs(collection(db,"orders"));
-  let out = "";
+let snap=await getDocs(collection(db,"orders"));
 
-  snap.forEach(doc=>{
-    let d = doc.data();
+let out="";
 
-    if(d.phone === phone){
-      out += `
-      <div class="card">
-        <h3>${d.product}</h3>
-        <p>💰 ${d.payment}</p>
-        <p>💳 ${d.paymentStatus}</p>
-        <p>🚚 ${d.deliveryStatus}</p>
-      </div>`;
-    }
-  });
+snap.forEach(doc=>{
+let d=doc.data();
 
-  document.getElementById("trackResult").innerHTML = out || "No Order Found ❌";
+if(d.phone===phone){
+out+=`<p>${d.product} | ${d.paymentStatus} | ${d.deliveryStatus}</p>`;
+}
+});
+
+trackResult.innerHTML=out||"No Order";
 }
 
-// 🔥 GLOBAL ACCESS
-window.openForm=openForm;
-window.closeForm=closeForm;
-window.placeOrder=placeOrder;
-window.trackOrder=trackOrder;
-
 </script>
+
   
 
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
