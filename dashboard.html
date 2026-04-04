@@ -706,11 +706,11 @@ let pincode = document.getElementById("custPincode").value;
 
   // Firebase save
   await addDoc(collection(db,"orders"),{
-orderId,name,phone,address,pincode,desc,
+orderId,name,phone,address,pincode,description,
     product:productName,
     price:productPrice,
     image:productImage,
-    desc:productDesc,
+    description:productDesc,
     payment:"COD",
     paymentStatus:"Pending",
     deliveryStatus:"Pending",
