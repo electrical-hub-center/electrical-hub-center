@@ -562,7 +562,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebas
 import { getFirestore, collection, getDocs, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const app=initializeApp({
-apiKey:"AIzaSy...",
+apiKey:"AIzaSyCm-lsMV-W9uNLRibsQalox13QHccgPFMc",
 authDomain:"electrical-hub-center.firebaseapp.com",
 projectId:"electrical-hub-center"
 });
@@ -706,11 +706,11 @@ let pincode = document.getElementById("custPincode").value;
 
   // Firebase save
   await addDoc(collection(db,"orders"),{
-orderId,name,phone,address,pincode,description,
+orderId,name,phone,address,pincode,desc,
     product:productName,
     price:productPrice,
     image:productImage,
-    description:productDesc,
+    desc:productDesc,
     payment:"COD",
     paymentStatus:"Pending",
     deliveryStatus:"Pending",
