@@ -859,12 +859,15 @@ async function loadProducts(){
     let d = doc.data();
     let images = d.images || [d.image];
 
+    // 🔥 images array কে string এ convert
+    let imgString = images.join("|");
+
     out += `
     <div class="card">
 
       <img id="img_${doc.id}" 
            src="${images[0]}" 
-           onclick='nextImage("${doc.id}", ${JSON.stringify(images)})'
+           onclick="nextImage('${doc.id}','${imgString}')"
            style="width:100%;height:150px;object-fit:cover;border-radius:10px;cursor:pointer;">
 
       <h4>${d.name}</h4>
@@ -874,7 +877,7 @@ async function loadProducts(){
         Order Now
       </button>
 
-      <button onclick='openGallery(${JSON.stringify(images)})'>
+      <button onclick="openGallery('${imgString}')">
         View Images
       </button>
 
@@ -895,9 +898,14 @@ window.onload = function(){
   loadProducts();
 };
 
+
+
+
 let imgIndexMap = {};
 
-function nextImage(id, images){
+function nextImage(id, imgString){
+
+  let images = imgString.split("|");
 
   if(!imgIndexMap[id]){
     imgIndexMap[id] = 0;
@@ -911,6 +919,23 @@ function nextImage(id, images){
 
   document.getElementById("img_" + id).src = images[imgIndexMap[id]];
 }
+
+
+function openGallery(imgString){
+
+  let images = imgString.split("|");
+
+  let out="";
+
+  images.forEach(img=>{
+    out += `<img src="${img}" style="width:100%;margin:5px 0;border-radius:10px;">`;
+  });
+
+  document.getElementById("imgContainer").innerHTML = out;
+  document.getElementById("imgModal").style.display="block";
+}
+
+
 
 </script>
 
