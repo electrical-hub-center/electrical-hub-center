@@ -261,7 +261,9 @@ textarea::placeholder{
 }
 
 .image-slider img{
+  flex:0 0 100% !important;
   width:100% !important;
+  max-width:100% !important;
   min-width:100% !important;
   height:150px !important;
   object-fit:cover !important;
@@ -850,38 +852,37 @@ function logout(){
 }
 
 
-// 🔥 LOAD PRODUCTS
 async function loadProducts(){
 
   let snap = await getDocs(collection(db,"products"));
-  console.log("Products count:", snap.size);
-
   let out = "";
 
   snap.forEach(doc=>{
 
     let d = doc.data();
 
-    // 🔥 old + new support
-    let images = d.images ? d.images : [d.image];
+    // 🔥 FIX (old + new support)
+    let images = [];
 
-    // 🔥 slider images build
-    let sliderHTML = "";
+    if(d.images && Array.isArray(d.images)){
+      images = d.images;
+    } else if(d.image){
+      images = [d.image];
+    }
+
+    // 🔥 SLIDER HTML
+    let slider = `<div class="image-slider">`;
 
     images.forEach(img=>{
-      sliderHTML += `
-        <img src="${img}" 
-        style="min-width:100%;height:120px;object-fit:cover;border-radius:10px;">
-      `;
+      slider += `<img src="${img}">`;
     });
+
+    slider += `</div>`;
 
     out += `
     <div class="card">
 
-      <!-- 🔥 IMAGE SLIDER -->
-      <div class="image-slider">
-        ${sliderHTML}
-      </div>
+      ${slider}
 
       <h4>${d.name}</h4>
       <p>₹${d.price}</p>
