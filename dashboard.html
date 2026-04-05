@@ -260,24 +260,27 @@ textarea::placeholder{
   width:100% !important;
 }
 
-.image-slider img{
+/* 🔥 FIX ADD */
+.image-slider > img{
   flex:0 0 100% !important;
   width:100% !important;
   max-width:100% !important;
-  min-width:100% !important;
-  height:150px !important;
-  object-fit:cover !important;
-  flex-shrink:0 !important;
-  scroll-snap-align:start !important;
-  border-radius:10px;
 }
-
 .card{
   overflow:hidden;
+  width:100% !important;
 }
 .grid{
-  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+  display:grid;
+  grid-template-columns: repeat(auto-fit,minmax(160px,1fr));
+  gap:15px;
 }
+
+/* 🔥 ADD THIS */
+.grid .card{
+  min-width:0;
+}
+
 </style>
 
 </head>
