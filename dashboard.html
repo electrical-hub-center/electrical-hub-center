@@ -852,26 +852,39 @@ async function loadProducts(){
 
     let d = doc.data();
 
-    // 🔥 SAFE IMAGE FIX (old + new support)
-    let img = d.images ? d.images[0] : d.image;
+    // 🔥 old + new support
+    let images = d.images ? d.images : [d.image];
+
+    // 🔥 slider images build
+    let sliderHTML = "";
+
+    images.forEach(img=>{
+      sliderHTML += `
+        <img src="${img}" 
+        style="min-width:100%;height:120px;object-fit:cover;border-radius:10px;">
+      `;
+    });
 
     out += `
     <div class="card">
 
-      <img src="${img}" style="width:100%;height:120px;">
+      <!-- 🔥 IMAGE SLIDER -->
+      <div class="image-slider">
+        ${sliderHTML}
+      </div>
 
       <h4>${d.name}</h4>
       <p>₹${d.price}</p>
 
-      <button onclick="openForm('${d.name}','${d.price}','${img}','${d.desc}')">
+      <button onclick="openForm('${d.name}','${d.price}','${images[0]}','${d.desc}')">
         Order Now
       </button>
 
-      <button onclick='openGallery(${JSON.stringify(d.images || [img])})'>
+      <button onclick='openGallery(${JSON.stringify(images)})'>
         View Images
       </button>
 
-      <button onclick="showDetails('${d.name}','${d.price}','${img}','${d.desc}')">
+      <button onclick="showDetails('${d.name}','${d.price}','${images[0]}','${d.desc}')">
         View Details
       </button>
 
@@ -882,7 +895,7 @@ async function loadProducts(){
   document.getElementById("productContainer").innerHTML = out || "No Products ❌";
 }
 
-// 🔥 AUTO LOAD FIX
+// 🔥 AUTO LOAD
 window.onload = function(){
   loadProducts();
 };
