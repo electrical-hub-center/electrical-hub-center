@@ -281,6 +281,19 @@ textarea::placeholder{
   min-width:0;
 }
 
+
+.image-slider{
+  display:flex;
+  overflow-x:auto;
+  width:100%;
+}
+
+.image-slider img{
+  flex:0 0 100%;
+  width:100%;
+  height:150px;
+  object-fit:cover;
+}
 </style>
 
 </head>
@@ -864,14 +877,8 @@ async function loadProducts(){
 
     let d = doc.data();
 
-    // 🔥 FIX (old + new support)
-    let images = [];
-
-    if(d.images && Array.isArray(d.images)){
-      images = d.images;
-    } else if(d.image){
-      images = [d.image];
-    }
+    // 🔥 SAFE ARRAY
+    let images = d.images || [d.image];
 
     // 🔥 SLIDER HTML
     let slider = `<div class="image-slider">`;
@@ -894,10 +901,6 @@ async function loadProducts(){
         Order Now
       </button>
 
-      <button onclick='openGallery(${JSON.stringify(images)})'>
-        View Images
-      </button>
-
       <button onclick="showDetails('${d.name}','${d.price}','${images[0]}','${d.desc}')">
         View Details
       </button>
@@ -908,6 +911,7 @@ async function loadProducts(){
 
   document.getElementById("productContainer").innerHTML = out || "No Products ❌";
 }
+
 
 // 🔥 AUTO LOAD
 window.onload = function(){
