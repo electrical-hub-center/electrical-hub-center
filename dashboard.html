@@ -273,6 +273,27 @@ textarea::placeholder{
   overflow:hidden;
 }
 
+
+.slider{
+  display:flex;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling: touch;
+  border-radius:10px;
+}
+
+.slider img{
+  flex:0 0 100%;
+  width:100%;
+  height:150px;
+  object-fit:cover;
+  scroll-snap-align:start;
+}
+
+.slider::-webkit-scrollbar{
+  display:none;
+}
+
 </style>
 
 </head>
@@ -860,10 +881,20 @@ async function loadProducts(){
     let d = doc.data();
     let images = d.images || [d.image];
 
+let sliderHTML = `<div class="slider">`;
+
+images.forEach(img=>{
+  sliderHTML += `<img src="${img}">`;
+});
+
+sliderHTML += `</div>`;
+
+
     let imgString = images.join("|");
 
     out += `
     <div class="card">
+  ${sliderHTML}
 
       <img id="img_${doc.id}" 
            src="${images[0]}" 
