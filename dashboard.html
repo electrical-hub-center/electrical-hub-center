@@ -839,12 +839,16 @@ async function loadProducts(){
 
     out += `
     <div class="card">
-      <img src="${d.image}" style="width:100%;height:120px;">
+         <img src="${d.images[0]}" style="width:100%;height:120px;">
       <h4>${d.name}</h4>
       <p>₹${d.price}</p>
 
       <button onclick="openForm('${d.name}','${d.price}','${d.image}','${d.desc}')">
         Order Now
+      </button>
+
+      <button onclick="openGallery(${JSON.stringify(d.images)})">
+        View Images
       </button>
 
       <button onclick="showDetails('${d.name}','${d.price}','${d.image}','${d.desc}')">
