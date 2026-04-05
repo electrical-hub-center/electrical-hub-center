@@ -859,7 +859,6 @@ async function loadProducts(){
     let d = doc.data();
     let images = d.images || [d.image];
 
-    // 🔥 images array কে string এ convert
     let imgString = images.join("|");
 
     out += `
@@ -877,6 +876,7 @@ async function loadProducts(){
         Order Now
       </button>
 
+      <!-- 🔥 FIX -->
       <button onclick="openGallery('${imgString}')">
         View Images
       </button>
@@ -901,40 +901,23 @@ window.onload = function(){
 
 
 
-let imgIndexMap = {};
-
-function nextImage(id, imgString){
-
-  let images = imgString.split("|");
-
-  if(!imgIndexMap[id]){
-    imgIndexMap[id] = 0;
-  }
-
-  imgIndexMap[id]++;
-
-  if(imgIndexMap[id] >= images.length){
-    imgIndexMap[id] = 0;
-  }
-
-  document.getElementById("img_" + id).src = images[imgIndexMap[id]];
-}
-
-
 function openGallery(imgString){
 
   let images = imgString.split("|");
 
-  let out="";
+  let out = "";
 
   images.forEach(img=>{
-    out += `<img src="${img}" style="width:100%;margin:5px 0;border-radius:10px;">`;
+    out += `<img src="${img}" style="width:100%;margin:10px 0;border-radius:10px;">`;
   });
 
   document.getElementById("imgContainer").innerHTML = out;
-  document.getElementById("imgModal").style.display="block";
+  document.getElementById("imgModal").style.display = "block";
 }
 
+function closeGallery(){
+  document.getElementById("imgModal").style.display = "none";
+}
 
 
 </script>
