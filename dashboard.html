@@ -824,11 +824,10 @@ function logout(){
 }
 
 
-
+// 🔥 LOAD PRODUCTS
 async function loadProducts(){
 
   let snap = await getDocs(collection(db,"products"));
-
   console.log("Products count:", snap.size);
 
   let out = "";
@@ -837,23 +836,29 @@ async function loadProducts(){
 
     let d = doc.data();
 
+    // 🔥 SAFE IMAGE FIX (old + new support)
+    let img = d.images ? d.images[0] : d.image;
+
     out += `
     <div class="card">
-         <img src="${d.images[0]}" style="width:100%;height:120px;">
+
+      <img src="${img}" style="width:100%;height:120px;">
+
       <h4>${d.name}</h4>
       <p>₹${d.price}</p>
 
-      <button onclick="openForm('${d.name}','${d.price}','${d.image}','${d.desc}')">
+      <button onclick="openForm('${d.name}','${d.price}','${img}','${d.desc}')">
         Order Now
       </button>
 
-      <button onclick="openGallery(${JSON.stringify(d.images)})">
+      <button onclick='openGallery(${JSON.stringify(d.images || [img])})'>
         View Images
       </button>
 
-      <button onclick="showDetails('${d.name}','${d.price}','${d.image}','${d.desc}')">
+      <button onclick="showDetails('${d.name}','${d.price}','${img}','${d.desc}')">
         View Details
       </button>
+
     </div>
     `;
   });
@@ -865,8 +870,6 @@ async function loadProducts(){
 window.onload = function(){
   loadProducts();
 };
-
-
 
 
 
@@ -887,9 +890,23 @@ document.getElementById("productDetails").style.display = "block";
 function closeDetails(){
 document.getElementById("productDetails").style.display = "none";
 }
+// 🖼️ IMAGE GALLERY
+function openGallery(images){
 
+  let out = "";
+
+  images.forEach(img=>{
+    out += `<img src="${img}" style="width:100%;margin:5px;border-radius:10px;">`;
+  });
+
+  document.getElementById("imgContainer").innerHTML = out;
+  document.getElementById("imgModal").style.display = "block";
+}
+
+function closeGallery(){
+  document.getElementById("imgModal").style.display = "none";
+}
 </script>
-<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
 
 <script>
@@ -911,5 +928,13 @@ window.logout = function(){
   }
 }
 </script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<div id="imgModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:#000000cc;z-index:999;">
+  <div style="max-width:500px;margin:40px auto;background:white;padding:10px;border-radius:10px;text-align:center;">
+    <div id="imgContainer"></div>
+    <button onclick="closeGallery()">Close</button>
+  </div>
+</div>
 </body>
 </html>
