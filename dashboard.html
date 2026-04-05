@@ -849,6 +849,7 @@ function logout(){
 
 
 
+// 🔥 LOAD PRODUCTS
 async function loadProducts(){
 
   let snap = await getDocs(collection(db,"products"));
@@ -876,7 +877,6 @@ async function loadProducts(){
         Order Now
       </button>
 
-      <!-- 🔥 FIX -->
       <button onclick="openGallery('${imgString}')">
         View Images
       </button>
@@ -896,12 +896,34 @@ async function loadProducts(){
 // 🔥 AUTO LOAD
 window.onload = function(){
   loadProducts();
-};
+}
 
 
+// ================== 🔥 GLOBAL FUNCTIONS ==================
+
+// 👉 NEXT IMAGE CLICK
+window.imgIndexMap = {};
+
+window.nextImage = function(id, imgString){
+
+  let images = imgString.split("|");
+
+  if(!window.imgIndexMap[id]){
+    window.imgIndexMap[id] = 0;
+  }
+
+  window.imgIndexMap[id]++;
+
+  if(window.imgIndexMap[id] >= images.length){
+    window.imgIndexMap[id] = 0;
+  }
+
+  document.getElementById("img_" + id).src = images[window.imgIndexMap[id]];
+}
 
 
-function openGallery(imgString){
+// 👉 VIEW IMAGES (FINAL FIX)
+window.openGallery = function(imgString){
 
   let images = imgString.split("|");
 
@@ -915,7 +937,9 @@ function openGallery(imgString){
   document.getElementById("imgModal").style.display = "block";
 }
 
-function closeGallery(){
+
+// 👉 CLOSE
+window.closeGallery = function(){
   document.getElementById("imgModal").style.display = "none";
 }
 
@@ -937,22 +961,7 @@ document.getElementById("productDetails").style.display = "block";
 function closeDetails(){
 document.getElementById("productDetails").style.display = "none";
 }
-// 🖼️ IMAGE GALLERY
-function openGallery(images){
 
-  let out = "";
-
-  images.forEach(img=>{
-    out += `<img src="${img}" style="width:100%;margin:5px;border-radius:10px;">`;
-  });
-
-  document.getElementById("imgContainer").innerHTML = out;
-  document.getElementById("imgModal").style.display = "block";
-}
-
-function closeGallery(){
-  document.getElementById("imgModal").style.display = "none";
-}
 </script>
 
 
