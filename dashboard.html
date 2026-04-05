@@ -901,6 +901,10 @@ async function loadProducts(){
         Order Now
       </button>
 
+     <button onclick='openGallery(${JSON.stringify(images)})'>
+        View Images
+      </button>
+
       <button onclick="showDetails('${d.name}','${d.price}','${images[0]}','${d.desc}')">
         View Details
       </button>
