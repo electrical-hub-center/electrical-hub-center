@@ -315,6 +315,51 @@ textarea::placeholder{
 .gallery-slider::-webkit-scrollbar{
   display:none;
 }
+
+
+
+
+
+/* 🔥 WRAPPER */
+.gallery-wrapper{
+  position:relative;
+}
+
+/* 🔥 SLIDER */
+.gallery-slider{
+  display:flex;
+  overflow:hidden;
+}
+
+.gallery-slider img{
+  flex:0 0 100%;
+  width:100%;
+  height:250px;
+  object-fit:cover;
+  border-radius:10px;
+}
+
+/* 🔥 ARROWS */
+.nav{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  background:rgba(0,0,0,0.5);
+  color:white;
+  border:none;
+  padding:10px;
+  font-size:20px;
+  cursor:pointer;
+  border-radius:50%;
+  z-index:10;
+}
+
+.nav.left{ left:5px; }
+.nav.right{ right:5px; }
+
+.nav:hover{
+  background:#00c6ff;
+}
 </style>
 
 </head>
@@ -974,21 +1019,70 @@ window.nextImage = function(id, imgString){
 }
 
 
-// 👉 VIEW IMAGES (FINAL FIX - SLIDER)
+// 👉 VIEW IMAGES (ARROW + SLIDER)
 window.openGallery = function(imgString){
 
   let images = imgString.split("|");
 
-  let out = `<div class="gallery-slider">`;
+  let out = `
+  <div class="gallery-wrapper">
+
+    <button class="nav left" onclick="prevImg()">❮</button>
+
+    <div class="gallery-slider" id="gallerySlider">
+  `;
 
   images.forEach(img=>{
     out += `<img src="${img}">`;
   });
 
-  out += `</div>`;
+  out += `
+    </div>
+
+    <button class="nav right" onclick="nextImg()">❯</button>
+
+  </div>
+  `;
 
   document.getElementById("imgContainer").innerHTML = out;
   document.getElementById("imgModal").style.display = "block";
+
+  window.currentIndex = 0;
+  window.totalImages = images.length;
+}
+
+
+// 👉 NEXT
+window.nextImg = function(){
+  let slider = document.getElementById("gallerySlider");
+
+  window.currentIndex++;
+
+  if(window.currentIndex >= window.totalImages){
+    window.currentIndex = 0;
+  }
+
+  slider.scrollTo({
+    left: window.currentIndex * slider.offsetWidth,
+    behavior: "smooth"
+  });
+}
+
+
+// 👉 PREVIOUS
+window.prevImg = function(){
+  let slider = document.getElementById("gallerySlider");
+
+  window.currentIndex--;
+
+  if(window.currentIndex < 0){
+    window.currentIndex = window.totalImages - 1;
+  }
+
+  slider.scrollTo({
+    left: window.currentIndex * slider.offsetWidth,
+    behavior: "smooth"
+  });
 }
 
 
