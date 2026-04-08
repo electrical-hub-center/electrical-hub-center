@@ -317,6 +317,28 @@ textarea::placeholder{
 }
 
 
+
+
+/* 🔍 ZOOM FULL SCREEN */
+#zoomModal{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:black;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+}
+
+#zoomModal img{
+  width:90%;
+  max-height:90%;
+  object-fit:contain;
+  border-radius:10px;
+}
 </style>
 
 </head>
@@ -984,7 +1006,7 @@ window.openGallery = function(imgString){
   let out = `<div class="gallery-slider">`;
 
   images.forEach(img=>{
-    out += `<img src="${img}">`;
+    out += `<img src="${img}"onclick="zoomImage(this)">`;
   });
 
   out += `</div>`;
@@ -994,9 +1016,29 @@ window.openGallery = function(imgString){
 }
 
 window.closeGallery = function(){
-  document.getElementById("imgModal").style.display = "none";
+  document.getElementById("imgModal").style.display = "block";
 }
 
+
+
+
+
+// 🔍 ZOOM IMAGE
+window.zoomImage = function(img){
+
+  let zoomHTML = `
+  <div id="zoomModal" onclick="closeZoom()">
+    <img src="${img.src}">
+  </div>
+  `;
+
+  document.body.insertAdjacentHTML("beforeend", zoomHTML);
+}
+
+// ❌ CLOSE ZOOM
+window.closeZoom = function(){
+  document.getElementById("zoomModal").remove();
+}
 
 </script>
 
