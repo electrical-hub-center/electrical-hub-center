@@ -446,6 +446,17 @@ textarea::placeholder{
 <h2>Shopping Products</h2>
 
 
+
+<input 
+  type="text" 
+  id="searchProduct" 
+  placeholder="Search product..."
+  onkeyup="searchProducts()"
+  style="width:100%;padding:10px;border-radius:8px;margin-bottom:10px;">
+
+<div id="productContainer"></div>
+
+
 <div class="grid" id="productContainer"></div>
 
 
@@ -921,49 +932,39 @@ async function loadProducts(){
   let snap = await getDocs(collection(db,"products"));
   let out = "";
 
-  snap.forEach(doc=>{
+  allProducts = [];
 
+  snap.forEach(doc=>{
     let d = doc.data();
+renderProducts(products);
+    allProducts.push({id:doc.id, ...d});
+
     let images = d.images || [d.image];
 
-    // 🔥 SLIDER (ONLY THIS)
     let slider = `<div class="slider">`;
-
     images.forEach(img=>{
       slider += `<img src="${img}">`;
     });
-
     slider += `</div>`;
 
     let imgString = images.join("|");
 
     out += `
     <div class="card">
-
       ${slider}
 
       <h4>${d.name}</h4>
       <p>₹${d.price}</p>
 
-      <button onclick="openForm('${d.name}','${d.price}','${images[0]}','${d.desc}')">
-        Order Now
-      </button>
-
-      <button onclick="openGallery('${imgString}')">
-        View Images
-      </button>
-
-      <button onclick="showDetails('${d.name}','${d.price}','${images[0]}','${d.desc}')">
-        View Details
-      </button>
-
+      <button onclick="openForm('${d.name}','${d.price}','${images[0]}','${d.desc}')">Order Now</button>
+      <button onclick="openGallery('${imgString}')">View Images</button>
+      <button onclick="showDetails('${d.name}','${d.price}','${images[0]}','${d.desc}')">View Details</button>
     </div>
     `;
   });
 
   
-
-  document.getElementById("productContainer").innerHTML = out || "No Products ❌";
+ document.getElementById("productContainer").innerHTML = out || "No Products ❌";
 }
 
 
@@ -1040,6 +1041,19 @@ window.closeZoom = function(){
   document.getElementById("zoomModal").remove();
 }
 
+
+
+
+window.searchProducts = function(){
+
+  let input = document.getElementById("searchProduct").value.toLowerCase();
+
+  let filtered = allProducts.filter(p =>
+    p.name.toLowerCase().includes(input)
+  );
+
+  renderProducts(filtered);
+}
 </script>
 
 </script>
