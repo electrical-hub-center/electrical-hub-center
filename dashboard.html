@@ -932,11 +932,10 @@ async function loadProducts(){
   let snap = await getDocs(collection(db,"products"));
   let out = "";
 
-  allProducts = [];
+
 
   snap.forEach(doc=>{
     let d = doc.data();
-renderProducts(products);
     allProducts.push({id:doc.id, ...d});
 
     let images = d.images || [d.image];
@@ -975,41 +974,6 @@ window.onload = function(){
 
 
 
-
-
-
-function renderProducts(list){
-
-  let out = "";
-
-  list.forEach(d=>{
-
-    let images = d.images || [d.image];
-
-    let slider = `<div class="slider">`;
-    images.forEach(img=>{
-      slider += `<img src="${img}">`;
-    });
-    slider += `</div>`;
-
-    let imgString = images.join("|");
-
-    out += `
-    <div class="card">
-      ${slider}
-
-      <h4>${d.name}</h4>
-      <p>₹${d.price}</p>
-
-      <button onclick="openForm('${d.name}','${d.price}','${images[0]}','${d.desc}')">Order Now</button>
-      <button onclick="openGallery('${imgString}')">View Images</button>
-      <button onclick="showDetails('${d.name}','${d.price}','${images[0]}','${d.desc}')">View Details</button>
-    </div>
-    `;
-  });
-
-  document.getElementById("productContainer").innerHTML = out || "No Product Found ❌";
-}
 
 // ================== 🔥 GLOBAL FUNCTIONS ==================
 
@@ -1079,18 +1043,6 @@ window.closeZoom = function(){
 }
 
 
-
-
-window.searchProducts = function(){
-
-  let input = document.getElementById("searchProduct").value.toLowerCase();
-
-  let filtered = allProducts.filter(p =>
-    p.name.toLowerCase().includes(input)
-  );
-
-  renderProducts(filtered);
-}
 </script>
 
 </script>
