@@ -974,6 +974,43 @@ window.onload = function(){
 }
 
 
+
+
+
+
+function renderProducts(list){
+
+  let out = "";
+
+  list.forEach(d=>{
+
+    let images = d.images || [d.image];
+
+    let slider = `<div class="slider">`;
+    images.forEach(img=>{
+      slider += `<img src="${img}">`;
+    });
+    slider += `</div>`;
+
+    let imgString = images.join("|");
+
+    out += `
+    <div class="card">
+      ${slider}
+
+      <h4>${d.name}</h4>
+      <p>₹${d.price}</p>
+
+      <button onclick="openForm('${d.name}','${d.price}','${images[0]}','${d.desc}')">Order Now</button>
+      <button onclick="openGallery('${imgString}')">View Images</button>
+      <button onclick="showDetails('${d.name}','${d.price}','${images[0]}','${d.desc}')">View Details</button>
+    </div>
+    `;
+  });
+
+  document.getElementById("productContainer").innerHTML = out || "No Product Found ❌";
+}
+
 // ================== 🔥 GLOBAL FUNCTIONS ==================
 
 // 👉 NEXT IMAGE CLICK
