@@ -938,12 +938,23 @@ async function loadProducts(){
     let imgString = images.join("|");
 
     out += `
-    <div class="card" onclick="openProductPage('${encodeURIComponent(JSON.stringify(d))}')">
+    <div class="card">
 
       ${slider}
 
       <h4>${d.name}</h4>
       <p>₹${d.price}</p>
+<button onclick="openForm('${d.name}','${d.price}','${images[0]}','${d.desc}')">
+        Order Now
+      </button>
+
+      <button onclick="openGallery('${imgString}')">
+        View Images
+      </button>
+
+      <button onclick="showDetails('${d.name}','${d.price}','${images[0]}','${d.desc}')">
+        View Details
+      </button>
 
     </div>
     `;
@@ -960,15 +971,6 @@ window.onload = function(){
 }
 
 
-
-
-
-window.openProductPage = function(productData){
-
-  localStorage.setItem("selectedProduct", productData);
-
-  window.location.href = "product.html";
-}
 
 
 // ================== 🔥 GLOBAL FUNCTIONS ==================
