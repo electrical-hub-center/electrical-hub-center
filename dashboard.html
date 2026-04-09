@@ -1008,7 +1008,7 @@ window.openGallery = function(imgString){
   let out = `<div class="gallery-slider">`;
 
   images.forEach(img=>{
-    out += `<img src="${img}">`;
+    out += `<img src="${img}"onclick="zoomImage(this)">`;
   });
 
   out += `</div>`;
@@ -1021,6 +1021,26 @@ window.closeGallery = function(){
   document.getElementById("imgModal").style.display = "none";
 }
 
+
+
+
+
+// 🔍 ZOOM IMAGE
+window.zoomImage = function(img){
+
+  let zoomHTML = `
+  <div id="zoomModal" onclick="closeZoom()">
+    <img src="${img.src}">
+  </div>
+  `;
+
+  document.body.insertAdjacentHTML("beforeend", zoomHTML);
+}
+
+// ❌ CLOSE ZOOM
+window.closeZoom = function(){
+  document.getElementById("zoomModal").remove();
+}
 
 </script>
 
