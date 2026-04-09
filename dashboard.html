@@ -921,38 +921,49 @@ async function loadProducts(){
   let snap = await getDocs(collection(db,"products"));
   let out = "";
 
-
-
   snap.forEach(doc=>{
-    let d = doc.data();
-    allProducts.push({id:doc.id, ...d});
 
+    let d = doc.data();
     let images = d.images || [d.image];
 
+    // 🔥 SLIDER (ONLY THIS)
     let slider = `<div class="slider">`;
+
     images.forEach(img=>{
       slider += `<img src="${img}">`;
     });
+
     slider += `</div>`;
 
     let imgString = images.join("|");
 
     out += `
     <div class="card">
+
       ${slider}
 
       <h4>${d.name}</h4>
       <p>₹${d.price}</p>
 
-      <button onclick="openForm('${d.name}','${d.price}','${images[0]}','${d.desc}')">Order Now</button>
-      <button onclick="openGallery('${imgString}')">View Images</button>
-      <button onclick="showDetails('${d.name}','${d.price}','${images[0]}','${d.desc}')">View Details</button>
+      <button onclick="openForm('${d.name}','${d.price}','${images[0]}','${d.desc}')">
+        Order Now
+      </button>
+
+      <button onclick="openGallery('${imgString}')">
+        View Images
+      </button>
+
+      <button onclick="showDetails('${d.name}','${d.price}','${images[0]}','${d.desc}')">
+        View Details
+      </button>
+
     </div>
     `;
   });
 
-  
- document.getElementById("productContainer").innerHTML = out || "No Products ❌";
+
+
+  document.getElementById("productContainer").innerHTML = out || "No Products ❌";
 }
 
 
@@ -997,7 +1008,7 @@ window.openGallery = function(imgString){
   let out = `<div class="gallery-slider">`;
 
   images.forEach(img=>{
-    out += `<img src="${img}"onclick="zoomImage(this)">`;
+    out += `<img src="${img}">`;
   });
 
   out += `</div>`;
@@ -1007,28 +1018,7 @@ window.openGallery = function(imgString){
 }
 
 window.closeGallery = function(){
-  document.getElementById("imgModal").style.display = "block";
-}
-
-
-
-
-
-// 🔍 ZOOM IMAGE
-window.zoomImage = function(img){
-
-  let zoomHTML = `
-  <div id="zoomModal" onclick="closeZoom()">
-    <img src="${img.src}">
-  </div>
-  `;
-
-  document.body.insertAdjacentHTML("beforeend", zoomHTML);
-}
-
-// ❌ CLOSE ZOOM
-window.closeZoom = function(){
-  document.getElementById("zoomModal").remove();
+  document.getElementById("imgModal").style.display = "none";
 }
 
 
