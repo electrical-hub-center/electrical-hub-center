@@ -1,1054 +1,1224 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<script>
-if(!localStorage.getItem("user")){
-  window.location.href="login.html";
-}
-</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Electrical Hub Center</title>
 
 <style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial, sans-serif;
+}
 
-/* 🌌 BODY BACKGROUND */
 body{
-  font-family: Arial;
-  margin:0;
-  background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
-  min-height:100vh;
-  color:white;
+    background:#f4f6f8;
+    color:#222;
 }
 
-/* HEADER */
+/* ================= HEADER ================= */
+
 header{
-  background: rgba(255,255,255,0.1);
-  backdrop-filter: blur(10px);
-  text-align:center;
-  padding:15px;
-  border-bottom:1px solid rgba(255,255,255,0.2);
+    background:#0d47a1;
+    color:white;
+    padding:18px 15px;
+    text-align:center;
+    position:relative;
 }
 
-/* SECTION */
-section{
-  padding:20px;
+header h1{
+    font-size:27px;
 }
 
-/* TITLE */
-h2{
-  color:#00f2ff;
+header p{
+    margin-top:5px;
+    font-size:14px;
 }
-
-/* GRID */
-.grid{
-  display:grid;
-  grid-template-columns: repeat(auto-fit,minmax(160px,1fr));
-  gap:15px;
-}
-
-/* PRODUCT CARD */
-.card{
-  background: rgba(255,255,255,0.1);
-  backdrop-filter: blur(10px);
-  padding:10px;
-  border-radius:15px;
-  text-align:center;
-  border:1px solid rgba(255,255,255,0.2);
-  transition:0.3s;
-}
-
-.card:hover{
-  transform:scale(1.05);
-  box-shadow:0 0 20px #00f2ff;
-}
-
-.card img{
-  width:100%;
-  height:120px;
-  border-radius:10px;
-}
-
-/* 🔥 FLEX */
-.main-flex{
-  display:flex;
-  gap:20px;
-  flex-wrap:wrap;
-}
-
-/* 💎 GLASS BOX */
-.box{
-  flex:1;
-  min-width:300px;
-  padding:20px;
-  border-radius:20px;
-
-  background: rgba(255,255,255,0.1);
-  backdrop-filter: blur(12px);
-
-  border:1px solid rgba(255,255,255,0.2);
-
-  box-shadow:0 0 20px rgba(0,255,255,0.2);
-
-  animation:fadeInUp 0.8s ease forwards;
-  opacity:0;
-}
-
-/* ✨ GLOW HOVER */
-.box:hover{
-  transform:translateY(-8px) scale(1.02);
-  box-shadow:
-    0 0 25px #00f2ff,
-    0 0 50px rgba(0,255,255,0.6);
-}
-
-/* 🔘 BUTTON */
-button{
-  width:100%;
-  background: linear-gradient(45deg,#00c6ff,#0072ff);
-  border:none;
-  padding:10px;
-  border-radius:8px;
-  color:white;
-  cursor:pointer;
-  transition:0.3s;
-}
-
-button:hover{
-  box-shadow:
-    0 0 10px #00f2ff,
-    0 0 20px #00f2ff;
-  transform:scale(1.05);
-}
-
-/* INPUT GLASS */
-input, select, textarea{
-  width:100%;
-  padding:8px;
-  margin:6px 0;
-  border:none;
-  border-radius:8px;
-  background: rgba(255,255,255,0.15);
-  color:white;
-}
-
-input::placeholder,
-textarea::placeholder{
-  color:#ddd;
-}
-
-/* ✨ ANIMATION */
-@keyframes fadeInUp{
-  from{
-    opacity:0;
-    transform:translateY(40px);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
-}
-
-/* 📱 MOBILE */
-@media(max-width:768px){
-  .main-flex{
-    flex-direction:column;
-  }
-}
-
-.card button{
-  width:48%;
-  margin:2px;
-}
-
-
-#productDetails h2, 
-#productDetails h3, 
-#productDetails p {
-    color: black;  /* বা #000 */
-}
-
-
-/* 🔥 ORDER POPUP FIX */
-#orderForm .orderBox{
-  background:white;
-  color:black; /* 🔥 TEXT VISIBLE */
-}
-
-#orderForm input,
-#orderForm textarea{
-  background:#f1f1f1;
-  color:black;
-}
-
-#orderForm input::placeholder,
-#orderForm textarea::placeholder{
-  color:#555;
-}
-
-
-.orderBox{
-  background: rgba(255,255,255,0.95);
-  backdrop-filter: blur(15px);
-}
-
-/* 🔥 ORDER POPUP FIX FULL */
-#orderForm{
-  align-items:center;
-  justify-content:center;
-}
-
-#orderForm div{
-  background:white !important;
-  color:black !important;
-}
-
-/* 🔥 INPUT + SELECT FIX */
-#orderForm input,
-#orderForm textarea,
-#orderForm select{
-  background:#f1f1f1 !important;
-  color:black !important;
-  border:1px solid #ccc;
-}
-
-/* 🔥 OPTION FIX */
-#orderForm select option{
-  color:black !important;
-  background:white !important;
-}
-
-/* 🔥 TITLE FIX */
-#orderForm h3{
-  color:black !important;
-}
-
-
 
 .logout-btn{
-  position:absolute;
-  right:15px;
-  top:15px;
-
-  padding:8px 16px;
-  border:none;
-  border-radius:20px;
-
-  background: rgba(255,255,255,0.15); /* 🔥 glass effect */
-  backdrop-filter: blur(8px);
-
-  color:white;
-  font-size:14px;
-  cursor:pointer;
-
-  transition:0.3s;
+    position:absolute;
+    right:15px;
+    top:18px;
+    background:#d32f2f;
+    color:white;
+    border:none;
+    padding:8px 12px;
+    border-radius:6px;
+    cursor:pointer;
 }
 
-/* ✨ Hover Effect */
-.logout-btn:hover{
-  background: linear-gradient(45deg,#ff4d4d,#ff0000);
-  box-shadow: 0 0 10px rgba(255,0,0,0.6);
-  transform: scale(1.05);
+/* ================= SECTION ================= */
+
+section{
+    max-width:1100px;
+    margin:25px auto;
+    padding:0 15px;
 }
 
-
-/* 🔥 IMAGE SLIDER FIX (FINAL) */
-.image-slider{
-  display:flex;
-  overflow-x:auto;
-  width:100%;
-  scroll-behavior:smooth;
+.section-title{
+    text-align:center;
+    margin-bottom:18px;
+    color:#0d47a1;
 }
 
-.image-slider img{
-  flex:0 0 100%;   /* 🔥 MAIN FIX */
-  width:100%;
-  height:150px;
-  object-fit:cover;
-  border-radius:10px;
+/* ================= SERVICES ================= */
+
+.service-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:15px;
 }
 
-/* 🔥 CARD FIX */
-.card{
-  overflow:hidden;
+.service-card{
+    background:white;
+    border-radius:12px;
+    padding:12px;
+    text-align:center;
+    box-shadow:0 3px 10px rgba(0,0,0,.1);
 }
 
+.service-card img{
+    width:100%;
+    height:130px;
+    object-fit:cover;
+    border-radius:9px;
+}
+
+.service-card h3{
+    margin-top:10px;
+    font-size:16px;
+}
+
+/* ================= BOX ================= */
+
+.box{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 3px 10px rgba(0,0,0,.1);
+}
+
+/* ================= INPUT ================= */
+
+input,
+select,
+textarea{
+    width:100%;
+    padding:12px;
+    margin:7px 0;
+    border:1px solid #ccc;
+    border-radius:7px;
+    font-size:15px;
+}
+
+textarea{
+    min-height:90px;
+    resize:vertical;
+}
+
+button{
+    cursor:pointer;
+}
+
+.primary-btn{
+    background:#0d47a1;
+    color:white;
+    border:none;
+    padding:11px 16px;
+    border-radius:7px;
+    font-weight:bold;
+}
+
+.primary-btn:hover{
+    background:#083578;
+}
+
+.green-btn{
+    background:#198754;
+    color:white;
+    border:none;
+    padding:10px 14px;
+    border-radius:7px;
+}
+
+.red-btn{
+    background:#dc3545;
+    color:white;
+    border:none;
+    padding:10px 14px;
+    border-radius:7px;
+}
+
+/* ================= TECHNICIAN ================= */
+
+#result{
+    margin-top:15px;
+}
+
+.tech-card{
+    background:#f8f9fa;
+    border:1px solid #ddd;
+    padding:15px;
+    border-radius:8px;
+    margin-top:10px;
+}
+
+/* ================= PRODUCTS ================= */
+
+.search-box{
+    margin-bottom:18px;
+}
+
+.product-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:20px;
+}
+
+.product-card{
+    background:white;
+    border-radius:12px;
+    padding:12px;
+    box-shadow:0 3px 12px rgba(0,0,0,.12);
+    transition:.2s;
+}
+
+.product-card:hover{
+    transform:translateY(-3px);
+}
+
+/* Product image slider */
 
 .slider{
-  display:flex;
-  overflow-x:auto;
-  scroll-snap-type:x mandatory;
-  -webkit-overflow-scrolling: touch;
-  border-radius:10px;
-}
-
-.slider img{
-  flex:0 0 100%;
-  width:100%;
-  height:150px;
-  object-fit:cover;
-  scroll-snap-align:start;
+    display:flex;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    width:100%;
+    border-radius:10px;
+    scrollbar-width:none;
 }
 
 .slider::-webkit-scrollbar{
-  display:none;
+    display:none;
 }
 
-
-/* 🔥 GALLERY SLIDER FIX */
-.gallery-slider{
-  display:flex;
-  overflow-x:auto;
-  scroll-snap-type:x mandatory;
-  gap:10px;
+.slider img{
+    flex:0 0 100%;
+    min-width:100%;
+    width:100%;
+    height:180px;
+    object-fit:cover;
+    scroll-snap-align:start;
+    border-radius:10px;
+    cursor:pointer;
 }
 
-.gallery-slider img{
-  flex:0 0 100%;
-  width:100%;
-  height:250px;
-  object-fit:cover;
-  border-radius:10px;
-  scroll-snap-align:start;
+.product-info{
+    padding-top:10px;
 }
 
-.gallery-slider::-webkit-scrollbar{
-  display:none;
+.product-info h3{
+    color:#0d47a1;
+    margin-bottom:6px;
 }
 
+.price{
+    color:#198754;
+    font-weight:bold;
+    font-size:18px;
+    margin:5px 0;
+}
 
+.desc{
+    color:#555;
+    font-size:14px;
+    line-height:1.5;
+}
+
+.product-buttons{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:7px;
+    margin-top:12px;
+}
+
+.product-buttons button{
+    padding:9px 5px;
+    border:none;
+    border-radius:6px;
+    font-size:13px;
+}
+
+.order-btn{
+    background:#198754;
+    color:white;
+}
+
+.image-btn{
+    background:#6f42c1;
+    color:white;
+}
+
+.details-btn{
+    background:#0d6efd;
+    color:white;
+}
+
+.product-page-btn{
+    background:#ff9800;
+    color:white;
+}
+
+/* ================= MODAL ================= */
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.7);
+    z-index:5000;
+    align-items:center;
+    justify-content:center;
+    padding:15px;
+}
+
+.modal-content{
+    background:white;
+    width:100%;
+    max-width:600px;
+    max-height:92vh;
+    overflow-y:auto;
+    border-radius:12px;
+    padding:20px;
+    position:relative;
+}
+
+.close{
+    position:absolute;
+    right:15px;
+    top:10px;
+    background:#dc3545;
+    color:white;
+    border:none;
+    border-radius:50%;
+    width:32px;
+    height:32px;
+    font-size:18px;
+}
+
+/* ================= PRODUCT DETAILS ================= */
+
+.details-image-slider{
+    display:flex;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    gap:8px;
+    margin-bottom:15px;
+}
+
+.details-image-slider img{
+    flex:0 0 100%;
+    width:100%;
+    height:260px;
+    object-fit:contain;
+    background:#f5f5f5;
+    border-radius:10px;
+    scroll-snap-align:start;
+    cursor:zoom-in;
+}
+
+.details-price{
+    font-size:23px;
+    color:#198754;
+    font-weight:bold;
+    margin:8px 0;
+}
+
+.details-description{
+    line-height:1.6;
+    margin-top:10px;
+}
+
+.read-more-btn{
+    border:none;
+    background:none;
+    color:#0d6efd;
+    font-weight:bold;
+    margin-top:6px;
+}
+
+.additional-details{
+    margin-top:18px;
+    border-top:1px solid #ddd;
+    padding-top:15px;
+}
+
+.additional-details h3{
+    color:#0d47a1;
+    margin-bottom:10px;
+}
+
+.detail-row{
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    border-bottom:1px solid #eee;
+    padding:8px 0;
+}
+
+.detail-row span:first-child{
+    font-weight:bold;
+}
+
+/* ================= GALLERY ================= */
+
+#imgModal{
+    background:rgba(0,0,0,.95);
+}
+
+#imgContainer{
+    width:100%;
+    max-width:900px;
+}
+
+#imgContainer img{
+    width:100%;
+    max-height:85vh;
+    object-fit:contain;
+}
+
+/* ================= ZOOM ================= */
+
+#zoomModal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.95);
+    z-index:9999;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+#zoomModal img{
+    max-width:100%;
+    max-height:90vh;
+    object-fit:contain;
+}
+
+/* ================= CONTACT ================= */
+
+.contact-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:12px;
+}
+
+.contact-grid a{
+    text-decoration:none;
+    text-align:center;
+    padding:12px;
+    border-radius:7px;
+    color:white;
+}
+
+.call{
+    background:#198754;
+}
+
+.whatsapp{
+    background:#25d366;
+}
+
+.email{
+    background:#0d6efd;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+    background:#0d47a1;
+    color:white;
+    text-align:center;
+    padding:20px;
+    margin-top:30px;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:600px){
+
+    header h1{
+        font-size:22px;
+    }
+
+    .logout-btn{
+        position:static;
+        margin-top:10px;
+    }
+
+    .product-grid{
+        grid-template-columns:1fr;
+    }
+
+    .product-buttons{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .details-image-slider img{
+        height:220px;
+    }
+}
 </style>
-
 </head>
-
 
 <body>
 
+<!-- =====================================================
+                     HEADER
+====================================================== -->
+
 <header>
-<h1>Electrical Hub Center</h1>
-<p>All Electrical Services & Products in One Place</p>
+
+<h1>⚡ Electrical Hub Center</h1>
+
+<p>Electrical Services • Products • Technician • Booking</p>
+
 <button class="logout-btn" onclick="logout()">Logout</button>
+
 </header>
 
-<!-- 🔧 SERVICES -->
-<section>
-<h2>Electrical Services</h2>
 
-<div class="grid">
-
-<div class="card">
-<img src="https://i.ibb.co/JjCPzm94/om-electrician-durgapura-jaipur-electricians-98ko617c5g.jpg">
-<h4>Fan Repair - ₹150</h4>
-</div>
-
-<div class="card">
-<img src="https://i.ibb.co/v63SScMM/shutterstock-2151193337.jpg">
-<h4>Light Installation - ₹100</h4>
-</div>
-
-<div class="card">
-<img src="https://i.ibb.co/MYq2KFD/close-electrician-working-on-light-260nw-2293986793.jpg">
-<h4>Switch Repair - ₹80</h4>
-</div>
-
-<div class="card">
-<img src="https://i.ibb.co/bjdwqxn0/hm-abt-1.jpg">
-<h4>AC Service - ₹500</h4>
-</div>
-
-<div class="card">
-<img src="https://i.ibb.co/HMZVhnZ/gemini-generated-image-lfrmuolfrmuolfrm-500x500.png">
-<h4>Refrigerator Repair - ₹400</h4>
-</div>
-
-<div class="card">
-<img src="https://i.ibb.co/S4yWXfRL/office-electrical-wiring-service.jpg">
-<h4>House Wiring - ₹3000+</h4>
-</div>
-
-</div>
+<!-- =====================================================
+                  ELECTRICAL SERVICES
+====================================================== -->
 
 <section>
 
-<div class="main-flex">
+<h2 class="section-title">Electrical Services</h2>
+
+<div class="service-grid">
+
+<div class="service-card">
+<img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=600&q=80">
+<h3>House Wiring</h3>
+</div>
+
+<div class="service-card">
+<img src="https://images.unsplash.com/photo-1555963966-b7ae5404b6ed?auto=format&fit=crop&w=600&q=80">
+<h3>Electrical Repair</h3>
+</div>
+
+<div class="service-card">
+<img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=600&q=80">
+<h3>Solar Installation</h3>
+</div>
+
+<div class="service-card">
+<img src="https://images.unsplash.com/photo-1558008258-3256797b43f3?auto=format&fit=crop&w=600&q=80">
+<h3>Fan Repair</h3>
+</div>
+
+<div class="service-card">
+<img src="https://images.unsplash.com/photo-1592833159155-c62df1b65634?auto=format&fit=crop&w=600&q=80">
+<h3>AC Repair</h3>
+</div>
+
+<div class="service-card">
+<img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80">
+<h3>Industrial Maintenance</h3>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+                  FIND TECHNICIAN
+====================================================== -->
+
+<section>
+
+<h2 class="section-title">🔎 Find Technician</h2>
 
 <div class="box">
-<!-- 🔍 FIND TECH -->
-<h2>Find Technician</h2>
 
 <select id="location">
+
 <option value="">Select Location</option>
 <option value="Nandigram">Nandigram</option>
 <option value="Haldia">Haldia</option>
 <option value="Naynan">Naynan</option>
 <option value="Kamalpur">Kamalpur</option>
+
 </select>
 
-<button id="searchBtn">Search</button>
+<button class="primary-btn" id="searchBtn">
+Search Technician
+</button>
 
 <div id="result"></div>
+
 </div>
 
+</section>
+
+
+<!-- =====================================================
+                  BOOK SERVICE
+====================================================== -->
+
+<section>
+
+<h2 class="section-title">📅 Book Electrical Service</h2>
+
 <div class="box">
-<!-- 📋 BOOKING -->
-<h2>Book Service</h2>
 
 <form id="bookingForm">
 
-<input type="text" name="name" placeholder="Your Name">
-<input type="tel" name="phone" placeholder="Phone Number">
-<input type="text" name="address" placeholder="Full Address">
-<input type="text" name="pincode" placeholder="PIN Code">
+<input
+type="text"
+id="bookingName"
+placeholder="Your Name"
+required
+>
 
-<select name="service">
-<option>Select Service</option>
-<option>Fan Repair</option>
-<option>Light Installation</option>
-<option>AC Service</option>
-<option>Refrigerator Repair</option>
+<input
+type="tel"
+id="bookingPhone"
+placeholder="Mobile Number"
+required
+>
+
+<textarea
+id="bookingAddress"
+placeholder="Full Address"
+required
+></textarea>
+
+<input
+type="text"
+id="bookingPincode"
+placeholder="PIN Code"
+required
+>
+
+<select id="bookingService" required>
+
+<option value="">Select Service</option>
+
 <option>House Wiring</option>
+<option>Electrical Repair</option>
+<option>Solar Installation</option>
+<option>Fan Repair</option>
+<option>AC Repair</option>
+<option>Industrial Maintenance</option>
+
 </select>
 
-<textarea name="details" placeholder="Extra details"></textarea>
+<textarea
+id="bookingDetails"
+placeholder="Describe your problem"
+></textarea>
 
-<button type="button" id="submitBtn">Submit Booking</button>
+<button
+type="button"
+class="primary-btn"
+id="submitBtn"
+>
+Submit Booking
+</button>
 
 </form>
-</div>
+
 </div>
 
 </section>
 
-<!-- 🛒 PRODUCTS -->
- <section>
-<h2>Shopping Products</h2>
+
+<!-- =====================================================
+                     PRODUCTS
+====================================================== -->
+
+<section>
+
+<h2 class="section-title">🛒 Electrical Products</h2>
+
+<div class="search-box">
+
+<input
+type="search"
+id="searchProduct"
+placeholder="🔎 Search product..."
+oninput="searchProducts()"
+>
+
+</div>
+
+<div
+class="product-grid"
+id="productContainer"
+>
+
+<p>Loading products...</p>
+
+</div>
+
+</section>
 
 
-<div class="grid" id="productContainer"></div>
+<!-- =====================================================
+                     ORDER MODAL
+====================================================== -->
 
+<div
+class="modal"
+id="orderForm"
+>
 
+<div class="modal-content">
 
-<div id="orderForm" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#000000aa;">
+<button
+class="close"
+onclick="closeForm()"
+>
+×
+</button>
 
-<div style="background:white; padding:20px; border-radius:10px; max-width:400px; width:90%;">
+<h2>🛒 Place Order</h2>
 
-<h3 style="color:black;">Confirm Order</h3>
+<br>
+
+<div id="selectedProductBox">
+
+<p>
+<strong>Product:</strong>
+<span id="selectedProductName"></span>
+</p>
+
+<p>
+<strong>Price:</strong>
+₹<span id="selectedProductPrice"></span>
+</p>
+
+</div>
+
+<br>
+
+<input
+type="text"
+id="custName"
+placeholder="Your Name"
+required
+>
+
+<input
+type="tel"
+id="custPhone"
+placeholder="Mobile Number"
+required
+>
+
+<textarea
+id="custAddress"
+placeholder="Delivery Address"
+required
+></textarea>
+
+<input
+type="text"
+id="custPincode"
+placeholder="PIN Code"
+required
+>
 
 <select id="paymentMethod">
-<option value="">Select Payment</option>
-<option value="COD">Cash on Delivery</option>
-<option value="ONLINE">Online Payment</option>
+
+<option value="">
+Select Payment Method
+</option>
+
+<option value="COD">
+Cash on Delivery
+</option>
+
+<option value="ONLINE">
+Online Payment
+</option>
+
 </select>
 
-<input type="text" id="custName" placeholder="Your Name">
-<input type="tel" id="custPhone" placeholder="Phone Number">
-<textarea id="custAddress" placeholder="Full Address"></textarea>
-<input type="text" id="custPincode" placeholder="PIN Code">
+<br><br>
 
-<button onclick="placeOrder()">Confirm Order</button>
-<button onclick="closeForm()">Cancel</button>
+<button
+class="green-btn"
+onclick="placeOrder()"
+>
+Place Order
+</button>
 
-</div>
-</div>
-
-<div id="productDetails" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#000000cc;">
-<div style="background:white; margin:40px auto; padding:20px; border-radius:15px; max-width:400px; text-align:center;">
-
-<h2 id="dName"></h2>
-<img id="dImage" style="width:100%; height:200px;">
-<h3 id="dPrice"></h3>
-<p id="dDesc"></p>
-
-<button onclick="closeDetails()">Close</button>
-
-</div>
-</div>
-
-<script>
-
-var productName="", productPrice="", productImage="", productDesc="";
-
-function openForm(name, price, image, desc){
-productName=name;
-productPrice=price;
-productImage=image;
-productDesc=desc;
-document.getElementById("orderForm").style.display="block";
-}
-
-function closeForm(){
-document.getElementById("orderForm").style.display="none";
-}
-
-function submitOrder(){
-
-var name=document.getElementById("custName").value;
-var phone=document.getElementById("custPhone").value;
-var address=document.getElementById("custAddress").value;
-
-if(name==""||phone==""||address==""||pincode==""){
-alert("Fill all details");
-return;
-}
-
-// 🔥 IMPORTANT FIX (encode)
-var msg = "New Order:\n"
-+ "Order ID: " + orderId + "\n"
-+ "Name: " + name + "\n"
-+ "Phone: " + phone + "\n"
-+ "Address: " + address + "\n"
-+ "Product: " + productName + "\n"
-+ "Price: " + productPrice + "\n"
-+ "Description: " + productDesc + "\n"
-+ "Image: " + productImage;
-
-var finalMsg = encodeURIComponent(msg);
-
-// WhatsApp
-window.open("https://api.whatsapp.com/send?phone=919434852965&text="+finalMsg);
-
-// Email
-window.location.href="https://formsubmit.co/khutiyanayan@gmail.com?Name="+encodeURIComponent(name)+"&Phone="+encodeURIComponent(phone)+"&Address="+encodeURIComponent(address)+"&Product="+encodeURIComponent(productName)+"&Price="+encodeURIComponent(productPrice)+"&Description="+encodeURIComponent(productDesc)+"&Image="+encodeURIComponent(productImage);
-
-}
-
-</script>
+<button
+class="red-btn"
+onclick="closeForm()"
+>
+Cancel
+</button>
 
 </div>
 
-</section>
+</div>
 
+
+<!-- =====================================================
+                 PRODUCT DETAILS MODAL
+====================================================== -->
+
+<div
+class="modal"
+id="productDetails"
+>
+
+<div class="modal-content">
+
+<button
+class="close"
+onclick="closeDetails()"
+>
+×
+</button>
+
+<div id="detailContent"></div>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+                    TRACK ORDER
+====================================================== -->
 
 <section>
-<h2>📦 Track Your Order</h2>
 
-<input type="text" id="trackInput" placeholder="Enter Order ID or Phone Number">
+<h2 class="section-title">📦 Track Your Order</h2>
 
-<button onclick="trackOrder()">Track Order</button>
+<div class="box">
+
+<input
+type="text"
+id="trackInput"
+placeholder="Enter Order ID or Mobile Number"
+>
+
+<button
+class="primary-btn"
+onclick="trackOrder()"
+>
+Track Order
+</button>
 
 <div id="trackResult"></div>
+
+</div>
+
 </section>
 
-<!-- 📞 CONTACT -->
+
+<!-- =====================================================
+                      CONTACT
+====================================================== -->
+
 <section>
-<h2>Contact</h2>
 
-<div style="text-align:center;">
+<h2 class="section-title">📞 Contact Us</h2>
 
-<a href="tel:9434852965">
-<button style="background:green;">📞 Call Now</button>
+<div class="contact-grid">
+
+<a
+class="call"
+href="tel:+919434852965"
+>
+📞 Call
 </a>
 
-<a href="https://wa.me/919434852965" target="_blank">
-<button style="background:#25D366;">💬 WhatsApp</button>
+<a
+class="whatsapp"
+href="https://wa.me/919434852965"
+target="_blank"
+>
+💬 WhatsApp
 </a>
 
-<a href="mailto:khutiyanayan@gmail.com">
-<button>📧 Email</button>
+<a
+class="email"
+href="mailto:khutiyanayan@gmail.com"
+>
+✉️ Email
 </a>
-
-<p>Nandigram, Purba Medinipur, West Bengal - 721631</p>
 
 </div>
+
 </section>
 
-<!-- 🔧 ORDER SCRIPT -->
-<script>
-let productName="",productPrice="",productImage="",productDesc="";
 
-function openForm(n,p,i,d){
-productName=n;
-productPrice=p;
-productImage=i;
-productDesc=d;
-document.getElementById("orderForm").style.display="block";
-}
-
-function closeForm(){
-document.getElementById("orderForm").style.display="none";
-}
-
-function submitOrder(){
-let name=document.getElementById("custName").value;
-let phone=document.getElementById("custPhone").value;
-let address=document.getElementById("custAddress").value;
-
-if(name==""||phone==""||address==""){
-alert("Fill all details");
-return;
-}
-
-let msg="New Order:"
-\nOrderID:"+orderId+" \nName:"+name+"\nPhone:"+phone+"\nAddress:"+address+"\nProduct:"+productName+"\nPrice:"+productPrice+"\nDesc:"+productDesc+"\nImage:"+productImage;
-
-window.open("https://wa.me/919434852965?text="+encodeURIComponent(msg));
-
-alert("Order Sent ✅");
-closeForm();
-}
-</script>
-
-
-<!-- 🔥 FIREBASE -->
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getFirestore, collection, getDocs, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-const app=initializeApp({
-apiKey:"AIzaSyCm-lsMV-W9uNLRibsQalox13QHccgPFMc",
-authDomain:"electrical-hub-center.firebaseapp.com",
-projectId:"electrical-hub-center"
-});
-
-const db=getFirestore(app);
-
-
-
-
-// 🔍 FIND TECH
-document.getElementById("searchBtn").addEventListener("click",async()=>{
-let loc=document.getElementById("location").value;
-let snap=await getDocs(collection(db,"technicians"));
-let out="";
-snap.forEach(doc=>{
-let d=doc.data();
-if(d.location && d.location.toLowerCase().includes(loc.toLowerCase())){
-out+=`<div class="card"><h3>${d.name}</h3><p>${d.service}</p><p>${d.phone}</p></div>`;
-}
-});
-document.getElementById("result").innerHTML=out||"No technician found ❌";
-});
-
-// 📋 BOOKING
-document.getElementById("submitBtn").addEventListener("click",async()=>{
-let name=document.querySelector('[name="name"]').value;
-let phone=document.querySelector('[name="phone"]').value;
-let address=document.querySelector('[name="address"]').value;
-let pincode=document.querySelector('[name="pincode"]').value;
-let service=document.querySelector('[name="service"]').value;
-let details=document.querySelector('[name="details"]').value;
-
-if(name==""||phone==""||address==""){
-alert("Fill all details");
-return;
-}
-
-await addDoc(collection(db,"bookings"),{
-name,phone,address,pincode, service,details,time:new Date()
-});
-
-let msg="New Booking:\nName:"+name+"\nPhone:"+phone+"\nAddress:"+address+"\nPIN:"+pincode+"\nService:"+service;
-
-window.open("https://wa.me/919434852965?text="+encodeURIComponent(msg));
-
-alert("Booking Done ✅");
-
-document.getElementById("bookingForm").reset();
-});
-
-let dName="", dPrice="", dImage="", dDesc="";
-
-function showDetails(name, price, image, desc){
-dName=name;
-dPrice=price;
-dImage=image;
-dDesc=desc;
-
-document.getElementById("dName").innerText=name;
-document.getElementById("dPrice").innerText="Price: ₹"+price;
-document.getElementById("dImage").src=image;
-document.getElementById("dDesc").innerText=desc;
-
-document.getElementById("productDetails").style.display="block";
-}
-
-function closeDetails(){
-document.getElementById("productDetails").style.display="none";
-}
-
-function orderFromDetails(){
-let msg="New Order:\nProduct:"+dName+"\nPrice:"+dPrice+"\nDescription:"+dDesc+"\nImage:"+dImage;
-
-window.open("https://wa.me/919434852965?text="+encodeURIComponent(msg));
-}
-
-
-window.showDetails=function(name,price,image,desc){
-document.getElementById("dName").innerText=name;
-document.getElementById("dPrice").innerText="Price: ₹"+price;
-document.getElementById("dImage").src=image;
-document.getElementById("dDesc").innerText=desc;
-document.getElementById("productDetails").style.display="block";
-}
-
-window.closeDetails=function(){
-document.getElementById("productDetails").style.display="none";
-}
-
-
-
-// 🔥 GLOBAL
-let productName="", productPrice="", productImage="", productDesc="";
-
-window.trackOrder = trackOrder;
-
-
-// OPEN
-window.openForm = function(name,price,image,desc){
-  productName=name;
-  productPrice=price;
-  productImage=image;
-  productDesc=desc;
-
-  document.getElementById("orderForm").style.display="flex";
-}
-
-// CLOSE
-window.closeForm = function(){
-  document.getElementById("orderForm").style.display="none";
-}
-
-// MAIN ORDER
-window.placeOrder = function(){
-
-  let payment = document.getElementById("paymentMethod").value;
-
-  if(payment===""){
-    alert("Select Payment Method");
-    return;
-  }
-
-  if(payment==="COD"){
-    submitCOD();
-  }else{
-    payNow();
-  }
-}
-
-// COD ORDER
-async function submitCOD(){
-
-  let name=document.getElementById("custName").value;
-  let phone=document.getElementById("custPhone").value;
-  let address=document.getElementById("custAddress").value;
-let pincode = document.getElementById("custPincode").value;
-
-  if(name==""||phone==""||address==""||pincode==""){
-    alert("Fill all details");
-    return;
-  }
- let orderId = "ORD" + Date.now();
-
-
-  // Firebase save
-  await addDoc(collection(db,"orders"),{
-orderId,name,phone,address,pincode,
-    product:productName,
-    price:productPrice,
-    image:productImage,
-    description:productDesc,
-    payment:"COD",
-    paymentStatus:"Pending",
-    deliveryStatus:"Pending",
-    time:new Date()
-  });
-
-  // WhatsApp
-  let msg=`New COD Order:
-OrderID: ${orderId}
-Name: ${name}
-Phone: ${phone}
-Address: ${address}
-PIN: ${pincode}
-Product: ${productName}
-Price: ₹${productPrice}
-Description: ${productDesc}
-
-🖼️ Image: ${productImage}`;
-
-  window.open("https://wa.me/919434852965?text="+encodeURIComponent(msg));
-
-  alert("COD Order Placed ✅\nOrder ID: " + orderId);
-  closeForm();
-}
-
-// ONLINE PAYMENT
-function payNow(){
-
-  let name=document.getElementById("custName").value;
-  let phone=document.getElementById("custPhone").value;
-  let address=document.getElementById("custAddress").value;
-let pincode = document.getElementById("custPincode").value;
-
-  if(name==""||phone==""||address==""||pincode==""){
-    alert("Fill all details");
-    return;
-  }
-
-  var options = {
-    key: "rzp_test_xxx", // 👉 replace with real key
-    amount: productPrice * 100,
-    currency: "INR",
-    name: "Electrical Hub Center",
-    description: productName,
-
-    handler: function (response){
-      saveOrder(response.razorpay_payment_id);
-    }
-  };
-
-  new Razorpay(options).open();
-}
-
-// SAVE ONLINE
-async function saveOrder(paymentId){
-
-let orderId = "ORD" + Date.now();
-
-  await addDoc(collection(db,"orders"),{
-    orderId: orderId,
-    name: custName.value,
-    phone: custPhone.value,
-    address: custAddress.value,
-    pincode: pincode,
-    product: productName,
-    price: productPrice,
-    image: productImage,
-    description: productDesc,
-    payment:"ONLINE",
-    paymentStatus:"Paid",
-    paymentId: paymentId,
-    deliveryStatus:"Pending",
-    time:new Date()
-  });
-
-  let msg=`New ONLINE Order:
-OrderID: ${orderId}
-Product: ${productName}
-Price: ₹${productPrice}
-📝 Description: ${productDesc}
-
-🖼️ Image: ${productImage}
-
-Payment ID: ${paymentId}`;
-
-  window.open("https://wa.me/919434852965?text="+encodeURIComponent(msg));
-
-  alert("Payment Successful ✅\nOrder ID: " + orderId);
-  closeForm();
-}
-
-
-
-
-async function trackOrder(){
-
-let input = document.getElementById("trackInput").value.trim();
-
-if(input==""){
-  alert("Enter Order ID or Phone");
-  return;
-}
-
-let snap = await getDocs(collection(db,"orders"));
-let out = "";
-
-snap.forEach(doc=>{
-let d = doc.data();
-
-let statusColor = d.deliveryStatus==="Delivered" ? "green" :
-                  d.deliveryStatus==="Shipped" ? "orange" : "red";
-
-if(d.orderId === input || d.phone === input){
-
-out += `
-<div class="card">
-<h3>🆔 ${d.orderId}</h3>
-
-<p>📦 Product: ${d.product}</p>
-<p>💰 Price: ₹${d.price}</p>
-
-<p>💳 Payment: ${d.payment}</p>
-<p>💳 Status: ${d.paymentStatus}</p>
-<p style="color:${statusColor}">🚚 Delivery: ${d.deliveryStatus}</p>
-
-
-<p>📅 Date: ${new Date(d.time.seconds*1000).toLocaleString()}</p>
+<!-- =====================================================
+                       GALLERY
+====================================================== -->
+
+<div
+class="modal"
+id="imgModal"
+>
+
+<button
+class="close"
+onclick="closeGallery()"
+>
+×
+</button>
+
+<div id="imgContainer"></div>
 
 </div>
-`;
-}
-});
 
-document.getElementById("trackResult").innerHTML = out || "❌ No Order Found";
-}
 
+<!-- =====================================================
+                        ZOOM
+====================================================== -->
 
+<div id="zoomModal">
 
-function logout(){
-  localStorage.removeItem("user");
-  window.location.href="login.html";
-}
+<button
+class="close"
+onclick="closeZoom()"
+>
+×
+</button>
 
+<img id="zoomImage">
 
+</div>
 
 
-// 🔥 LOAD PRODUCTS FINAL
-async function loadProducts(){
+<footer>
 
-  let snap = await getDocs(collection(db,"products"));
-  let out = "";
+<p>© 2026 Electrical Hub Center</p>
 
-  snap.forEach(doc=>{
+<p>Electrical Service & Products</p>
 
-    let d = doc.data();
-    let images = d.images || [d.image];
+</footer>
 
-    // 🔥 SLIDER (ONLY THIS)
-    let slider = `<div class="slider">`;
 
-    images.forEach(img=>{
-      slider += `<img src="${img}">`;
-    });
+<!-- =====================================================
+                    RAZORPAY
+====================================================== -->
 
-    slider += `</div>`;
-
-    let imgString = images.join("|");
-
-    out += `
-    <div class="card">
-
-      ${slider}
-
-      <h4>${d.name}</h4>
-      <p>₹${d.price}</p>
-
-      <button onclick="openForm('${d.name}','${d.price}','${images[0]}','${d.desc}')">
-        Order Now
-      </button>
-
-      <button onclick="openGallery('${imgString}')">
-        View Images
-      </button>
-
-      <button onclick="showDetails('${d.name}','${d.price}','${images[0]}','${d.desc}')">
-        View Details
-      </button>
-
-    </div>
-    `;
-  });
-
-
-
-  document.getElementById("productContainer").innerHTML = out || "No Products ❌";
-}
-
-
-
-
-// 🔥 AUTO LOAD
-window.onload = function(){
-  loadProducts();
-}
-
-
-
-
-// ================== 🔥 GLOBAL FUNCTIONS ==================
-
-// 👉 NEXT IMAGE CLICK
-window.imgIndexMap = {};
-
-window.nextImage = function(id, imgString){
-
-  let images = imgString.split("|");
-
-  if(!window.imgIndexMap[id]){
-    window.imgIndexMap[id] = 0;
-  }
-
-  window.imgIndexMap[id]++;
-
-  if(window.imgIndexMap[id] >= images.length){
-    window.imgIndexMap[id] = 0;
-  }
-
-  document.getElementById("img_" + id).src = images[window.imgIndexMap[id]];
-}
-
-
-
-
-
-window.openGallery = function(imgString){
-
-  let images = imgString.split("|");
-
-  let out = `<div class="gallery-slider">`;
-
-  images.forEach(img=>{
-    out += `<img src="${img}">`;
-  });
-
-  out += `</div>`;
-
-  document.getElementById("imgContainer").innerHTML = out;
-  document.getElementById("imgModal").style.display = "block";
-}
-
-window.closeGallery = function(){
-  document.getElementById("imgModal").style.display = "none";
-}
-
-
-</script>
-
-</script>
-<script>
-
-function showDetails(name, price, image, desc){
-document.getElementById("dName").innerText = name;
-document.getElementById("dPrice").innerText = "Price: ₹" + price;
-document.getElementById("dImage").src = image;
-document.getElementById("dDesc").innerText = desc;
-
-document.getElementById("productDetails").style.display = "block";
-}
-
-function closeDetails(){
-document.getElementById("productDetails").style.display = "none";
-}
-
-</script>
-
-
-<script>
-
-function logout(){
-  localStorage.removeItem("user");   // user delete
-  localStorage.removeItem("userLoggedIn"); // old data delete
-
-  alert("Logged out successfully");
-
-  window.location.href = "login.html"; // redirect
-}
-
-
-window.logout = function(){
-  if(confirm("Are you sure you want to logout?")){
-    localStorage.removeItem("user");
-    window.location.href="login.html";
-  }
-}
-</script>
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
-<div id="imgModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:#000000cc;z-index:999;">
-  <div style="max-width:500px;margin:40px auto;background:white;padding:10px;border-radius:10px;text-align:center;">
-    <div id="imgContainer"></div>
-    <button onclick="closeGallery()">Close</button>
-  </div>
-</div>
-</body>
-</html>
+
+<!-- =====================================================
+                  FIREBASE + ALL JS
+====================================================== -->
+
+<script type="module">
+
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+
+import {
+    getFirestore,
+    collection,
+    getDocs,
+    addDoc,
+    query,
+    where,
+    serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+
+/* =====================================================
+                     FIREBASE CONFIG
+====================================================== */
+
+const firebaseConfig = {
+
+    apiKey: "AIzaSyCm-lsMV-W9uNLRibsQalox13QHccgPFMc",
+
+    authDomain:
+    "electrical-hub-center.firebaseapp.com",
+
+    projectId:
+    "electrical-hub-center"
+
+};
+
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+
+/* =====================================================
+                     GLOBAL VARIABLES
+====================================================== */
+
+let selectedProduct = {
+
+    name:"",
+    price:"",
+    images:[],
+    desc:"",
+    generic:"",
+    country:"",
+    brand:"",
+    manufacturer:"",
+    model:""
+
+};
+
+let allProducts = [];
+
+
+/* =====================================================
+                    HTML ESCAPE
+====================================================== */
+
+function escapeHTML(value){
+
+    if(value === null || value === undefined){
+        return "";
+    }
+
+    return String(value)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+/* =====================================================
+                  WHATSAPP FUNCTION
+====================================================== */
+
+function openWhatsApp(message){
+
+    const url =
+    "https://wa.me/919434852965?text="
+    + encodeURIComponent(message);
+
+    window.open(url,"_blank");
+
+}
+
+
+/* =====================================================
+                    TECHNICIAN SEARCH
+====================================================== */
+
+document
+.getElementById("searchBtn")
+.addEventListener("click", async function(){
+
+    const location =
+    document.getElementById("location").value;
+
+    const result =
+    document.getElementById("result");
+
+    if(!location){
+
+        result.innerHTML =
+        "<p>Please select a location.</p>";
+
+        return;
+
+    }
+
+    result.innerHTML =
+    "<p>Searching technician...</p>";
+
+    try{
+
+        const snapshot =
+        await getDocs(collection(db,"technicians"));
+
+        let found = [];
+
+        snapshot.forEach(docSnap => {
+
+            const data = docSnap.data();
+
+            if(
+                String(data.location || "")
+                .toLowerCase()
+                ===
+                location.toLowerCase()
+            ){
+
+                found.push(data);
+
+            }
+
+        });
+
+
+        if(found.length === 0){
+
+            result.innerHTML =
+            "<div class='tech-card'>"+
+            "<p>No technician found in "+
+            escapeHTML(location)+
+            ".</p>"+
+            "</div>";
+
+            return;
+
+        }
+
+
+        result.innerHTML =
+        found.map(t => {
+
+            return `
+
+            <div class="tech-card">
+
+                <h3>
+                ${escapeHTML(t.name || "Technician")}
+                </h3>
+
+                <p>
+                📍 ${escapeHTML(t.location || location)}
+                </p>
+
+                <p>
+                🔧 ${escapeHTML(t.service || "Electrical Service")}
+                </p>
+
+                <p>
+                📞 ${escapeHTML(t.phone || "")}
+                </p>
+
+                ${
+                    t.phone
+                    ?
+                    `<br>
+                    <a
+                    href="tel:${escapeHTML(t.phone)}"
+                    class="green-btn"
+                    style="text-decoration:none;"
+                    >
+                    Call Technician
+                    </a>`
+                    :
+                    ""
+                }
+
+            </div>
+
+            `;
+
+        }).join("");
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        result.innerHTML =
+        "<p>Technician search failed. Please try again.</p>";
+
+    }
+
+});
+
+
+/* =====================================================
+                     BOOK SERVICE
+====================================================== */
+
+document
+.getElementById("submitBtn")
+.addEventListener("click", async function(){
+
+    const name =
+    document.getElementById("bookingName").value.trim();
+
+    const phone =
+    document.getElementById("bookingPhone").value.trim();
+
+    const address =
+    document.getElementById("bookingAddress").value.trim();
+
+    const pincode =
+    document.getElementById("bookingPincode").value.trim();
+
+    const service =
+    document.getElementById("bookingService").value;
+
+    const details =
+    document.getElementById("bookingDetails").value.trim();
+
+
+    if(
+        !name ||
+        !phone ||
+        !address ||
+        !pincode ||
+        !service
+    ){
+
+        alert("Please fill all required fields.");
+
+        return;
+
+    }
+
+
+    if(phone.length < 10){
+
+        alert("Please enter a valid mobile number.");
+
+        return;
+
+    }
+
+
+    const bookingId =
+    "BK" + Date.now();
+
+
+    try{
+
+        await addDoc(
+            collection(db,"bookings"),
+            {
+
+                bookingId:bookingId,
+
+                name:name,
+
+                phone:phone,
+
+                address:address,
+
+                pincode:pincode,
+
+                service:service,
+
+                details:details,
+
+                status:"Pending",
+
+                time:serverTimestamp()
+
+            }
+   
