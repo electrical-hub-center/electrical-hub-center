@@ -1,321 +1,859 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<script>
-if(!localStorage.getItem("user")){
-  window.location.href="login.html";
-}
-</script>
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
 <title>Electrical Hub Center</title>
+
+
+<!-- ================= LOGIN CHECK ================= -->
+
+<script>
+
+if(!localStorage.getItem("user")){
+    window.location.href = "login.html";
+}
+
+</script>
+
 
 <style>
 
-/* 🌌 BODY BACKGROUND */
+/* =====================================================
+                    BODY
+===================================================== */
+
+*{
+    box-sizing:border-box;
+}
+
 body{
-  font-family: Arial;
-  margin:0;
-  background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
-  min-height:100vh;
-  color:white;
+
+    margin:0;
+
+    font-family:Arial,sans-serif;
+
+    background:
+    linear-gradient(
+        135deg,
+        #0f2027,
+        #203a43,
+        #2c5364
+    );
+
+    min-height:100vh;
+
+    color:white;
+
 }
 
-/* HEADER */
+
+/* =====================================================
+                    HEADER
+===================================================== */
+
 header{
-  background: rgba(255,255,255,0.1);
-  backdrop-filter: blur(10px);
-  text-align:center;
-  padding:15px;
-  border-bottom:1px solid rgba(255,255,255,0.2);
+
+    position:relative;
+
+    text-align:center;
+
+    padding:20px;
+
+    background:
+    rgba(255,255,255,0.10);
+
+    backdrop-filter:blur(10px);
+
+    border-bottom:
+    1px solid rgba(255,255,255,0.2);
+
 }
 
-/* SECTION */
+header h1{
+
+    margin:0;
+
+    color:#00f2ff;
+
+}
+
+header p{
+
+    margin:7px 0 0;
+
+}
+
+
+/* =====================================================
+                    LOGOUT
+===================================================== */
+
+.logout-btn{
+
+    position:absolute;
+
+    right:15px;
+
+    top:15px;
+
+    width:auto;
+
+    padding:8px 16px;
+
+    border:none;
+
+    border-radius:20px;
+
+    background:
+    rgba(255,255,255,0.15);
+
+    color:white;
+
+    cursor:pointer;
+
+}
+
+.logout-btn:hover{
+
+    background:#ff3333;
+
+}
+
+
+/* =====================================================
+                    SECTION
+===================================================== */
+
 section{
-  padding:20px;
+
+    padding:20px;
+
 }
 
-/* TITLE */
 h2{
-  color:#00f2ff;
+
+    color:#00f2ff;
+
 }
 
-/* GRID */
+
+/* =====================================================
+                    GRID
+===================================================== */
+
 .grid{
-  display:grid;
-  grid-template-columns: repeat(auto-fit,minmax(160px,1fr));
-  gap:15px;
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(
+        auto-fit,
+        minmax(160px,1fr)
+    );
+
+    gap:15px;
+
 }
 
-/* PRODUCT CARD */
+
+/* =====================================================
+                    CARD
+===================================================== */
+
 .card{
-  background: rgba(255,255,255,0.1);
-  backdrop-filter: blur(10px);
-  padding:10px;
-  border-radius:15px;
-  text-align:center;
-  border:1px solid rgba(255,255,255,0.2);
-  transition:0.3s;
+
+    background:
+    rgba(255,255,255,0.10);
+
+    backdrop-filter:blur(10px);
+
+    padding:12px;
+
+    border-radius:15px;
+
+    text-align:center;
+
+    border:
+    1px solid
+    rgba(255,255,255,0.2);
+
+    overflow:hidden;
+
 }
+
 
 .card:hover{
-  transform:scale(1.05);
-  box-shadow:0 0 20px #00f2ff;
+
+    box-shadow:
+    0 0 20px #00f2ff;
+
 }
 
-.card img{
-  width:100%;
-  height:120px;
-  border-radius:10px;
+
+/* =====================================================
+                SERVICE IMAGE
+===================================================== */
+
+.card > img{
+
+    width:100%;
+
+    height:130px;
+
+    object-fit:cover;
+
+    border-radius:10px;
+
 }
 
-/* 🔥 FLEX */
+
+/* =====================================================
+                    MAIN FLEX
+===================================================== */
+
 .main-flex{
-  display:flex;
-  gap:20px;
-  flex-wrap:wrap;
+
+    display:flex;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
 }
 
-/* 💎 GLASS BOX */
+
+/* =====================================================
+                    BOX
+===================================================== */
+
 .box{
-  flex:1;
-  min-width:300px;
-  padding:20px;
-  border-radius:20px;
 
-  background: rgba(255,255,255,0.1);
-  backdrop-filter: blur(12px);
+    flex:1;
 
-  border:1px solid rgba(255,255,255,0.2);
+    min-width:300px;
 
-  box-shadow:0 0 20px rgba(0,255,255,0.2);
+    padding:20px;
 
-  animation:fadeInUp 0.8s ease forwards;
-  opacity:0;
+    border-radius:20px;
+
+    background:
+    rgba(255,255,255,0.10);
+
+    backdrop-filter:blur(12px);
+
+    border:
+    1px solid
+    rgba(255,255,255,0.2);
+
 }
 
-/* ✨ GLOW HOVER */
-.box:hover{
-  transform:translateY(-8px) scale(1.02);
-  box-shadow:
-    0 0 25px #00f2ff,
-    0 0 50px rgba(0,255,255,0.6);
-}
 
-/* 🔘 BUTTON */
+/* =====================================================
+                    BUTTON
+===================================================== */
+
 button{
-  width:100%;
-  background: linear-gradient(45deg,#00c6ff,#0072ff);
-  border:none;
-  padding:10px;
-  border-radius:8px;
-  color:white;
-  cursor:pointer;
-  transition:0.3s;
+
+    width:100%;
+
+    background:
+    linear-gradient(
+        45deg,
+        #00c6ff,
+        #0072ff
+    );
+
+    border:none;
+
+    padding:10px;
+
+    margin-top:5px;
+
+    border-radius:8px;
+
+    color:white;
+
+    cursor:pointer;
+
 }
+
 
 button:hover{
-  box-shadow:
-    0 0 10px #00f2ff,
-    0 0 20px #00f2ff;
-  transform:scale(1.05);
+
+    box-shadow:
+    0 0 12px #00f2ff;
+
 }
 
-/* INPUT GLASS */
-input, select, textarea{
-  width:100%;
-  padding:8px;
-  margin:6px 0;
-  border:none;
-  border-radius:8px;
-  background: rgba(255,255,255,0.15);
-  color:white;
+
+/* =====================================================
+                INPUT / SELECT
+===================================================== */
+
+input,
+select,
+textarea{
+
+    width:100%;
+
+    padding:11px;
+
+    margin:6px 0;
+
+    border:none;
+
+    border-radius:8px;
+
+    background:
+    rgba(255,255,255,0.15);
+
+    color:white;
+
+    font-size:15px;
+
 }
+
 
 input::placeholder,
 textarea::placeholder{
-  color:#ddd;
-}
 
-/* ✨ ANIMATION */
-@keyframes fadeInUp{
-  from{
-    opacity:0;
-    transform:translateY(40px);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
-}
+    color:#ddd;
 
-/* 📱 MOBILE */
-@media(max-width:768px){
-  .main-flex{
-    flex-direction:column;
-  }
-}
-
-.card button{
-  width:48%;
-  margin:2px;
 }
 
 
-#productDetails h2, 
-#productDetails h3, 
-#productDetails p {
-    color: black;  /* বা #000 */
+select option{
+
+    color:black;
+
+    background:white;
+
 }
 
 
-/* 🔥 ORDER POPUP FIX */
-#orderForm .orderBox{
-  background:white;
-  color:black; /* 🔥 TEXT VISIBLE */
+/* =====================================================
+                PRODUCT SLIDER
+===================================================== */
+
+.slider{
+
+    display:flex;
+
+    overflow-x:auto;
+
+    scroll-snap-type:x mandatory;
+
+    scroll-behavior:smooth;
+
+    -webkit-overflow-scrolling:touch;
+
+    border-radius:10px;
+
+    scrollbar-width:none;
+
 }
 
-#orderForm input,
-#orderForm textarea{
-  background:#f1f1f1;
-  color:black;
-}
 
-#orderForm input::placeholder,
-#orderForm textarea::placeholder{
-  color:#555;
+.slider::-webkit-scrollbar{
+
+    display:none;
+
 }
 
 
-.orderBox{
-  background: rgba(255,255,255,0.95);
-  backdrop-filter: blur(15px);
+.slider img{
+
+    flex:
+    0 0 100%;
+
+    min-width:100%;
+
+    width:100%;
+
+    height:160px;
+
+    object-fit:cover;
+
+    border-radius:10px;
+
+    scroll-snap-align:start;
+
+    cursor:pointer;
+
 }
 
-/* 🔥 ORDER POPUP FIX FULL */
-#orderForm{
-  align-items:center;
-  justify-content:center;
+
+/* =====================================================
+                PRODUCT BUTTONS
+===================================================== */
+
+.product-btn{
+
+    width:48%;
+
+    display:inline-block;
+
+    font-size:13px;
+
+    padding:9px 4px;
+
 }
 
-#orderForm div{
-  background:white !important;
-  color:black !important;
+
+/* =====================================================
+                PRODUCT SEARCH
+===================================================== */
+
+#searchProduct{
+
+    background:
+    rgba(255,255,255,0.15);
+
 }
 
-/* 🔥 INPUT + SELECT FIX */
+
+/* =====================================================
+                MODAL
+===================================================== */
+
+.modal{
+
+    display:none;
+
+    position:fixed;
+
+    inset:0;
+
+    width:100%;
+
+    height:100%;
+
+    background:
+    rgba(0,0,0,0.85);
+
+    z-index:5000;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:15px;
+
+}
+
+
+.modal-box{
+
+    width:100%;
+
+    max-width:500px;
+
+    max-height:92vh;
+
+    overflow-y:auto;
+
+    background:white;
+
+    color:black;
+
+    padding:20px;
+
+    border-radius:15px;
+
+    position:relative;
+
+}
+
+
+/* =====================================================
+                MODAL CLOSE
+===================================================== */
+
+.close-btn{
+
+    position:absolute;
+
+    right:12px;
+
+    top:12px;
+
+    width:35px;
+
+    height:35px;
+
+    border-radius:50%;
+
+    background:#dc3545;
+
+    color:white;
+
+    font-size:20px;
+
+    padding:0;
+
+}
+
+
+/* =====================================================
+                ORDER MODAL
+===================================================== */
+
+#orderForm .modal-box{
+
+    background:white;
+
+    color:black;
+
+}
+
+
 #orderForm input,
 #orderForm textarea,
 #orderForm select{
-  background:#f1f1f1 !important;
-  color:black !important;
-  border:1px solid #ccc;
+
+    background:#f1f1f1;
+
+    color:black;
+
+    border:
+    1px solid #ccc;
+
 }
 
-/* 🔥 OPTION FIX */
+
 #orderForm select option{
-  color:black !important;
-  background:white !important;
-}
 
-/* 🔥 TITLE FIX */
-#orderForm h3{
-  color:black !important;
-}
+    color:black;
 
+    background:white;
 
-
-.logout-btn{
-  position:absolute;
-  right:15px;
-  top:15px;
-
-  padding:8px 16px;
-  border:none;
-  border-radius:20px;
-
-  background: rgba(255,255,255,0.15); /* 🔥 glass effect */
-  backdrop-filter: blur(8px);
-
-  color:white;
-  font-size:14px;
-  cursor:pointer;
-
-  transition:0.3s;
-}
-
-/* ✨ Hover Effect */
-.logout-btn:hover{
-  background: linear-gradient(45deg,#ff4d4d,#ff0000);
-  box-shadow: 0 0 10px rgba(255,0,0,0.6);
-  transform: scale(1.05);
 }
 
 
-/* 🔥 IMAGE SLIDER FIX (FINAL) */
-.image-slider{
-  display:flex;
-  overflow-x:auto;
-  width:100%;
-  scroll-behavior:smooth;
-}
+/* =====================================================
+                PRODUCT DETAILS
+===================================================== */
 
-.image-slider img{
-  flex:0 0 100%;   /* 🔥 MAIN FIX */
-  width:100%;
-  height:150px;
-  object-fit:cover;
-  border-radius:10px;
-}
+.details-slider{
 
-/* 🔥 CARD FIX */
-.card{
-  overflow:hidden;
+    display:flex;
+
+    overflow-x:auto;
+
+    scroll-snap-type:x mandatory;
+
+    gap:10px;
+
 }
 
 
-.slider{
-  display:flex;
-  overflow-x:auto;
-  scroll-snap-type:x mandatory;
-  -webkit-overflow-scrolling: touch;
-  border-radius:10px;
-}
+.details-slider::-webkit-scrollbar{
 
-.slider img{
-  flex:0 0 100%;
-  width:100%;
-  height:150px;
-  object-fit:cover;
-  scroll-snap-align:start;
-}
+    display:none;
 
-.slider::-webkit-scrollbar{
-  display:none;
 }
 
 
-/* 🔥 GALLERY SLIDER FIX */
+.details-slider img{
+
+    flex:
+    0 0 100%;
+
+    min-width:100%;
+
+    height:250px;
+
+    object-fit:contain;
+
+    background:#f1f1f1;
+
+    border-radius:10px;
+
+    scroll-snap-align:start;
+
+    cursor:zoom-in;
+
+}
+
+
+.detail-price{
+
+    color:#198754;
+
+    font-size:23px;
+
+    font-weight:bold;
+
+    margin:10px 0;
+
+}
+
+
+.detail-description{
+
+    line-height:1.6;
+
+}
+
+
+.read-btn{
+
+    background:none;
+
+    color:#0072ff;
+
+    width:auto;
+
+    padding:0;
+
+}
+
+
+/* =====================================================
+            ADDITIONAL DETAILS
+===================================================== */
+
+.additional{
+
+    margin-top:20px;
+
+    border-top:
+    1px solid #ddd;
+
+    padding-top:10px;
+
+}
+
+
+.additional h3{
+
+    color:#0d47a1;
+
+}
+
+
+.detail-row{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:10px;
+
+    padding:8px 0;
+
+    border-bottom:
+    1px solid #eee;
+
+}
+
+
+.detail-row span:first-child{
+
+    font-weight:bold;
+
+}
+
+
+/* =====================================================
+                GALLERY
+===================================================== */
+
 .gallery-slider{
-  display:flex;
-  overflow-x:auto;
-  scroll-snap-type:x mandatory;
-  gap:10px;
+
+    display:flex;
+
+    overflow-x:auto;
+
+    scroll-snap-type:x mandatory;
+
+    gap:10px;
+
 }
 
-.gallery-slider img{
-  flex:0 0 100%;
-  width:100%;
-  height:250px;
-  object-fit:cover;
-  border-radius:10px;
-  scroll-snap-align:start;
-}
 
 .gallery-slider::-webkit-scrollbar{
-  display:none;
+
+    display:none;
+
 }
 
+
+.gallery-slider img{
+
+    flex:
+    0 0 100%;
+
+    min-width:100%;
+
+    height:300px;
+
+    object-fit:contain;
+
+    background:#eee;
+
+    border-radius:10px;
+
+    scroll-snap-align:start;
+
+    cursor:zoom-in;
+
+}
+
+
+/* =====================================================
+                    ZOOM
+===================================================== */
+
+#zoomModal{
+
+    display:none;
+
+    position:fixed;
+
+    inset:0;
+
+    background:
+    rgba(0,0,0,0.95);
+
+    z-index:9999;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:20px;
+
+}
+
+
+#zoomModal img{
+
+    max-width:100%;
+
+    max-height:90vh;
+
+    object-fit:contain;
+
+}
+
+
+/* =====================================================
+                TECHNICIAN
+===================================================== */
+
+.tech-card{
+
+    background:
+    rgba(255,255,255,0.12);
+
+    padding:15px;
+
+    margin-top:10px;
+
+    border-radius:10px;
+
+}
+
+
+/* =====================================================
+                TRACK RESULT
+===================================================== */
+
+.track-card{
+
+    background:white;
+
+    color:black;
+
+    padding:15px;
+
+    margin-top:15px;
+
+    border-radius:10px;
+
+}
+
+
+/* =====================================================
+                    CONTACT
+===================================================== */
+
+.contact-btn{
+
+    display:block;
+
+    text-decoration:none;
+
+    color:white;
+
+    padding:12px;
+
+    margin:8px auto;
+
+    max-width:400px;
+
+    border-radius:8px;
+
+    text-align:center;
+
+}
+
+
+.call{
+
+    background:green;
+
+}
+
+
+.whatsapp{
+
+    background:#25D366;
+
+}
+
+
+.email{
+
+    background:#0072ff;
+
+}
+
+
+/* =====================================================
+                    MOBILE
+===================================================== */
+
+@media(max-width:768px){
+
+    .main-flex{
+
+        flex-direction:column;
+
+    }
+
+    header h1{
+
+        font-size:23px;
+
+    }
+
+    .logout-btn{
+
+        position:static;
+
+        margin-top:10px;
+
+    }
+
+}
 
 </style>
 
@@ -324,731 +862,2796 @@ textarea::placeholder{
 
 <body>
 
+
+<!-- =====================================================
+                    HEADER
+===================================================== -->
+
 <header>
-<h1>Electrical Hub Center</h1>
-<p>All Electrical Services & Products in One Place</p>
-<button class="logout-btn" onclick="logout()">Logout</button>
+
+<h1>
+Electrical Hub Center ⚡
+</h1>
+
+<p>
+All Electrical Services & Products in One Place
+</p>
+
+<button
+class="logout-btn"
+onclick="logout()"
+>
+Logout
+</button>
+
 </header>
 
-<!-- 🔧 SERVICES -->
+
+
+<!-- =====================================================
+                ELECTRICAL SERVICES
+===================================================== -->
+
 <section>
-<h2>Electrical Services</h2>
+
+<h2>
+Electrical Services
+</h2>
+
 
 <div class="grid">
 
+
 <div class="card">
+
 <img src="https://i.ibb.co/JjCPzm94/om-electrician-durgapura-jaipur-electricians-98ko617c5g.jpg">
-<h4>Fan Repair - ₹150</h4>
+
+<h4>
+Fan Repair - ₹150
+</h4>
+
 </div>
 
+
 <div class="card">
+
 <img src="https://i.ibb.co/v63SScMM/shutterstock-2151193337.jpg">
-<h4>Light Installation - ₹100</h4>
+
+<h4>
+Light Installation - ₹100
+</h4>
+
 </div>
 
+
 <div class="card">
+
 <img src="https://i.ibb.co/MYq2KFD/close-electrician-working-on-light-260nw-2293986793.jpg">
-<h4>Switch Repair - ₹80</h4>
+
+<h4>
+Switch Repair - ₹80
+</h4>
+
 </div>
 
+
 <div class="card">
+
 <img src="https://i.ibb.co/bjdwqxn0/hm-abt-1.jpg">
-<h4>AC Service - ₹500</h4>
+
+<h4>
+AC Service - ₹500
+</h4>
+
 </div>
 
+
 <div class="card">
+
 <img src="https://i.ibb.co/HMZVhnZ/gemini-generated-image-lfrmuolfrmuolfrm-500x500.png">
-<h4>Refrigerator Repair - ₹400</h4>
+
+<h4>
+Refrigerator Repair - ₹400
+</h4>
+
 </div>
+
 
 <div class="card">
+
 <img src="https://i.ibb.co/S4yWXfRL/office-electrical-wiring-service.jpg">
-<h4>House Wiring - ₹3000+</h4>
-</div>
+
+<h4>
+House Wiring - ₹3000+
+</h4>
 
 </div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+                TECHNICIAN + BOOKING
+===================================================== -->
 
 <section>
 
 <div class="main-flex">
 
+
+<!-- ================= TECHNICIAN ================= -->
+
 <div class="box">
-<!-- 🔍 FIND TECH -->
-<h2>Find Technician</h2>
+
+<h2>
+🔍 Find Technician
+</h2>
+
 
 <select id="location">
-<option value="">Select Location</option>
-<option value="Nandigram">Nandigram</option>
-<option value="Haldia">Haldia</option>
-<option value="Naynan">Naynan</option>
-<option value="Kamalpur">Kamalpur</option>
+
+<option value="">
+Select Location
+</option>
+
+<option value="Nandigram">
+Nandigram
+</option>
+
+<option value="Haldia">
+Haldia
+</option>
+
+<option value="Naynan">
+Naynan
+</option>
+
+<option value="Kamalpur">
+Kamalpur
+</option>
+
 </select>
 
-<button id="searchBtn">Search</button>
+
+<button id="searchBtn">
+Search Technician
+</button>
+
 
 <div id="result"></div>
+
 </div>
 
+
+
+<!-- ================= BOOKING ================= -->
+
 <div class="box">
-<!-- 📋 BOOKING -->
-<h2>Book Service</h2>
+
+<h2>
+📋 Book Service
+</h2>
+
 
 <form id="bookingForm">
 
-<input type="text" name="name" placeholder="Your Name">
-<input type="tel" name="phone" placeholder="Phone Number">
-<input type="text" name="address" placeholder="Full Address">
-<input type="text" name="pincode" placeholder="PIN Code">
 
-<select name="service">
-<option>Select Service</option>
-<option>Fan Repair</option>
-<option>Light Installation</option>
-<option>AC Service</option>
-<option>Refrigerator Repair</option>
-<option>House Wiring</option>
+<input
+type="text"
+id="bookingName"
+placeholder="Your Name"
+required
+>
+
+
+<input
+type="tel"
+id="bookingPhone"
+placeholder="Phone Number"
+required
+>
+
+
+<input
+type="text"
+id="bookingAddress"
+placeholder="Full Address"
+required
+>
+
+
+<input
+type="text"
+id="bookingPincode"
+placeholder="PIN Code"
+required
+>
+
+
+<select
+id="bookingService"
+required
+>
+
+<option value="">
+Select Service
+</option>
+
+<option>
+Fan Repair
+</option>
+
+<option>
+Light Installation
+</option>
+
+<option>
+Switch Repair
+</option>
+
+<option>
+AC Service
+</option>
+
+<option>
+Refrigerator Repair
+</option>
+
+<option>
+House Wiring
+</option>
+
 </select>
 
-<textarea name="details" placeholder="Extra details"></textarea>
 
-<button type="button" id="submitBtn">Submit Booking</button>
+<textarea
+id="bookingDetails"
+placeholder="Extra details"
+></textarea>
+
+
+<button
+type="button"
+id="submitBtn"
+>
+Submit Booking
+</button>
+
 
 </form>
+
 </div>
+
+
 </div>
 
 </section>
 
-<!-- 🛒 PRODUCTS -->
- <section>
-<h2>Shopping Products</h2>
 
 
-<div class="grid" id="productContainer"></div>
+<!-- =====================================================
+                    PRODUCTS
+===================================================== -->
+
+<section>
+
+<h2>
+🛒 Shopping Products
+</h2>
+
+
+<input
+type="search"
+id="searchProduct"
+placeholder="🔎 Search Product..."
+oninput="searchProducts()"
+>
+
+
+<br><br>
+
+
+<div
+class="grid"
+id="productContainer"
+>
+
+<p>
+Loading products...
+</p>
+
+</div>
+
+</section>
 
 
 
-<div id="orderForm" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#000000aa;">
+<!-- =====================================================
+                    ORDER MODAL
+===================================================== -->
 
-<div style="background:white; padding:20px; border-radius:10px; max-width:400px; width:90%;">
+<div
+id="orderForm"
+class="modal"
+>
 
-<h3 style="color:black;">Confirm Order</h3>
+<div class="modal-box">
+
+
+<button
+class="close-btn"
+onclick="closeForm()"
+>
+×
+</button>
+
+
+<h2 style="color:#0d47a1;">
+Confirm Order
+</h2>
+
+
+<h3 id="selectedProductName">
+</h3>
+
+
+<p>
+
+<strong>
+Price:
+</strong>
+
+₹<span id="selectedProductPrice">
+</span>
+
+</p>
+
 
 <select id="paymentMethod">
-<option value="">Select Payment</option>
-<option value="COD">Cash on Delivery</option>
-<option value="ONLINE">Online Payment</option>
+
+<option value="">
+Select Payment
+</option>
+
+<option value="COD">
+Cash on Delivery
+</option>
+
+<option value="ONLINE">
+Online Payment
+</option>
+
 </select>
 
-<input type="text" id="custName" placeholder="Your Name">
-<input type="tel" id="custPhone" placeholder="Phone Number">
-<textarea id="custAddress" placeholder="Full Address"></textarea>
-<input type="text" id="custPincode" placeholder="PIN Code">
 
-<button onclick="placeOrder()">Confirm Order</button>
-<button onclick="closeForm()">Cancel</button>
+<input
+type="text"
+id="custName"
+placeholder="Your Name"
+>
 
-</div>
-</div>
 
-<div id="productDetails" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#000000cc;">
-<div style="background:white; margin:40px auto; padding:20px; border-radius:15px; max-width:400px; text-align:center;">
+<input
+type="tel"
+id="custPhone"
+placeholder="Phone Number"
+>
 
-<h2 id="dName"></h2>
-<img id="dImage" style="width:100%; height:200px;">
-<h3 id="dPrice"></h3>
-<p id="dDesc"></p>
 
-<button onclick="closeDetails()">Close</button>
+<textarea
+id="custAddress"
+placeholder="Full Address"
+></textarea>
 
-</div>
-</div>
 
-<script>
+<input
+type="text"
+id="custPincode"
+placeholder="PIN Code"
+>
 
-var productName="", productPrice="", productImage="", productDesc="";
 
-function openForm(name, price, image, desc){
-productName=name;
-productPrice=price;
-productImage=image;
-productDesc=desc;
-document.getElementById("orderForm").style.display="block";
-}
+<button
+onclick="placeOrder()"
+>
+Confirm Order
+</button>
 
-function closeForm(){
-document.getElementById("orderForm").style.display="none";
-}
 
-function submitOrder(){
+<button
+onclick="closeForm()"
+style="background:#dc3545;"
+>
+Cancel
+</button>
 
-var name=document.getElementById("custName").value;
-var phone=document.getElementById("custPhone").value;
-var address=document.getElementById("custAddress").value;
-
-if(name==""||phone==""||address==""||pincode==""){
-alert("Fill all details");
-return;
-}
-
-// 🔥 IMPORTANT FIX (encode)
-var msg = "New Order:\n"
-+ "Order ID: " + orderId + "\n"
-+ "Name: " + name + "\n"
-+ "Phone: " + phone + "\n"
-+ "Address: " + address + "\n"
-+ "Product: " + productName + "\n"
-+ "Price: " + productPrice + "\n"
-+ "Description: " + productDesc + "\n"
-+ "Image: " + productImage;
-
-var finalMsg = encodeURIComponent(msg);
-
-// WhatsApp
-window.open("https://api.whatsapp.com/send?phone=919434852965&text="+finalMsg);
-
-// Email
-window.location.href="https://formsubmit.co/khutiyanayan@gmail.com?Name="+encodeURIComponent(name)+"&Phone="+encodeURIComponent(phone)+"&Address="+encodeURIComponent(address)+"&Product="+encodeURIComponent(productName)+"&Price="+encodeURIComponent(productPrice)+"&Description="+encodeURIComponent(productDesc)+"&Image="+encodeURIComponent(productImage);
-
-}
-
-</script>
 
 </div>
 
-</section>
+</div>
 
+
+
+<!-- =====================================================
+                PRODUCT DETAILS MODAL
+===================================================== -->
+
+<div
+id="productDetails"
+class="modal"
+>
+
+<div
+class="modal-box"
+id="detailsContent"
+>
+
+<button
+class="close-btn"
+onclick="closeDetails()"
+>
+×
+</button>
+
+
+<div id="productDetailsContent">
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<!-- =====================================================
+                    GALLERY MODAL
+===================================================== -->
+
+<div
+id="imgModal"
+class="modal"
+>
+
+<div class="modal-box">
+
+<button
+class="close-btn"
+onclick="closeGallery()"
+>
+×
+</button>
+
+
+<div id="imgContainer">
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<!-- =====================================================
+                    ZOOM MODAL
+===================================================== -->
+
+<div id="zoomModal">
+
+<button
+class="close-btn"
+onclick="closeZoom()"
+>
+×
+</button>
+
+
+<img id="zoomImage">
+
+</div>
+
+
+
+<!-- =====================================================
+                    TRACK ORDER
+===================================================== -->
 
 <section>
-<h2>📦 Track Your Order</h2>
 
-<input type="text" id="trackInput" placeholder="Enter Order ID or Phone Number">
+<h2>
+📦 Track Your Order
+</h2>
 
-<button onclick="trackOrder()">Track Order</button>
+
+<input
+type="text"
+id="trackInput"
+placeholder="Enter Order ID or Phone Number"
+>
+
+
+<button
+onclick="trackOrder()"
+>
+Track Order
+</button>
+
 
 <div id="trackResult"></div>
+
 </section>
 
-<!-- 📞 CONTACT -->
+
+
+<!-- =====================================================
+                    CONTACT
+===================================================== -->
+
 <section>
-<h2>Contact</h2>
 
-<div style="text-align:center;">
+<h2>
+📞 Contact
+</h2>
 
-<a href="tel:9434852965">
-<button style="background:green;">📞 Call Now</button>
+
+<a
+class="contact-btn call"
+href="tel:+919434852965"
+>
+📞 Call Now
 </a>
 
-<a href="https://wa.me/919434852965" target="_blank">
-<button style="background:#25D366;">💬 WhatsApp</button>
+
+<a
+class="contact-btn whatsapp"
+href="https://wa.me/919434852965"
+target="_blank"
+>
+💬 WhatsApp
 </a>
 
-<a href="mailto:khutiyanayan@gmail.com">
-<button>📧 Email</button>
+
+<a
+class="contact-btn email"
+href="mailto:khutiyanayan@gmail.com"
+>
+📧 Email
 </a>
 
-<p>Nandigram, Purba Medinipur, West Bengal - 721631</p>
 
-</div>
+<p style="text-align:center;">
+Nandigram, Purba Medinipur,
+West Bengal - 721631
+</p>
+
 </section>
 
-<!-- 🔧 ORDER SCRIPT -->
-<script>
-let productName="",productPrice="",productImage="",productDesc="";
 
-function openForm(n,p,i,d){
-productName=n;
-productPrice=p;
-productImage=i;
-productDesc=d;
-document.getElementById("orderForm").style.display="block";
-}
 
-function closeForm(){
-document.getElementById("orderForm").style.display="none";
-}
+<!-- =====================================================
+                    RAZORPAY
+===================================================== -->
 
-function submitOrder(){
-let name=document.getElementById("custName").value;
-let phone=document.getElementById("custPhone").value;
-let address=document.getElementById("custAddress").value;
-
-if(name==""||phone==""||address==""){
-alert("Fill all details");
-return;
-}
-
-let msg="New Order:"
-\nOrderID:"+orderId+" \nName:"+name+"\nPhone:"+phone+"\nAddress:"+address+"\nProduct:"+productName+"\nPrice:"+productPrice+"\nDesc:"+productDesc+"\nImage:"+productImage;
-
-window.open("https://wa.me/919434852965?text="+encodeURIComponent(msg));
-
-alert("Order Sent ✅");
-closeForm();
-}
-</script>
-
-
-<!-- 🔥 FIREBASE -->
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getFirestore, collection, getDocs, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-const app=initializeApp({
-apiKey:"AIzaSyCm-lsMV-W9uNLRibsQalox13QHccgPFMc",
-authDomain:"electrical-hub-center.firebaseapp.com",
-projectId:"electrical-hub-center"
-});
-
-const db=getFirestore(app);
-
-
-
-
-// 🔍 FIND TECH
-document.getElementById("searchBtn").addEventListener("click",async()=>{
-let loc=document.getElementById("location").value;
-let snap=await getDocs(collection(db,"technicians"));
-let out="";
-snap.forEach(doc=>{
-let d=doc.data();
-if(d.location && d.location.toLowerCase().includes(loc.toLowerCase())){
-out+=`<div class="card"><h3>${d.name}</h3><p>${d.service}</p><p>${d.phone}</p></div>`;
-}
-});
-document.getElementById("result").innerHTML=out||"No technician found ❌";
-});
-
-// 📋 BOOKING
-document.getElementById("submitBtn").addEventListener("click",async()=>{
-let name=document.querySelector('[name="name"]').value;
-let phone=document.querySelector('[name="phone"]').value;
-let address=document.querySelector('[name="address"]').value;
-let pincode=document.querySelector('[name="pincode"]').value;
-let service=document.querySelector('[name="service"]').value;
-let details=document.querySelector('[name="details"]').value;
-
-if(name==""||phone==""||address==""){
-alert("Fill all details");
-return;
-}
-
-await addDoc(collection(db,"bookings"),{
-name,phone,address,pincode, service,details,time:new Date()
-});
-
-let msg="New Booking:\nName:"+name+"\nPhone:"+phone+"\nAddress:"+address+"\nPIN:"+pincode+"\nService:"+service;
-
-window.open("https://wa.me/919434852965?text="+encodeURIComponent(msg));
-
-alert("Booking Done ✅");
-
-document.getElementById("bookingForm").reset();
-});
-
-let dName="", dPrice="", dImage="", dDesc="";
-
-function showDetails(name, price, image, desc){
-dName=name;
-dPrice=price;
-dImage=image;
-dDesc=desc;
-
-document.getElementById("dName").innerText=name;
-document.getElementById("dPrice").innerText="Price: ₹"+price;
-document.getElementById("dImage").src=image;
-document.getElementById("dDesc").innerText=desc;
-
-document.getElementById("productDetails").style.display="block";
-}
-
-function closeDetails(){
-document.getElementById("productDetails").style.display="none";
-}
-
-function orderFromDetails(){
-let msg="New Order:\nProduct:"+dName+"\nPrice:"+dPrice+"\nDescription:"+dDesc+"\nImage:"+dImage;
-
-window.open("https://wa.me/919434852965?text="+encodeURIComponent(msg));
-}
-
-
-window.showDetails=function(name,price,image,desc){
-document.getElementById("dName").innerText=name;
-document.getElementById("dPrice").innerText="Price: ₹"+price;
-document.getElementById("dImage").src=image;
-document.getElementById("dDesc").innerText=desc;
-document.getElementById("productDetails").style.display="block";
-}
-
-window.closeDetails=function(){
-document.getElementById("productDetails").style.display="none";
-}
-
-
-
-// 🔥 GLOBAL
-let productName="", productPrice="", productImage="", productDesc="";
-
-window.trackOrder = trackOrder;
-
-
-// OPEN
-window.openForm = function(name,price,image,desc){
-  productName=name;
-  productPrice=price;
-  productImage=image;
-  productDesc=desc;
-
-  document.getElementById("orderForm").style.display="flex";
-}
-
-// CLOSE
-window.closeForm = function(){
-  document.getElementById("orderForm").style.display="none";
-}
-
-// MAIN ORDER
-window.placeOrder = function(){
-
-  let payment = document.getElementById("paymentMethod").value;
-
-  if(payment===""){
-    alert("Select Payment Method");
-    return;
-  }
-
-  if(payment==="COD"){
-    submitCOD();
-  }else{
-    payNow();
-  }
-}
-
-// COD ORDER
-async function submitCOD(){
-
-  let name=document.getElementById("custName").value;
-  let phone=document.getElementById("custPhone").value;
-  let address=document.getElementById("custAddress").value;
-let pincode = document.getElementById("custPincode").value;
-
-  if(name==""||phone==""||address==""||pincode==""){
-    alert("Fill all details");
-    return;
-  }
- let orderId = "ORD" + Date.now();
-
-
-  // Firebase save
-  await addDoc(collection(db,"orders"),{
-orderId,name,phone,address,pincode,
-    product:productName,
-    price:productPrice,
-    image:productImage,
-    description:productDesc,
-    payment:"COD",
-    paymentStatus:"Pending",
-    deliveryStatus:"Pending",
-    time:new Date()
-  });
-
-  // WhatsApp
-  let msg=`New COD Order:
-OrderID: ${orderId}
-Name: ${name}
-Phone: ${phone}
-Address: ${address}
-PIN: ${pincode}
-Product: ${productName}
-Price: ₹${productPrice}
-Description: ${productDesc}
-
-🖼️ Image: ${productImage}`;
-
-  window.open("https://wa.me/919434852965?text="+encodeURIComponent(msg));
-
-  alert("COD Order Placed ✅\nOrder ID: " + orderId);
-  closeForm();
-}
-
-// ONLINE PAYMENT
-function payNow(){
-
-  let name=document.getElementById("custName").value;
-  let phone=document.getElementById("custPhone").value;
-  let address=document.getElementById("custAddress").value;
-let pincode = document.getElementById("custPincode").value;
-
-  if(name==""||phone==""||address==""||pincode==""){
-    alert("Fill all details");
-    return;
-  }
-
-  var options = {
-    key: "rzp_test_xxx", // 👉 replace with real key
-    amount: productPrice * 100,
-    currency: "INR",
-    name: "Electrical Hub Center",
-    description: productName,
-
-    handler: function (response){
-      saveOrder(response.razorpay_payment_id);
-    }
-  };
-
-  new Razorpay(options).open();
-}
-
-// SAVE ONLINE
-async function saveOrder(paymentId){
-
-let orderId = "ORD" + Date.now();
-
-  await addDoc(collection(db,"orders"),{
-    orderId: orderId,
-    name: custName.value,
-    phone: custPhone.value,
-    address: custAddress.value,
-    pincode: pincode,
-    product: productName,
-    price: productPrice,
-    image: productImage,
-    description: productDesc,
-    payment:"ONLINE",
-    paymentStatus:"Paid",
-    paymentId: paymentId,
-    deliveryStatus:"Pending",
-    time:new Date()
-  });
-
-  let msg=`New ONLINE Order:
-OrderID: ${orderId}
-Product: ${productName}
-Price: ₹${productPrice}
-📝 Description: ${productDesc}
-
-🖼️ Image: ${productImage}
-
-Payment ID: ${paymentId}`;
-
-  window.open("https://wa.me/919434852965?text="+encodeURIComponent(msg));
-
-  alert("Payment Successful ✅\nOrder ID: " + orderId);
-  closeForm();
-}
-
-
-
-
-async function trackOrder(){
-
-let input = document.getElementById("trackInput").value.trim();
-
-if(input==""){
-  alert("Enter Order ID or Phone");
-  return;
-}
-
-let snap = await getDocs(collection(db,"orders"));
-let out = "";
-
-snap.forEach(doc=>{
-let d = doc.data();
-
-let statusColor = d.deliveryStatus==="Delivered" ? "green" :
-                  d.deliveryStatus==="Shipped" ? "orange" : "red";
-
-if(d.orderId === input || d.phone === input){
-
-out += `
-<div class="card">
-<h3>🆔 ${d.orderId}</h3>
-
-<p>📦 Product: ${d.product}</p>
-<p>💰 Price: ₹${d.price}</p>
-
-<p>💳 Payment: ${d.payment}</p>
-<p>💳 Status: ${d.paymentStatus}</p>
-<p style="color:${statusColor}">🚚 Delivery: ${d.deliveryStatus}</p>
-
-
-<p>📅 Date: ${new Date(d.time.seconds*1000).toLocaleString()}</p>
-
-</div>
-`;
-}
-});
-
-document.getElementById("trackResult").innerHTML = out || "❌ No Order Found";
-}
-
-
-
-function logout(){
-  localStorage.removeItem("user");
-  window.location.href="login.html";
-}
-
-
-
-
-// 🔥 LOAD PRODUCTS FINAL
-async function loadProducts(){
-
-  let snap = await getDocs(collection(db,"products"));
-  let out = "";
-
-  snap.forEach(doc=>{
-
-    let d = doc.data();
-    let images = d.images || [d.image];
-
-    // 🔥 SLIDER (ONLY THIS)
-    let slider = `<div class="slider">`;
-
-    images.forEach(img=>{
-      slider += `<img src="${img}">`;
-    });
-
-    slider += `</div>`;
-
-    let imgString = images.join("|");
-
-    out += `
-    <div class="card">
-
-      ${slider}
-
-      <h4>${d.name}</h4>
-      <p>₹${d.price}</p>
-
-      <button onclick="openForm('${d.name}','${d.price}','${images[0]}','${d.desc}')">
-        Order Now
-      </button>
-
-      <button onclick="openGallery('${imgString}')">
-        View Images
-      </button>
-
-      <button onclick="showDetails('${d.name}','${d.price}','${images[0]}','${d.desc}')">
-        View Details
-      </button>
-
-    </div>
-    `;
-  });
-
-
-
-  document.getElementById("productContainer").innerHTML = out || "No Products ❌";
-}
-
-
-
-
-// 🔥 AUTO LOAD
-window.onload = function(){
-  loadProducts();
-}
-
-
-
-
-// ================== 🔥 GLOBAL FUNCTIONS ==================
-
-// 👉 NEXT IMAGE CLICK
-window.imgIndexMap = {};
-
-window.nextImage = function(id, imgString){
-
-  let images = imgString.split("|");
-
-  if(!window.imgIndexMap[id]){
-    window.imgIndexMap[id] = 0;
-  }
-
-  window.imgIndexMap[id]++;
-
-  if(window.imgIndexMap[id] >= images.length){
-    window.imgIndexMap[id] = 0;
-  }
-
-  document.getElementById("img_" + id).src = images[window.imgIndexMap[id]];
-}
-
-
-
-
-
-window.openGallery = function(imgString){
-
-  let images = imgString.split("|");
-
-  let out = `<div class="gallery-slider">`;
-
-  images.forEach(img=>{
-    out += `<img src="${img}">`;
-  });
-
-  out += `</div>`;
-
-  document.getElementById("imgContainer").innerHTML = out;
-  document.getElementById("imgModal").style.display = "block";
-}
-
-window.closeGallery = function(){
-  document.getElementById("imgModal").style.display = "none";
-}
-
-
-</script>
-
-</script>
-<script>
-
-function showDetails(name, price, image, desc){
-document.getElementById("dName").innerText = name;
-document.getElementById("dPrice").innerText = "Price: ₹" + price;
-document.getElementById("dImage").src = image;
-document.getElementById("dDesc").innerText = desc;
-
-document.getElementById("productDetails").style.display = "block";
-}
-
-function closeDetails(){
-document.getElementById("productDetails").style.display = "none";
-}
-
-</script>
-
-
-<script>
-
-function logout(){
-  localStorage.removeItem("user");   // user delete
-  localStorage.removeItem("userLoggedIn"); // old data delete
-
-  alert("Logged out successfully");
-
-  window.location.href = "login.html"; // redirect
-}
-
-
-window.logout = function(){
-  if(confirm("Are you sure you want to logout?")){
-    localStorage.removeItem("user");
-    window.location.href="login.html";
-  }
-}
-</script>
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
-<div id="imgModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:#000000cc;z-index:999;">
-  <div style="max-width:500px;margin:40px auto;background:white;padding:10px;border-radius:10px;text-align:center;">
-    <div id="imgContainer"></div>
-    <button onclick="closeGallery()">Close</button>
-  </div>
-</div>
+
+
+<!-- =====================================================
+                FIREBASE SINGLE SCRIPT
+===================================================== -->
+
+<script type="module">
+
+/* =====================================================
+                FIREBASE IMPORT
+===================================================== */
+
+import {
+
+    initializeApp
+
+}
+from
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+
+
+import {
+
+    getFirestore,
+    collection,
+    getDocs,
+    addDoc,
+    serverTimestamp
+
+}
+from
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+
+
+/* =====================================================
+                FIREBASE CONFIG
+===================================================== */
+
+const firebaseConfig = {
+
+    apiKey:
+    "AIzaSyCm-lsMV-W9uNLRibsAqox13QHccgPFMc",
+
+    authDomain:
+    "electrical-hub-center.firebaseapp.com",
+
+    projectId:
+    "electrical-hub-center"
+
+};
+
+
+/* IMPORTANT
+   If your original API key is different,
+   keep YOUR original Firebase apiKey here.
+*/
+
+
+const app =
+initializeApp(firebaseConfig);
+
+
+const db =
+getFirestore(app);
+
+
+
+/* =====================================================
+                GLOBAL PRODUCT
+===================================================== */
+
+let selectedProduct = {
+
+    name:"",
+    price:"",
+    images:[],
+    desc:"",
+    generic:"",
+    brand:"",
+    country:"",
+    manufacturer:"",
+    model:""
+
+};
+
+
+let allProducts = [];
+
+
+
+/* =====================================================
+                HTML SAFE TEXT
+===================================================== */
+
+function safe(value){
+
+    if(
+        value === undefined ||
+        value === null
+    ){
+
+        return "";
+
+    }
+
+    return String(value)
+
+    .replace(/&/g,"&amp;")
+
+    .replace(/</g,"&lt;")
+
+    .replace(/>/g,"&gt;")
+
+    .replace(/"/g,"&quot;")
+
+    .replace(/'/g,"&#039;");
+
+}
+
+
+
+/* =====================================================
+                    WHATSAPP
+===================================================== */
+
+function sendWhatsApp(message){
+
+    const url =
+    "https://wa.me/919434852965?text="
+    +
+    encodeURIComponent(message);
+
+    window.open(
+        url,
+        "_blank"
+    );
+
+}
+
+
+
+/* =====================================================
+                TECHNICIAN SEARCH
+===================================================== *
+document
+.getElementById("searchBtn")
+.addEventListener(
+"click",
+async function(){
+
+    const location =
+    document
+    .getElementById("location")
+    .value
+    .trim();
+
+
+    const result =
+    document
+    .getElementById("result");
+
+
+    if(!location){
+
+        result.innerHTML =
+        "<div class='tech-card'>"+
+        "Please select a location."+
+        "</div>";
+
+        return;
+
+    }
+
+
+    result.innerHTML =
+    "<div class='tech-card'>"+
+    "Searching technician..."+
+    "</div>";
+
+
+    try{
+
+        const snapshot =
+        await getDocs(
+            collection(
+                db,
+                "technicians"
+            )
+        );
+
+
+        let found = [];
+
+
+        snapshot.forEach(
+        function(docSnap){
+
+            const data =
+            docSnap.data();
+
+
+            const techLocation =
+            String(
+                data.location || ""
+            )
+            .toLowerCase();
+
+
+            if(
+                techLocation ===
+                location.toLowerCase()
+            ){
+
+                found.push(data);
+
+            }
+
+        });
+
+
+        if(found.length === 0){
+
+            result.innerHTML =
+            "<div class='tech-card'>"+
+            "No technician found in "+
+            safe(location)+
+            " ❌"+
+            "</div>";
+
+            return;
+
+        }
+
+
+        result.innerHTML =
+        found.map(
+        function(tech){
+
+            return `
+
+            <div class="tech-card">
+
+                <h3>
+                🔧 ${safe(tech.name || "Technician")}
+                </h3>
+
+                <p>
+                📍 ${safe(tech.location || "")}
+                </p>
+
+                <p>
+                🛠️ ${safe(tech.service || "Electrical Service")}
+                </p>
+
+                <p>
+                📞 ${safe(tech.phone || "")}
+                </p>
+
+                ${
+                    tech.phone
+                    ?
+                    `
+                    <a
+                    href="tel:${safe(tech.phone)}"
+                    style="
+                    display:block;
+                    background:green;
+                    color:white;
+                    padding:10px;
+                    border-radius:7px;
+                    text-decoration:none;
+                    text-align:center;
+                    "
+                    >
+                    Call Technician
+                    </a>
+                    `
+                    :
+                    ""
+                }
+
+            </div>
+
+            `;
+
+        }).join("");
+
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        result.innerHTML = `
+
+        <div class="tech-card">
+
+        ❌ Technician search failed.
+
+        <br><br>
+
+        ${safe(error.message)}
+
+        </div>
+
+        `;
+
+    }
+
+});
+
+
+
+/*=====================================================
+                    BOOK SERVICE
+===================================================== */
+
+document
+.getElementById("submitBtn")
+.addEventListener(
+"click",
+async function(){
+
+    const name =
+    document
+    .getElementById("bookingName")
+    .value
+    .trim();
+
+
+    const phone =
+    document
+    .getElementById("bookingPhone")
+    .value
+    .trim();
+
+
+    const address =
+    document
+    .getElementById("bookingAddress")
+    .value
+    .trim();
+
+
+    const pincode =
+    document
+    .getElementById("bookingPincode")
+    .value
+    .trim();
+
+
+    const service =
+    document
+    .getElementById("bookingService")
+    .value;
+
+
+    const details =
+    document
+    .getElementById("bookingDetails")
+    .value
+    .trim();
+
+
+
+    if(
+        !name ||
+        !phone ||
+        !address ||
+        !pincode ||
+        !service
+    ){
+
+        alert(
+        "Please fill all required fields."
+        );
+
+        return;
+
+    }
+
+
+    const bookingId =
+    "BK" + Date.now();
+
+
+    try{
+
+        await addDoc(
+
+            collection(
+                db,
+                "bookings"
+            ),
+
+            {
+
+                bookingId:bookingId,
+
+                name:name,
+
+                phone:phone,
+
+                address:address,
+
+                pincode:pincode,
+
+                service:service,
+
+                details:details,
+
+                status:"Pending",
+
+                time:serverTimestamp()
+
+            }
+
+        );
+
+
+        const message =
+
+`🔧 NEW SERVICE BOOKING
+
+Booking ID:
+${bookingId}
+
+Name:
+${name}
+
+Phone:
+${phone}
+
+Address:
+${address}
+
+PIN:
+${pincode}
+
+Service:
+${service}
+
+Details:
+${details || "Not provided"}`;
+
+
+        sendWhatsApp(message);
+
+
+        alert(
+
+        "Booking Successful ✅\n\n"+
+        "Booking ID: "+
+        bookingId
+
+        );
+
+
+        document
+        .getElementById("bookingForm")
+        .reset();
+
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        alert(
+
+        "Booking failed ❌\n\n"+
+        error.message
+
+        );
+
+    }
+
+});
+
+
+
+/* =====================================================
+                    PRODUCT IMAGES
+===================================================== */
+
+function getImages(product){
+
+    let images = [];
+
+
+    if(
+        Array.isArray(
+            product.images
+        )
+    ){
+
+        images =
+        product.images
+        .filter(Boolean);
+
+    }
+
+
+    if(
+        images.length === 0 &&
+        product.image
+    ){
+
+        images = [
+            product.image
+        ];
+
+    }
+
+
+    if(images.length === 0){
+
+        images = [
+
+        "https://via.placeholder.com/600x400?text=No+Image"
+
+        ];
+
+    }
+
+
+    return images;
+
+}
+
+
+
+/* =====================================================
+                    LOAD PRODUCTS
+===================================================== */
+
+async function loadProducts(){
+
+    const container =
+    document
+    .getElementById("productContainer");
+
+
+    container.innerHTML =
+    "<p>Loading products...</p>";
+
+
+    try{
+
+        const snapshot =
+        await getDocs(
+            collection(
+                db,
+                "products"
+            )
+        );
+
+
+        allProducts = [];
+
+
+        snapshot.forEach(
+        function(docSnap){
+
+            allProducts.push({
+
+                id:docSnap.id,
+
+                ...docSnap.data()
+
+            });
+
+        });
+
+
+        renderProducts(
+            allProducts
+        );
+
+
+    }
+    catch(error){
+
+        console.error(error);
+
+
+        container.innerHTML = `
+
+        <div class="card">
+
+        <h3>
+        ❌ Product Loading Failed
+        </h3>
+
+        <p>
+        ${safe(error.message)}
+        </p>
+
+        </div>
+
+        `;
+
+    }
+
+}
+
+
+
+/* =====================================================
+                RENDER PRODUCTS
+===================================================== */
+
+function renderProducts(products){
+
+    const container =
+    document
+    .getElementById("productContainer");
+
+
+    if(
+        products.length === 0
+    ){
+
+        container.innerHTML =
+        "<p>No Products Found ❌</p>";
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+
+    products.map(
+    function(product){
+
+        const images =
+        getImages(product);
+
+
+        const encoded =
+        encodeURIComponent(
+
+            JSON.stringify({
+
+                name:
+                product.name || "",
+
+                price:
+                product.price || "",
+
+                images:
+                images,
+
+                desc:
+                product.desc || "",
+
+                generic:
+                product.generic || "",
+
+                brand:
+                product.brand || "",
+
+                country:
+                product.country || "",
+
+                manufacturer:
+                product.manufacturer || "",
+
+                model:
+                product.model || ""
+
+            })
+
+        );
+
+
+        const slider =
+
+        images.map(
+        function(img){
+
+            return `
+
+            <img
+            src="${safe(img)}"
+            alt="${safe(product.name)}"
+            onclick="zoomImage('${encodeURIComponent(img)}')"
+            >
+
+            `;
+
+        }).join("");
+
+
+        return `
+
+        <div class="card">
+
+            <div class="slider">
+
+                ${slider}
+
+            </div>
+
+
+            <h3>
+            ${safe(product.name || "Product")}
+            </h3>
+
+
+            <p>
+
+            <strong>
+            ₹${safe(product.price || "0")}
+            </strong>
+
+            </p>
+
+
+            <p>
+
+            ${safe(
+                String(
+                    product.desc || ""
+                ).substring(0,100)
+            )}
+
+            ${
+                String(
+                    product.desc || ""
+                ).length > 100
+                ? "..."
+                : ""
+            }
+
+            </p>
+
+
+            <button
+            class="product-btn"
+            onclick="openFormEncoded('${encoded}')"
+            >
+            🛒 Order
+            </button>
+
+
+            <button
+            class="product-btn"
+            onclick="openGalleryEncoded('${encoded}')"
+            >
+            🖼 Images
+            </button>
+
+
+            <button
+            class="product-btn"
+            onclick="openDetailsEncoded('${encoded}')"
+            >
+            📋 Details
+            </button>
+
+
+            <button
+            class="product-btn"
+            onclick="openDetailsEncoded('${encoded}')"
+            >
+            📖 View Product
+            </button>
+
+        </div>
+
+        `;
+
+    }).join("");
+
+}
+
+
+
+/*
+
+
+=====================================================
+                PRODUCT SEARCH
+===================================================== */
+
+window.searchProducts =
+function(){
+
+    const input =
+    document
+    .getElementById("searchProduct")
+    .value
+    .toLowerCase()
+    .trim();
+
+
+    if(!input){
+
+        renderProducts(
+            allProducts
+        );
+
+        return;
+
+    }
+
+
+    const filtered =
+    allProducts.filter(
+    function(product){
+
+        return (
+
+            String(
+                product.name || ""
+            )
+            .toLowerCase()
+            .includes(input)
+
+            ||
+
+            String(
+                product.brand || ""
+            )
+            .toLowerCase()
+            .includes(input)
+
+            ||
+
+            String(
+                product.generic || ""
+            )
+            .toLowerCase()
+            .includes(input)
+
+        );
+
+    });
+
+
+    renderProducts(
+        filtered
+    );
+
+};
+
+
+
+/* =====================================================
+                OPEN ORDER FORM
+===================================================== */
+
+window.openFormEncoded =
+function(encoded){
+
+    try{
+
+        selectedProduct =
+        JSON.parse(
+            decodeURIComponent(
+                encoded
+            )
+        );
+
+
+        document
+        .getElementById(
+            "selectedProductName"
+        )
+        .textContent =
+        selectedProduct.name;
+
+
+        document
+        .getElementById(
+            "selectedProductPrice"
+        )
+        .textContent =
+        selectedProduct.price;
+
+
+        document
+        .getElementById(
+            "orderForm"
+        )
+        .style.display =
+        "flex";
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        alert(
+        "Could not open order form."
+        );
+
+    }
+
+};
+
+
+
+/* =====================================================
+                CLOSE ORDER FORM
+===================================================== */
+
+window.closeForm =
+function(){
+
+    document
+    .getElementById(
+        "orderForm"
+    )
+    .style.display =
+    "none";
+
+};
+
+
+
+/* =====================================================
+                    PLACE ORDER
+===================================================== */
+
+window.placeOrder =
+async function(){
+
+    const payment =
+    document
+    .getElementById(
+        "paymentMethod"
+    )
+    .value;
+
+
+    if(!payment){
+
+        alert(
+        "Please select payment method."
+        );
+
+        return;
+
+    }
+
+
+    if(payment === "COD"){
+
+        await submitCOD();
+
+    }
+    else{
+
+        await payOnline();
+
+    }
+
+};
+
+
+
+/* =====================================================
+                    COD ORDER
+===================================================== */
+
+async function submitCOD(){
+
+    const name =
+    document
+    .getElementById("custName")
+    .value
+    .trim();
+
+
+    const phone =
+    document
+    .getElementById("custPhone")
+    .value
+    .trim();
+
+
+    const address =
+    document
+    .getElementById("custAddress")
+    .value
+    .trim();
+
+
+    const pincode =
+    document
+    .getElementById("custPincode")
+    .value
+    .trim();
+
+
+    if(
+        !name ||
+        !phone ||
+        !address ||
+        !pincode
+    ){
+
+        alert(
+        "Please fill all delivery details."
+        );
+
+        return;
+
+    }
+
+
+    const orderId =
+    "ORD" + Date.now();
+
+
+    try{
+
+        await addDoc(
+
+            collection(
+                db,
+                "orders"
+            ),
+
+            {
+
+                orderId:orderId,
+
+                name:name,
+
+                phone:phone,
+
+                address:address,
+
+                pincode:pincode,
+
+                product:
+                selectedProduct.name,
+
+                price:
+                selectedProduct.price,
+
+                image:
+                selectedProduct.images[0] || "",
+
+                description:
+                selectedProduct.desc || "",
+
+                payment:"COD",
+
+                paymentStatus:
+                "Pending",
+
+                deliveryStatus:
+                "Pending",
+
+                time:
+                serverTimestamp()
+
+            }
+
+        );
+
+
+        const message =
+
+`🛒 NEW COD ORDER
+
+Order ID:
+${orderId}
+
+Product:
+${selectedProduct.name}
+
+Price:
+₹${selectedProduct.price}
+
+Customer:
+${name}
+
+Phone:
+${phone}
+
+Address:
+${address}
+
+PIN:
+${pincode}
+
+Payment:
+Cash on Delivery`;
+
+
+        sendWhatsApp(
+            message
+        );
+
+
+        alert(
+
+        "Order Placed Successfully ✅\n\n"+
+        "Order ID: "+
+        orderId
+
+        );
+
+
+        closeForm();
+
+
+        clearOrderForm();
+
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        alert(
+
+        "COD Order Failed ❌\n\n"+
+        error.message
+
+        );
+
+    }
+
+}
+
+
+
+/* =====================================================
+                CLEAR ORDER FORM
+===================================================== */
+
+function clearOrderForm(){
+
+    document
+    .getElementById("custName")
+    .value = "";
+
+
+    document
+    .getElementById("custPhone")
+    .value = "";
+
+
+    document
+    .getElementById("custAddress")
+    .value = "";
+
+
+    document
+    .getElementById("custPincode")
+    .value = "";
+
+
+    document
+    .getElementById("paymentMethod")
+    .value = "";
+
+}
+
+
+
+/* =====================================================
+                ONLINE PAYMENT
+===================================================== */
+
+async function payOnline(){
+
+    const name =
+    document
+    .getElementById("custName")
+    .value
+    .trim();
+
+
+    const phone =
+    document
+    .getElementById("custPhone")
+    .value
+    .trim();
+
+
+    const address =
+    document
+    .getElementById("custAddress")
+    .value
+    .trim();
+
+
+    const pincode =
+    document
+    .getElementById("custPincode")
+    .value
+    .trim();
+
+
+    if(
+        !name ||
+        !phone ||
+        !address ||
+        !pincode
+    ){
+
+        alert(
+        "Please fill all delivery details."
+        );
+
+        return;
+
+    }
+
+
+    if(
+        typeof Razorpay ===
+        "undefined"
+    ){
+
+        alert(
+        "Razorpay is not loaded."
+        );
+
+        return;
+
+    }
+
+
+    const amount =
+    Number(
+        String(
+            selectedProduct.price
+        )
+        .replace(/[^\d.]/g,"")
+    );
+
+
+    if(
+        !amount ||
+        amount <= 0
+    ){
+
+        alert(
+        "Invalid product price."
+        );
+
+        return;
+
+    }
+
+
+    /*
+       IMPORTANT:
+       Replace this with your actual
+       Razorpay TEST/LIVE Key.
+    */
+
+    const razorpayKey =
+    "rzp_test_xxx";
+
+
+    if(
+        razorpayKey ===
+        "rzp_test_xxx"
+    ){
+
+        alert(
+
+        "Razorpay Key set করা হয়নি.\n\n"+
+        "Code-এর razorpayKey variable-এ "+
+        "তোমার Razorpay Key বসাও."
+
+        );
+
+        return;
+
+    }
+
+
+    const orderId =
+    "ORD" + Date.now();
+
+
+    const options = {
+
+        key:
+        razorpayKey,
+
+        amount:
+        Math.round(
+            amount * 100
+        ),
+
+        currency:
+        "INR",
+
+        name:
+        "Electrical Hub Center",
+
+        description:
+        selectedProduct.name,
+
+        prefill:{
+
+            name:name,
+
+            contact:phone
+
+        },
+
+
+        handler:
+        async function(response){
+
+            try{
+
+                await addDoc(
+
+                    collection(
+                        db,
+                        "orders"
+                    ),
+
+                    {
+
+                        orderId:
+                        orderId,
+
+                        name:
+                        name,
+
+                        phone:
+                        phone,
+
+                        address:
+                        address,
+
+                        pincode:
+                        pincode,
+
+                        product:
+                        selectedProduct.name,
+
+                        price:
+                        selectedProduct.price,
+
+                        image:
+                        selectedProduct.images[0] || "",
+
+                        description:
+                        selectedProduct.desc || "",
+
+                        payment:
+                        "ONLINE",
+
+                        paymentStatus:
+                        "Paid",
+
+                        paymentId:
+                        response.razorpay_payment_id,
+
+                        deliveryStatus:
+                        "Pending",
+
+                        time:
+                        serverTimestamp()
+
+                    }
+
+                );
+
+
+                const message =
+
+`💳 NEW ONLINE ORDER
+
+Order ID:
+${orderId}
+
+Product:
+${selectedProduct.name}
+
+Price:
+₹${selectedProduct.price}
+
+Customer:
+${name}
+
+Phone:
+${phone}
+
+Address:
+${address}
+
+PIN:
+${pincode}
+
+Payment:
+Online
+
+Payment ID:
+${response.razorpay_payment_id}`;
+
+
+                sendWhatsApp(
+                    message
+                );
+
+
+                alert(
+
+                "Payment Successful ✅\n\n"+
+                "Order ID: "+
+                orderId
+
+                );
+
+
+                closeForm();
+
+                clearOrderForm();
+
+
+            }
+            catch(error){
+
+                console.error(error);
+
+                alert(
+
+                "Payment successful, but order save failed.\n\n"+
+                error.message
+
+                );
+
+            }
+
+        }
+
+    };
+
+
+    const razorpay =
+    new Razorpay(options);
+
+
+    razorpay.on(
+    "payment.failed",
+    function(){
+
+        alert(
+        "Payment Failed ❌"
+        );
+
+    });
+
+
+    razorpay.open();
+
+}
+
+
+
+/*
+=====================================================
+                PRODUCT DETAILS
+===================================================== */
+
+window.openDetailsEncoded =
+function(encoded){
+
+    try{
+
+        const product =
+        JSON.parse(
+            decodeURIComponent(
+                encoded
+            )
+        );
+
+
+        const images =
+        product.images || [];
+
+
+        const imageHTML =
+        images.map(
+        function(img){
+
+            return `
+
+            <img
+            src="${safe(img)}"
+            onclick="zoomImage('${encodeURIComponent(img)}')"
+            >
+
+            `;
+
+        }).join("");
+
+
+        const desc =
+        product.desc ||
+        "No description available.";
+
+
+        const shortDesc =
+        desc.length > 250
+        ?
+        desc.substring(0,250)
+        :
+        desc;
+
+
+        const encodedProduct =
+        encodeURIComponent(
+            JSON.stringify(product)
+        );
+
+
+        document
+        .getElementById(
+            "productDetailsContent"
+        )
+        .innerHTML = `
+
+        <div class="details-slider">
+
+            ${imageHTML}
+
+        </div>
+
+
+        <h2 style="color:#0d47a1;">
+
+        ${safe(product.name)}
+
+        </h2>
+
+
+        <div class="detail-price">
+
+        ₹${safe(product.price)}
+
+        </div>
+
+
+        <h3>
+        Description
+        </h3>
+
+
+        <p
+        id="descText"
+        class="detail-description"
+        >
+
+        ${safe(shortDesc)}
+
+        ${
+            desc.length > 250
+            ? "..."
+            : ""
+        }
+
+        </p>
+
+
+        ${
+            desc.length > 250
+            ?
+
+            `
+            <button
+            class="read-btn"
+            id="readBtn"
+            onclick="toggleDescription('${encodeURIComponent(desc)}')"
+            >
+            Read More
+            </button>
+            `
+
+            :
+
+            ""
+
+        }
+
+
+        <div class="additional">
+
+        <h3>
+        📋 Additional Details
+        </h3>
+
+
+        ${detailRow(
+            "Generic Name",
+            product.generic
+        )}
+
+
+        ${detailRow(
+            "Brand",
+            product.brand
+        )}
+
+
+        ${detailRow(
+            "Country of Manufacture",
+            product.country
+        )}
+
+
+        ${detailRow(
+            "Manufacturer",
+            product.manufacturer
+        )}
+
+
+        ${detailRow(
+            "Model",
+            product.model
+        )}
+
+
+        </div>
+
+
+        <br>
+
+
+        <button
+        onclick="openFormEncoded('${encodedProduct}');closeDetails();"
+        style="background:#198754;"
+        >
+        🛒 Order Now
+        </button>
+
+        `;
+
+
+        document
+        .getElementById(
+            "productDetails"
+        )
+        .style.display =
+        "flex";
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        alert(
+        "Could not open product details."
+        );
+
+    }
+
+};
+
+
+
+/* =====================================================
+                DETAIL ROW
+===================================================== */
+
+function detailRow(
+    label,
+    value
+){
+
+    if(
+        !value ||
+        String(value).trim() === ""
+    ){
+
+        return "";
+
+    }
+
+
+    return `
+
+    <div class="detail-row">
+
+        <span>
+        ${safe(label)}
+        </span>
+
+        <span>
+        ${safe(value)}
+        </span>
+
+    </div>
+
+    `;
+
+}
+
+
+
+/* =====================================================
+                READ MORE
+===================================================== */
+
+window.toggleDescription =
+function(encodedDesc){
+
+    const desc =
+    decodeURIComponent(
+        encodedDesc
+    );
+
+
+    const text =
+    document
+    .getElementById(
+        "descText"
+    );
+
+
+    const button =
+    document
+    .getElementById(
+        "readBtn"
+    );
+
+
+    if(
+        button.textContent.trim()
+        ===
+        "Read More"
+    ){
+
+        text.textContent =
+        desc;
+
+        button.textContent =
+        "Read Less";
+
+    }
+    else{
+
+        text.textContent =
+        desc.substring(0,250)
+        +
+        (
+            desc.length > 250
+            ?
+            "..."
+            :
+            ""
+        );
+
+        button.textContent =
+        "Read More";
+
+    }
+
+};
+
+
+
+/* =====================================================
+                CLOSE DETAILS
+===================================================== */
+
+window.closeDetails =
+function(){
+
+    document
+    .getElementById(
+        "productDetails"
+    )
+    .style.display =
+    "none";
+
+};
+
+
+
+/* =====================================================
+                OPEN GALLERY
+===================================================== */
+
+window.openGalleryEncoded =
+function(encoded){
+
+    try{
+
+        const product =
+        JSON.parse(
+            decodeURIComponent(
+                encoded
+            )
+        );
+
+
+        const images =
+        product.images || [];
+
+
+        const html =
+        `
+
+        <div class="gallery-slider">
+
+        ${
+            images.map(
+            function(img){
+
+                return `
+
+                <img
+                src="${safe(img)}"
+                onclick="zoomImage('${encodeURIComponent(img)}')"
+                >
+
+                `;
+
+            }).join("")
+        }
+
+        </div>
+
+        `;
+
+
+        document
+        .getElementById(
+            "imgContainer"
+        )
+        .innerHTML =
+        html;
+
+
+        document
+        .getElementById(
+            "imgModal"
+        )
+        .style.display =
+        "flex";
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        alert(
+        "Could not open gallery."
+        );
+
+    }
+
+};
+
+
+
+/* =====================================================
+                CLOSE GALLERY
+===================================================== */
+
+window.closeGallery =
+function(){
+
+    document
+    .getElementById(
+        "imgModal"
+    )
+    .style.display =
+    "none";
+
+};
+
+
+
+/* =====================================================
+                    IMAGE ZOOM
+===================================================== */
+
+window.zoomImage =
+function(encodedImage){
+
+    const image =
+    decodeURIComponent(
+        encodedImage
+    );
+
+
+    document
+    .getElementById(
+        "zoomImage"
+    )
+    .src =
+    image;
+
+
+    document
+    .getElementById(
+        "zoomModal"
+    )
+    .style.display =
+    "flex";
+
+};
+
+
+
+/* =====================================================
+                    CLOSE ZOOM
+===================================================== */
+
+window.closeZoom =
+function(){
+
+    document
+    .getElementById(
+        "zoomModal"
+    )
+    .style.display =
+    "none";
+
+};
+
+
+
+/* =====================================================
+                    TRACK ORDER
+===================================================== */
+
+window.trackOrder =
+async function(){
+
+    const input =
+    document
+    .getElementById(
+        "trackInput"
+    )
+    .value
+    .trim();
+
+
+    const result =
+    document
+    .getElementById(
+        "trackResult"
+    );
+
+
+    if(!input){
+
+        alert(
+        "Enter Order ID or Phone Number."
+        );
+
+        return;
+
+    }
+
+
+    result.innerHTML =
+    "<p>Checking order...</p>";
+
+
+    try{
+
+        const snapshot =
+        await getDocs(
+            collection(
+                db,
+                "orders"
+            )
+        );
+
+
+        let found = [];
+
+
+        snapshot.forEach(
+        function(docSnap){
+
+            const data =
+            docSnap.data();
+
+
+            if(
+
+                String(
+                    data.orderId || ""
+                )
+                .toLowerCase()
+                ===
+                input.toLowerCase()
+
+                ||
+
+                String(
+                    data.phone || ""
+                )
+                ===
+                input
+
+            ){
+
+                found.push(data);
+
+            }
+
+        });
+
+
+        if(found.length === 0){
+
+            result.innerHTML = `
+
+            <div class="track-card">
+
+            ❌ No Order Found
+
+            </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        result.innerHTML =
+
+        found.map(
+        function(order){
+
+            let dateText =
+            "Not available";
+
+
+            if(
+                order.time &&
+                typeof order.time.toDate
+                ===
+                "function"
+            ){
+
+                dateText =
+                order.time
+                .toDate()
+                .toLocaleString();
+
+            }
+
+
+            return `
+
+            <div class="track-card">
+
+            <h3>
+            📦 Order Details
+            </h3>
+
+
+            <p>
+            <strong>Order ID:</strong>
+            ${safe(order.orderId)}
+            </p>
+
+
+            <p>
+            <strong>Product:</strong>
+            ${safe(order.product)}
+            </p>
+
+
+            <p>
+            <strong>Price:</strong>
+            ₹${safe(order.price)}
+            </p>
+
+
+            <p>
+            <strong>Payment:</strong>
+            ${safe(order.payment)}
+            </p>
+
+
+            <p>
+            <strong>Payment Status:</strong>
+            ${safe(order.paymentStatus)}
+            </p>
+
+
+            <p>
+            <strong>Delivery Status:</strong>
+
+            <span style="
+            color:
+            ${
+                order.deliveryStatus === "Delivered"
+                ?
+                "green"
+                :
+                order.deliveryStatus === "Shipped"
+                ?
+                "orange"
+                :
+                "red"
+            };
+            font-weight:bold;
+            ">
+
+            ${safe(
+                order.deliveryStatus ||
+                "Pending"
+            )}
+
+            </span>
+
+            </p>
+
+
+            <p>
+            <strong>Order Date:</strong>
+            ${safe(dateText)}
+            </p>
+
+
+            </div>
+
+            `;
+
+        }).join("");
+
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        result.innerHTML = `
+
+        <div class="track-card">
+
+        ❌ Tracking failed.
+
+        <br><br>
+
+        ${safe(error.message)}
+
+        </div>
+
+        `;
+
+    }
+
+};
+
+
+
+/*
+=====================================================
+                    LOGOUT
+===================================================== */
+
+window.logout =
+function(){
+
+    const ok =
+    confirm(
+        "Are you sure you want to logout?"
+    );
+
+
+    if(!ok){
+
+        return;
+
+    }
+
+
+    localStorage.removeItem(
+        "user"
+    );
+
+
+    localStorage.removeItem(
+        "userLoggedIn"
+    );
+
+
+    window.location.href =
+    "login.html";
+
+};
+
+
+
+/* =====================================================
+                    LOAD PRODUCTS
+===================================================== */
+
+loadProducts();
+
+
+</script>
+
+
 </body>
+
 </html>
