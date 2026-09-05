@@ -6,852 +6,672 @@
 <meta charset="UTF-8">
 
 <meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+      content="width=device-width, initial-scale=1.0">
 
 <title>Electrical Hub Center</title>
-
-
-<!-- ================= LOGIN CHECK ================= -->
-
-<script>
-
-if(!localStorage.getItem("user")){
-    window.location.href = "login.html";
-}
-
-</script>
-
 
 <style>
 
 /* =====================================================
-                    BODY
+   BASIC
 ===================================================== */
 
 *{
-    box-sizing:border-box;
+  box-sizing:border-box;
 }
 
 body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  color:white;
 
-    margin:0;
+  background:
+    linear-gradient(135deg,#0f2027,#203a43,#2c5364);
 
-    font-family:Arial,sans-serif;
-
-    background:
-    linear-gradient(
-        135deg,
-        #0f2027,
-        #203a43,
-        #2c5364
-    );
-
-    min-height:100vh;
-
-    color:white;
-
+  min-height:100vh;
 }
 
 
 /* =====================================================
-                    HEADER
+   HEADER
 ===================================================== */
 
 header{
+  position:relative;
 
-    position:relative;
+  text-align:center;
 
-    text-align:center;
+  padding:18px 60px;
 
-    padding:20px;
+  background:rgba(255,255,255,0.10);
 
-    background:
-    rgba(255,255,255,0.10);
+  backdrop-filter:blur(12px);
 
-    backdrop-filter:blur(10px);
-
-    border-bottom:
-    1px solid rgba(255,255,255,0.2);
-
+  border-bottom:
+    1px solid rgba(255,255,255,0.20);
 }
 
 header h1{
+  margin:0;
 
-    margin:0;
+  color:#00f2ff;
 
-    color:#00f2ff;
-
+  font-size:24px;
 }
 
 header p{
+  margin:7px 0 0;
 
-    margin:7px 0 0;
-
+  font-size:13px;
 }
 
 
 /* =====================================================
-                    LOGOUT
+   LOGOUT
 ===================================================== */
 
 .logout-btn{
+  position:absolute;
 
-    position:absolute;
+  right:15px;
+  top:15px;
 
-    right:15px;
+  width:auto;
 
-    top:15px;
+  padding:8px 16px;
 
-    width:auto;
+  border:none;
 
-    padding:8px 16px;
+  border-radius:20px;
 
-    border:none;
+  background:rgba(255,255,255,0.18);
 
-    border-radius:20px;
+  color:white;
 
-    background:
-    rgba(255,255,255,0.15);
-
-    color:white;
-
-    cursor:pointer;
-
+  cursor:pointer;
 }
 
 .logout-btn:hover{
-
-    background:#ff3333;
-
+  background:#ff3333;
 }
 
 
 /* =====================================================
-                    SECTION
+   SECTION
 ===================================================== */
 
 section{
-
-    padding:20px;
-
+  padding:20px 14px;
 }
 
 h2{
+  color:#00f2ff;
 
-    color:#00f2ff;
-
+  font-size:18px;
 }
 
 
 /* =====================================================
-                    GRID
+   GRID
 ===================================================== */
 
 .grid{
+  display:grid;
 
-    display:grid;
+  grid-template-columns:
+    repeat(auto-fit,minmax(160px,1fr));
 
-    grid-template-columns:
-    repeat(
-        auto-fit,
-        minmax(160px,1fr)
-    );
-
-    gap:15px;
-
+  gap:12px;
 }
 
 
 /* =====================================================
-                    CARD
+   CARD
 ===================================================== */
 
 .card{
-
-    background:
+  background:
     rgba(255,255,255,0.10);
 
-    backdrop-filter:blur(10px);
+  backdrop-filter:blur(10px);
 
-    padding:12px;
+  border:
+    1px solid rgba(255,255,255,0.15);
 
-    border-radius:15px;
+  border-radius:14px;
 
-    text-align:center;
+  padding:10px;
 
-    border:
-    1px solid
-    rgba(255,255,255,0.2);
+  text-align:center;
 
-    overflow:hidden;
+  overflow:hidden;
 
+  transition:0.25s;
 }
-
 
 .card:hover{
+  transform:translateY(-3px);
 
-    box-shadow:
-    0 0 20px #00f2ff;
-
+  box-shadow:
+    0 0 18px rgba(0,242,255,0.35);
 }
 
 
 /* =====================================================
-                SERVICE IMAGE
+   SERVICE IMAGE
 ===================================================== */
 
-.card > img{
+.service-card img{
+  width:100%;
 
-    width:100%;
+  height:120px;
 
-    height:130px;
+  object-fit:cover;
 
-    object-fit:cover;
-
-    border-radius:10px;
-
+  border-radius:10px;
 }
 
 
 /* =====================================================
-                    MAIN FLEX
+   PRODUCT IMAGE
 ===================================================== */
 
-.main-flex{
+.product-image{
+  width:100%;
 
-    display:flex;
+  height:150px;
 
-    gap:20px;
+  object-fit:cover;
 
-    flex-wrap:wrap;
+  border-radius:10px;
 
+  background:#eee;
 }
 
 
 /* =====================================================
-                    BOX
+   PRODUCT BUTTON AREA
 ===================================================== */
 
-.box{
+.product-buttons{
+  display:flex;
 
-    flex:1;
+  gap:5px;
 
-    min-width:300px;
+  margin-top:8px;
+}
 
-    padding:20px;
+.product-buttons button{
+  flex:1;
 
-    border-radius:20px;
+  font-size:11px;
 
-    background:
-    rgba(255,255,255,0.10);
-
-    backdrop-filter:blur(12px);
-
-    border:
-    1px solid
-    rgba(255,255,255,0.2);
-
+  padding:9px 4px;
 }
 
 
 /* =====================================================
-                    BUTTON
+   BUTTON
 ===================================================== */
 
 button{
+  width:100%;
 
-    width:100%;
+  padding:10px;
 
-    background:
-    linear-gradient(
-        45deg,
-        #00c6ff,
-        #0072ff
-    );
+  border:none;
 
-    border:none;
+  border-radius:8px;
 
-    padding:10px;
+  background:
+    linear-gradient(45deg,#00c6ff,#0072ff);
 
-    margin-top:5px;
+  color:white;
 
-    border-radius:8px;
+  cursor:pointer;
 
-    color:white;
-
-    cursor:pointer;
-
+  transition:0.2s;
 }
 
-
 button:hover{
+  transform:scale(1.02);
 
-    box-shadow:
-    0 0 12px #00f2ff;
-
+  box-shadow:
+    0 0 12px rgba(0,242,255,0.6);
 }
 
 
 /* =====================================================
-                INPUT / SELECT
+   INPUT
 ===================================================== */
 
 input,
 select,
 textarea{
 
-    width:100%;
+  width:100%;
 
-    padding:11px;
+  padding:10px;
 
-    margin:6px 0;
+  margin:6px 0;
 
-    border:none;
+  border:none;
 
-    border-radius:8px;
+  border-radius:8px;
 
-    background:
+  background:
     rgba(255,255,255,0.15);
 
-    color:white;
+  color:white;
 
-    font-size:15px;
-
+  outline:none;
 }
-
 
 input::placeholder,
 textarea::placeholder{
-
-    color:#ddd;
-
+  color:#ddd;
 }
-
 
 select option{
+  background:white;
 
-    color:black;
-
-    background:white;
-
+  color:black;
 }
 
 
 /* =====================================================
-                PRODUCT SLIDER
+   MAIN FLEX
 ===================================================== */
 
-.slider{
+.main-flex{
+  display:flex;
 
-    display:flex;
+  gap:15px;
 
-    overflow-x:auto;
-
-    scroll-snap-type:x mandatory;
-
-    scroll-behavior:smooth;
-
-    -webkit-overflow-scrolling:touch;
-
-    border-radius:10px;
-
-    scrollbar-width:none;
-
+  flex-wrap:wrap;
 }
 
+.box{
+  flex:1;
 
-.slider::-webkit-scrollbar{
+  min-width:280px;
 
-    display:none;
+  padding:14px;
 
-}
+  border-radius:18px;
 
+  background:
+    rgba(255,255,255,0.10);
 
-.slider img{
+  backdrop-filter:blur(12px);
 
-    flex:
-    0 0 100%;
-
-    min-width:100%;
-
-    width:100%;
-
-    height:160px;
-
-    object-fit:cover;
-
-    border-radius:10px;
-
-    scroll-snap-align:start;
-
-    cursor:pointer;
-
+  border:
+    1px solid rgba(255,255,255,0.15);
 }
 
 
 /* =====================================================
-                PRODUCT BUTTONS
-===================================================== */
-
-.product-btn{
-
-    width:48%;
-
-    display:inline-block;
-
-    font-size:13px;
-
-    padding:9px 4px;
-
-}
-
-
-/* =====================================================
-                PRODUCT SEARCH
+   PRODUCT SEARCH
 ===================================================== */
 
 #searchProduct{
-
-    background:
-    rgba(255,255,255,0.15);
-
+  margin-bottom:15px;
 }
 
 
 /* =====================================================
-                MODAL
+   ORDER MODAL
 ===================================================== */
 
-.modal{
+#orderForm{
 
-    display:none;
+  display:none;
 
-    position:fixed;
+  position:fixed;
 
-    inset:0;
+  inset:0;
 
-    width:100%;
+  z-index:4000;
 
-    height:100%;
+  background:
+    rgba(0,0,0,0.82);
 
-    background:
-    rgba(0,0,0,0.85);
+  align-items:center;
 
-    z-index:5000;
+  justify-content:center;
 
-    align-items:center;
+  padding:15px;
 
-    justify-content:center;
-
-    padding:15px;
-
+  overflow-y:auto;
 }
 
+.orderBox{
 
-.modal-box{
+  width:100%;
 
-    width:100%;
+  max-width:430px;
 
-    max-width:500px;
+  background:white;
 
-    max-height:92vh;
+  color:black;
 
-    overflow-y:auto;
+  padding:20px;
 
-    background:white;
+  border-radius:16px;
 
-    color:black;
+  max-height:90vh;
 
-    padding:20px;
+  overflow-y:auto;
+}
 
-    border-radius:15px;
+.orderBox h3{
+  color:#111;
 
-    position:relative;
+  margin-top:0;
+}
 
+.orderBox input,
+.orderBox textarea,
+.orderBox select{
+
+  background:#f2f2f2;
+
+  color:black;
+
+  border:1px solid #ccc;
+}
+
+.orderBox select option{
+  color:black;
+
+  background:white;
+}
+
+.order-buttons{
+  display:flex;
+
+  gap:8px;
+
+  margin-top:10px;
+}
+
+.order-buttons button{
+  flex:1;
 }
 
 
 /* =====================================================
-                MODAL CLOSE
+   PRODUCT DETAILS MODAL
 ===================================================== */
 
-.close-btn{
+#productDetails{
 
-    position:absolute;
+  display:none;
 
-    right:12px;
+  position:fixed;
 
-    top:12px;
+  inset:0;
 
-    width:35px;
+  z-index:4500;
 
-    height:35px;
+  background:
+    rgba(0,0,0,0.88);
 
-    border-radius:50%;
+  padding:15px;
 
-    background:#dc3545;
+  overflow-y:auto;
+}
 
-    color:white;
+.detailsBox{
 
-    font-size:20px;
+  position:relative;
 
-    padding:0;
+  width:100%;
 
+  max-width:500px;
+
+  margin:20px auto;
+
+  background:white;
+
+  color:#111;
+
+  padding:20px;
+
+  border-radius:18px;
+}
+
+.detailsClose{
+
+  position:absolute;
+
+  top:10px;
+
+  right:10px;
+
+  width:40px;
+
+  height:40px;
+
+  padding:0;
+
+  border-radius:50%;
+
+  background:#ff4444;
+
+  font-size:18px;
+
+  z-index:5;
+}
+
+.details-main-image{
+
+  width:100%;
+
+  height:250px;
+
+  object-fit:contain;
+
+  background:#f4f4f4;
+
+  border-radius:12px;
+}
+
+#dName{
+  color:#111;
+
+  margin-bottom:5px;
+}
+
+#dPrice{
+  color:#0072ff;
+
+  margin:5px 0;
+}
+
+#dDesc{
+  color:#333;
+
+  line-height:1.5;
+
+  white-space:pre-line;
+}
+
+.additionalBox{
+
+  background:#f2f2f2;
+
+  padding:12px;
+
+  border-radius:10px;
+
+  margin-top:15px;
+
+  text-align:left;
+}
+
+.additionalBox h3{
+  color:#111;
+
+  margin-top:0;
+}
+
+.additionalBox p{
+  color:#222;
+
+  margin:7px 0;
+}
+
+.details-buttons{
+
+  display:flex;
+
+  gap:8px;
+
+  margin-top:15px;
+}
+
+.details-buttons button{
+  flex:1;
 }
 
 
 /* =====================================================
-                ORDER MODAL
+   GALLERY
 ===================================================== */
 
-#orderForm .modal-box{
+#imgModal{
 
-    background:white;
+  display:none;
 
-    color:black;
+  position:fixed;
 
+  inset:0;
+
+  z-index:6000;
+
+  background:
+    rgba(0,0,0,0.94);
+
+  padding:15px;
+
+  overflow-y:auto;
 }
 
+.galleryBox{
 
-#orderForm input,
-#orderForm textarea,
-#orderForm select{
+  max-width:550px;
 
-    background:#f1f1f1;
+  margin:20px auto;
 
-    color:black;
+  background:white;
 
-    border:
-    1px solid #ccc;
+  padding:10px;
 
+  border-radius:15px;
 }
-
-
-#orderForm select option{
-
-    color:black;
-
-    background:white;
-
-}
-
-
-/* =====================================================
-                PRODUCT DETAILS
-===================================================== */
-
-.details-slider{
-
-    display:flex;
-
-    overflow-x:auto;
-
-    scroll-snap-type:x mandatory;
-
-    gap:10px;
-
-}
-
-
-.details-slider::-webkit-scrollbar{
-
-    display:none;
-
-}
-
-
-.details-slider img{
-
-    flex:
-    0 0 100%;
-
-    min-width:100%;
-
-    height:250px;
-
-    object-fit:contain;
-
-    background:#f1f1f1;
-
-    border-radius:10px;
-
-    scroll-snap-align:start;
-
-    cursor:zoom-in;
-
-}
-
-
-.detail-price{
-
-    color:#198754;
-
-    font-size:23px;
-
-    font-weight:bold;
-
-    margin:10px 0;
-
-}
-
-
-.detail-description{
-
-    line-height:1.6;
-
-}
-
-
-.read-btn{
-
-    background:none;
-
-    color:#0072ff;
-
-    width:auto;
-
-    padding:0;
-
-}
-
-
-/* =====================================================
-            ADDITIONAL DETAILS
-===================================================== */
-
-.additional{
-
-    margin-top:20px;
-
-    border-top:
-    1px solid #ddd;
-
-    padding-top:10px;
-
-}
-
-
-.additional h3{
-
-    color:#0d47a1;
-
-}
-
-
-.detail-row{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    gap:10px;
-
-    padding:8px 0;
-
-    border-bottom:
-    1px solid #eee;
-
-}
-
-
-.detail-row span:first-child{
-
-    font-weight:bold;
-
-}
-
-
-/* =====================================================
-                GALLERY
-===================================================== */
 
 .gallery-slider{
 
-    display:flex;
+  display:flex;
 
-    overflow-x:auto;
+  overflow-x:auto;
 
-    scroll-snap-type:x mandatory;
+  scroll-snap-type:x mandatory;
 
-    gap:10px;
+  gap:10px;
 
+  scrollbar-width:none;
 }
-
 
 .gallery-slider::-webkit-scrollbar{
-
-    display:none;
-
+  display:none;
 }
-
 
 .gallery-slider img{
 
-    flex:
-    0 0 100%;
+  flex:0 0 100%;
 
-    min-width:100%;
+  width:100%;
 
-    height:300px;
+  height:300px;
 
-    object-fit:contain;
+  object-fit:contain;
 
-    background:#eee;
+  background:#eee;
 
-    border-radius:10px;
+  border-radius:10px;
 
-    scroll-snap-align:start;
-
-    cursor:zoom-in;
-
+  scroll-snap-align:start;
 }
 
 
 /* =====================================================
-                    ZOOM
+   TRACK RESULT
 ===================================================== */
 
-#zoomModal{
-
-    display:none;
-
-    position:fixed;
-
-    inset:0;
-
-    background:
-    rgba(0,0,0,0.95);
-
-    z-index:9999;
-
-    align-items:center;
-
-    justify-content:center;
-
-    padding:20px;
-
-}
-
-
-#zoomModal img{
-
-    max-width:100%;
-
-    max-height:90vh;
-
-    object-fit:contain;
-
+#trackResult{
+  margin-top:12px;
 }
 
 
 /* =====================================================
-                TECHNICIAN
+   CONTACT
 ===================================================== */
 
-.tech-card{
+.contact-buttons{
+  max-width:500px;
 
-    background:
-    rgba(255,255,255,0.12);
+  margin:auto;
+}
 
-    padding:15px;
+.contact-buttons a{
+  text-decoration:none;
+}
 
-    margin-top:10px;
-
-    border-radius:10px;
-
+.contact-buttons button{
+  margin:5px 0;
 }
 
 
 /* =====================================================
-                TRACK RESULT
+   MOBILE
 ===================================================== */
 
-.track-card{
+@media(max-width:600px){
 
-    background:white;
+  header h1{
+    font-size:20px;
+  }
 
-    color:black;
+  header p{
+    font-size:11px;
+  }
 
-    padding:15px;
+  .grid{
+    grid-template-columns:
+      repeat(2,1fr);
+  }
 
-    margin-top:15px;
+  .card{
+    font-size:12px;
+  }
 
-    border-radius:10px;
+  .service-card img{
+    height:100px;
+  }
 
-}
+  .product-image{
+    height:130px;
+  }
 
+  .product-buttons{
+    flex-direction:column;
+  }
 
-/* =====================================================
-                    CONTACT
-===================================================== */
-
-.contact-btn{
-
-    display:block;
-
-    text-decoration:none;
-
-    color:white;
-
-    padding:12px;
-
-    margin:8px auto;
-
-    max-width:400px;
-
-    border-radius:8px;
-
-    text-align:center;
-
-}
-
-
-.call{
-
-    background:green;
-
-}
-
-
-.whatsapp{
-
-    background:#25D366;
-
-}
-
-
-.email{
-
-    background:#0072ff;
-
-}
-
-
-/* =====================================================
-                    MOBILE
-===================================================== */
-
-@media(max-width:768px){
-
-    .main-flex{
-
-        flex-direction:column;
-
-    }
-
-    header h1{
-
-        font-size:23px;
-
-    }
-
-    .logout-btn{
-
-        position:static;
-
-        margin-top:10px;
-
-    }
+  .details-buttons{
+    flex-direction:column;
+  }
 
 }
 
@@ -864,577 +684,592 @@ select option{
 
 
 <!-- =====================================================
-                    HEADER
+     HEADER
 ===================================================== -->
 
 <header>
 
-<h1>
-Electrical Hub Center ⚡
-</h1>
+  <h1>
+    Electrical Hub Center ⚡
+  </h1>
 
-<p>
-All Electrical Services & Products in One Place
-</p>
+  <p>
+    All Electrical Services & Products in One Place
+  </p>
 
-<button
-class="logout-btn"
-onclick="logout()"
->
-Logout
-</button>
+  <button
+    class="logout-btn"
+    onclick="logout()">
+
+    Logout
+
+  </button>
 
 </header>
 
 
-
 <!-- =====================================================
-                ELECTRICAL SERVICES
+     ELECTRICAL SERVICES
 ===================================================== -->
 
 <section>
 
-<h2>
-Electrical Services
-</h2>
+  <h2>
+    Electrical Services
+  </h2>
 
 
-<div class="grid">
+  <div class="grid">
 
 
-<div class="card">
+    <div class="card service-card">
 
-<img src="https://i.ibb.co/JjCPzm94/om-electrician-durgapura-jaipur-electricians-98ko617c5g.jpg">
+      <img
+        src="https://i.ibb.co/JjCPzm94/om-electrician-durgapura-jaipur-electricians-98ko617c5g.jpg">
 
-<h4>
-Fan Repair - ₹150
-</h4>
+      <h4>
+        Fan Repair - ₹150
+      </h4>
 
-</div>
-
-
-<div class="card">
-
-<img src="https://i.ibb.co/v63SScMM/shutterstock-2151193337.jpg">
-
-<h4>
-Light Installation - ₹100
-</h4>
-
-</div>
+    </div>
 
 
-<div class="card">
+    <div class="card service-card">
 
-<img src="https://i.ibb.co/MYq2KFD/close-electrician-working-on-light-260nw-2293986793.jpg">
+      <img
+        src="https://i.ibb.co/v63SScMM/shutterstock-2151193337.jpg">
 
-<h4>
-Switch Repair - ₹80
-</h4>
+      <h4>
+        Light Installation - ₹100
+      </h4>
 
-</div>
-
-
-<div class="card">
-
-<img src="https://i.ibb.co/bjdwqxn0/hm-abt-1.jpg">
-
-<h4>
-AC Service - ₹500
-</h4>
-
-</div>
+    </div>
 
 
-<div class="card">
+    <div class="card service-card">
 
-<img src="https://i.ibb.co/HMZVhnZ/gemini-generated-image-lfrmuolfrmuolfrm-500x500.png">
+      <img
+        src="https://i.ibb.co/MYq2KFD/close-electrician-working-on-light-260nw-2293986793.jpg">
 
-<h4>
-Refrigerator Repair - ₹400
-</h4>
+      <h4>
+        Switch Repair - ₹80
+      </h4>
 
-</div>
-
-
-<div class="card">
-
-<img src="https://i.ibb.co/S4yWXfRL/office-electrical-wiring-service.jpg">
-
-<h4>
-House Wiring - ₹3000+
-</h4>
-
-</div>
+    </div>
 
 
-</div>
+    <div class="card service-card">
+
+      <img
+        src="https://i.ibb.co/bjdwqxn0/hm-abt-1.jpg">
+
+      <h4>
+        AC Service - ₹500
+      </h4>
+
+    </div>
+
+
+    <div class="card service-card">
+
+      <img
+        src="https://i.ibb.co/HMZVhnZ/gemini-generated-image-lfrmuolfrmuolfrm-500x500.png">
+
+      <h4>
+        Refrigerator Repair - ₹400
+      </h4>
+
+    </div>
+
+
+    <div class="card service-card">
+
+      <img
+        src="https://i.ibb.co/S4yWXfRL/office-electrical-wiring-service.jpg">
+
+      <h4>
+        House Wiring - ₹3000+
+      </h4>
+
+    </div>
+
+
+  </div>
 
 </section>
 
 
 
 <!-- =====================================================
-                TECHNICIAN + BOOKING
+     TECHNICIAN + BOOKING
 ===================================================== -->
 
 <section>
 
-<div class="main-flex">
+  <div class="main-flex">
 
 
-<!-- ================= TECHNICIAN ================= -->
+    <!-- FIND TECHNICIAN -->
 
-<div class="box">
+    <div class="box">
 
-<h2>
-🔍 Find Technician
-</h2>
-
-
-<select id="location">
-
-<option value="">
-Select Location
-</option>
-
-<option value="Nandigram">
-Nandigram
-</option>
-
-<option value="Haldia">
-Haldia
-</option>
-
-<option value="Naynan">
-Naynan
-</option>
-
-<option value="Kamalpur">
-Kamalpur
-</option>
-
-</select>
+      <h2>
+        🔍 Find Technician
+      </h2>
 
 
-<button id="searchBtn">
-Search Technician
-</button>
+      <select id="location">
+
+        <option value="">
+          Select Location
+        </option>
+
+        <option value="Nandigram">
+          Nandigram
+        </option>
+
+        <option value="Haldia">
+          Haldia
+        </option>
+
+        <option value="Naynan">
+          Naynan
+        </option>
+
+        <option value="Kamalpur">
+          Kamalpur
+        </option>
+
+      </select>
 
 
-<div id="result"></div>
-
-</div>
-
-
-
-<!-- ================= BOOKING ================= -->
-
-<div class="box">
-
-<h2>
-📋 Book Service
-</h2>
+      <button id="searchBtn">
+        Search Technician
+      </button>
 
 
-<form id="bookingForm">
+      <div id="result"></div>
+
+    </div>
 
 
-<input
-type="text"
-id="bookingName"
-placeholder="Your Name"
-required
->
+
+    <!-- BOOK SERVICE -->
+
+    <div class="box">
+
+      <h2>
+        📋 Book Service
+      </h2>
 
 
-<input
-type="tel"
-id="bookingPhone"
-placeholder="Phone Number"
-required
->
+      <form id="bookingForm">
 
 
-<input
-type="text"
-id="bookingAddress"
-placeholder="Full Address"
-required
->
+        <input
+          type="text"
+          name="name"
+          placeholder="Your Name">
 
 
-<input
-type="text"
-id="bookingPincode"
-placeholder="PIN Code"
-required
->
+        <input
+          type="tel"
+          name="phone"
+          placeholder="Phone Number">
 
 
-<select
-id="bookingService"
-required
->
-
-<option value="">
-Select Service
-</option>
-
-<option>
-Fan Repair
-</option>
-
-<option>
-Light Installation
-</option>
-
-<option>
-Switch Repair
-</option>
-
-<option>
-AC Service
-</option>
-
-<option>
-Refrigerator Repair
-</option>
-
-<option>
-House Wiring
-</option>
-
-</select>
+        <input
+          type="text"
+          name="address"
+          placeholder="Full Address">
 
 
-<textarea
-id="bookingDetails"
-placeholder="Extra details"
-></textarea>
+        <input
+          type="text"
+          name="pincode"
+          placeholder="PIN Code">
 
 
-<button
-type="button"
-id="submitBtn"
->
-Submit Booking
-</button>
+        <select name="service">
+
+          <option value="">
+            Select Service
+          </option>
+
+          <option value="Fan Repair">
+            Fan Repair
+          </option>
+
+          <option value="Light Installation">
+            Light Installation
+          </option>
+
+          <option value="Switch Repair">
+            Switch Repair
+          </option>
+
+          <option value="AC Service">
+            AC Service
+          </option>
+
+          <option value="Refrigerator Repair">
+            Refrigerator Repair
+          </option>
+
+          <option value="House Wiring">
+            House Wiring
+          </option>
+
+        </select>
 
 
-</form>
+        <textarea
+          name="details"
+          rows="3"
+          placeholder="Extra details"></textarea>
 
-</div>
+
+        <button
+          type="button"
+          id="submitBtn">
+
+          Submit Booking
+
+        </button>
 
 
-</div>
+      </form>
+
+    </div>
+
+  </div>
 
 </section>
 
 
 
 <!-- =====================================================
-                    PRODUCTS
+     SHOPPING PRODUCTS
 ===================================================== -->
 
 <section>
 
-<h2>
-🛒 Shopping Products
-</h2>
+  <h2>
+    🛒 Shopping Products
+  </h2>
 
 
-<input
-type="search"
-id="searchProduct"
-placeholder="🔎 Search Product..."
-oninput="searchProducts()"
->
+  <input
+    type="search"
+    id="searchProduct"
+    placeholder="🔎 Search Product..."
+    oninput="searchProducts()">
 
 
-<br><br>
+  <div
+    class="grid"
+    id="productContainer">
 
+    <div class="card">
+      ⏳ Loading Products...
+    </div>
 
-<div
-class="grid"
-id="productContainer"
->
-
-<p>
-Loading products...
-</p>
-
-</div>
+  </div>
 
 </section>
 
 
 
 <!-- =====================================================
-                    ORDER MODAL
+     ORDER FORM
 ===================================================== -->
 
-<div
-id="orderForm"
-class="modal"
->
+<div id="orderForm">
 
-<div class="modal-box">
+  <div class="orderBox">
 
-
-<button
-class="close-btn"
-onclick="closeForm()"
->
-×
-</button>
+    <h3>
+      🛒 Confirm Order
+    </h3>
 
 
-<h2 style="color:#0d47a1;">
-Confirm Order
-</h2>
+    <p>
+      <b>Product:</b>
+      <span id="orderProductName">
+        -
+      </span>
+    </p>
 
 
-<h3 id="selectedProductName">
-</h3>
+    <p>
+      <b>Price:</b>
+      ₹<span id="orderProductPrice">
+        -
+      </span>
+    </p>
 
 
-<p>
+    <select id="paymentMethod">
 
-<strong>
-Price:
-</strong>
+      <option value="">
+        Select Payment
+      </option>
 
-₹<span id="selectedProductPrice">
-</span>
+      <option value="COD">
+        Cash on Delivery
+      </option>
 
-</p>
+      <option value="ONLINE">
+        Online Payment
+      </option>
 
-
-<select id="paymentMethod">
-
-<option value="">
-Select Payment
-</option>
-
-<option value="COD">
-Cash on Delivery
-</option>
-
-<option value="ONLINE">
-Online Payment
-</option>
-
-</select>
+    </select>
 
 
-<input
-type="text"
-id="custName"
-placeholder="Your Name"
->
+    <input
+      type="text"
+      id="custName"
+      placeholder="Your Name">
 
 
-<input
-type="tel"
-id="custPhone"
-placeholder="Phone Number"
->
+    <input
+      type="tel"
+      id="custPhone"
+      placeholder="Phone Number">
 
 
-<textarea
-id="custAddress"
-placeholder="Full Address"
-></textarea>
+    <textarea
+      id="custAddress"
+      rows="3"
+      placeholder="Full Address"></textarea>
 
 
-<input
-type="text"
-id="custPincode"
-placeholder="PIN Code"
->
+    <input
+      type="text"
+      id="custPincode"
+      placeholder="PIN Code">
 
 
-<button
-onclick="placeOrder()"
->
-Confirm Order
-</button>
+    <div class="order-buttons">
+
+      <button
+        onclick="placeOrder()">
+
+        Confirm Order
+
+      </button>
 
 
-<button
-onclick="closeForm()"
-style="background:#dc3545;"
->
-Cancel
-</button>
+      <button
+        onclick="closeForm()"
+        style="background:#777;">
 
+        Cancel
 
-</div>
+      </button>
+
+    </div>
+
+  </div>
 
 </div>
 
 
 
 <!-- =====================================================
-                PRODUCT DETAILS MODAL
+     PRODUCT DETAILS
 ===================================================== -->
 
-<div
-id="productDetails"
-class="modal"
->
+<div id="productDetails">
 
-<div
-class="modal-box"
-id="detailsContent"
->
-
-<button
-class="close-btn"
-onclick="closeDetails()"
->
-×
-</button>
+  <div class="detailsBox">
 
 
-<div id="productDetailsContent">
-</div>
+    <button
+      class="detailsClose"
+      onclick="closeDetails()">
+
+      ✕
+
+    </button>
 
 
-</div>
+    <div id="detailsImages">
+
+      <img
+        id="dImage"
+        class="details-main-image">
+
+    </div>
+
+
+    <h2 id="dName">
+      Product
+    </h2>
+
+
+    <h3 id="dPrice">
+      Price
+    </h3>
+
+
+    <p id="dDesc">
+      Description
+    </p>
+
+
+    <div id="additionalDetails"></div>
+
+
+    <div class="details-buttons">
+
+      <button
+        id="detailsOrderBtn">
+
+        🛒 Order Now
+
+      </button>
+
+
+      <button
+        id="detailsImageBtn">
+
+        🖼️ View Images
+
+      </button>
+
+    </div>
+
+
+  </div>
 
 </div>
 
 
 
 <!-- =====================================================
-                    GALLERY MODAL
-===================================================== -->
-
-<div
-id="imgModal"
-class="modal"
->
-
-<div class="modal-box">
-
-<button
-class="close-btn"
-onclick="closeGallery()"
->
-×
-</button>
-
-
-<div id="imgContainer">
-</div>
-
-
-</div>
-
-</div>
-
-
-
-<!-- =====================================================
-                    ZOOM MODAL
-===================================================== -->
-
-<div id="zoomModal">
-
-<button
-class="close-btn"
-onclick="closeZoom()"
->
-×
-</button>
-
-
-<img id="zoomImage">
-
-</div>
-
-
-
-<!-- =====================================================
-                    TRACK ORDER
+     TRACK ORDER
 ===================================================== -->
 
 <section>
 
-<h2>
-📦 Track Your Order
-</h2>
+  <h2>
+    📦 Track Your Order
+  </h2>
 
 
-<input
-type="text"
-id="trackInput"
-placeholder="Enter Order ID or Phone Number"
->
+  <input
+    type="text"
+    id="trackInput"
+    placeholder="Enter Order ID or Phone Number">
 
 
-<button
-onclick="trackOrder()"
->
-Track Order
-</button>
+  <button onclick="trackOrder()">
+
+    Track Order
+
+  </button>
 
 
-<div id="trackResult"></div>
+  <div id="trackResult"></div>
 
 </section>
 
 
 
 <!-- =====================================================
-                    CONTACT
+     CONTACT
 ===================================================== -->
 
 <section>
 
-<h2>
-📞 Contact
-</h2>
+  <h2>
+    📞 Contact
+  </h2>
 
 
-<a
-class="contact-btn call"
-href="tel:+919434852965"
->
-📞 Call Now
-</a>
+  <div
+    class="contact-buttons"
+    style="text-align:center;">
 
 
-<a
-class="contact-btn whatsapp"
-href="https://wa.me/919434852965"
-target="_blank"
->
-💬 WhatsApp
-</a>
+    <a href="tel:9434852965">
+
+      <button
+        style="background:green;">
+
+        📞 Call Now
+
+      </button>
+
+    </a>
 
 
-<a
-class="contact-btn email"
-href="mailto:khutiyanayan@gmail.com"
->
-📧 Email
-</a>
+    <a
+      href="https://wa.me/919434852965"
+      target="_blank">
+
+      <button
+        style="background:#25D366;">
+
+        💬 WhatsApp
+
+      </button>
+
+    </a>
 
 
-<p style="text-align:center;">
-Nandigram, Purba Medinipur,
-West Bengal - 721631
-</p>
+    <a
+      href="mailto:khutiyanayan@gmail.com">
+
+      <button>
+
+        📧 Email
+
+      </button>
+
+    </a>
+
+
+    <p>
+      Nandigram, Purba Medinipur,
+      West Bengal - 721631
+    </p>
+
+
+  </div>
 
 </section>
 
 
 
 <!-- =====================================================
-                    RAZORPAY
+     IMAGE GALLERY
+===================================================== -->
+
+<div id="imgModal">
+
+  <div class="galleryBox">
+
+    <div id="imgContainer"></div>
+
+
+    <button
+      onclick="closeGallery()"
+      style="margin-top:10px;background:#555;">
+
+      Close
+
+    </button>
+
+  </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     RAZORPAY
 ===================================================== -->
 
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
@@ -1442,32 +1277,24 @@ West Bengal - 721631
 
 
 <!-- =====================================================
-                FIREBASE SINGLE SCRIPT
+     FIREBASE + ALL JAVASCRIPT
 ===================================================== -->
 
 <script type="module">
 
-/* =====================================================
-                FIREBASE IMPORT
-===================================================== */
 
 import {
-
-    initializeApp
-
+  initializeApp
 }
 from
 "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 
 
 import {
-
-    getFirestore,
-    collection,
-    getDocs,
-    addDoc,
-    serverTimestamp
-
+  getFirestore,
+  collection,
+  getDocs,
+  addDoc
 }
 from
 "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
@@ -1475,77 +1302,57 @@ from
 
 
 /* =====================================================
-                FIREBASE CONFIG
+   FIREBASE CONFIG
 ===================================================== */
 
 const firebaseConfig = {
 
-    apiKey:
-    "AIzaSyCm-lsMV-W9uNLRibsAqox13QHccgPFMc",
+  apiKey:
+    "AIzaSyCm-lsMV-W9uNLRibsQalox13QHccgPFMc",
 
-    authDomain:
+  authDomain:
     "electrical-hub-center.firebaseapp.com",
 
-    projectId:
+  projectId:
     "electrical-hub-center"
 
 };
 
 
-/* IMPORTANT
-   If your original API key is different,
-   keep YOUR original Firebase apiKey here.
-*/
-
-
 const app =
-initializeApp(firebaseConfig);
+  initializeApp(firebaseConfig);
 
 
 const db =
-getFirestore(app);
+  getFirestore(app);
 
 
 
 /* =====================================================
-                GLOBAL PRODUCT
+   GLOBAL PRODUCT VARIABLES
 ===================================================== */
 
-let selectedProduct = {
+let productName = "";
 
-    name:"",
-    price:"",
-    images:[],
-    desc:"",
-    generic:"",
-    brand:"",
-    country:"",
-    manufacturer:"",
-    model:""
+let productPrice = "";
 
-};
+let productImage = "";
 
+let productDesc = "";
+
+let currentProduct = null;
 
 let allProducts = [];
 
 
 
 /* =====================================================
-                HTML SAFE TEXT
+   SECURITY ESCAPE
 ===================================================== */
 
-function safe(value){
+function escapeHTML(value){
 
-    if(
-        value === undefined ||
-        value === null
-    ){
-
-        return "";
-
-    }
-
-    return String(value)
+  return String(value ?? "")
 
     .replace(/&/g,"&amp;")
 
@@ -1562,659 +1369,574 @@ function safe(value){
 
 
 /* =====================================================
-                    WHATSAPP
+   FIND TECHNICIAN
 ===================================================== */
 
-function sendWhatsApp(message){
-
-    const url =
-    "https://wa.me/919434852965?text="
-    +
-    encodeURIComponent(message);
-
-    window.open(
-        url,
-        "_blank"
-    );
-
-}
-
-
-
-/* =====================================================
-                TECHNICIAN SEARCH
-===================================================== *
 document
 .getElementById("searchBtn")
-.addEventListener(
-"click",
-async function(){
+.addEventListener("click",async()=>{
 
-    const location =
+
+  const location =
     document
     .getElementById("location")
     .value
     .trim();
 
 
-    const result =
+  if(!location){
+
+    alert("Please select location");
+
+    return;
+
+  }
+
+
+  const result =
     document
     .getElementById("result");
 
 
-    if(!location){
-
-        result.innerHTML =
-        "<div class='tech-card'>"+
-        "Please select a location."+
-        "</div>";
-
-        return;
-
-    }
+  result.innerHTML =
+    "⏳ Searching...";
 
 
-    result.innerHTML =
-    "<div class='tech-card'>"+
-    "Searching technician..."+
-    "</div>";
+  try{
 
 
-    try{
-
-        const snapshot =
-        await getDocs(
-            collection(
-                db,
-                "technicians"
-            )
-        );
+    const snap =
+      await getDocs(
+        collection(db,"technicians")
+      );
 
 
-        let found = [];
+    let output = "";
 
 
-        snapshot.forEach(
-        function(docSnap){
-
-            const data =
-            docSnap.data();
+    snap.forEach(docSnap=>{
 
 
-            const techLocation =
-            String(
-                data.location || ""
-            )
-            .toLowerCase();
+      const d =
+        docSnap.data();
 
 
-            if(
-                techLocation ===
-                location.toLowerCase()
-            ){
-
-                found.push(data);
-
-            }
-
-        });
+      const techLocation =
+        String(d.location || "");
 
 
-        if(found.length === 0){
+      if(
+        techLocation
+        .toLowerCase()
+        .includes(
+          location.toLowerCase()
+        )
+      ){
 
-            result.innerHTML =
-            "<div class='tech-card'>"+
-            "No technician found in "+
-            safe(location)+
-            " ❌"+
-            "</div>";
+        output += `
 
-            return;
+          <div
+            class="card"
+            style="margin-top:10px;">
 
-        }
+            <h3>
+              👨‍🔧
+              ${escapeHTML(d.name || "Technician")}
+            </h3>
 
+            <p>
+              🔧
+              ${escapeHTML(d.service || "")}
+            </p>
 
-        result.innerHTML =
-        found.map(
-        function(tech){
+            <p>
+              📍
+              ${escapeHTML(d.location || "")}
+            </p>
 
-            return `
+            <p>
+              📞
+              ${escapeHTML(d.phone || "")}
+            </p>
 
-            <div class="tech-card">
-
-                <h3>
-                🔧 ${safe(tech.name || "Technician")}
-                </h3>
-
-                <p>
-                📍 ${safe(tech.location || "")}
-                </p>
-
-                <p>
-                🛠️ ${safe(tech.service || "Electrical Service")}
-                </p>
-
-                <p>
-                📞 ${safe(tech.phone || "")}
-                </p>
-
-                ${
-                    tech.phone
-                    ?
-                    `
-                    <a
-                    href="tel:${safe(tech.phone)}"
-                    style="
-                    display:block;
-                    background:green;
-                    color:white;
-                    padding:10px;
-                    border-radius:7px;
-                    text-decoration:none;
-                    text-align:center;
-                    "
-                    >
-                    Call Technician
-                    </a>
-                    `
-                    :
-                    ""
-                }
-
-            </div>
-
-            `;
-
-        }).join("");
-
-
-    }
-    catch(error){
-
-        console.error(error);
-
-        result.innerHTML = `
-
-        <div class="tech-card">
-
-        ❌ Technician search failed.
-
-        <br><br>
-
-        ${safe(error.message)}
-
-        </div>
+          </div>
 
         `;
 
-    }
+      }
+
+    });
+
+
+    result.innerHTML =
+      output ||
+      "❌ No technician found";
+
+
+  }catch(error){
+
+    console.error(error);
+
+    result.innerHTML =
+      "❌ Search failed";
+
+    alert(
+      "Technician search failed ❌\n\n"
+      + error.message
+    );
+
+  }
 
 });
 
 
 
-/*=====================================================
-                    BOOK SERVICE
+/* =====================================================
+   BOOK SERVICE
 ===================================================== */
 
 document
 .getElementById("submitBtn")
-.addEventListener(
-"click",
-async function(){
-
-    const name =
-    document
-    .getElementById("bookingName")
-    .value
-    .trim();
+.addEventListener("click",async()=>{
 
 
-    const phone =
-    document
-    .getElementById("bookingPhone")
-    .value
-    .trim();
+  const form =
+    document.getElementById("bookingForm");
 
 
-    const address =
-    document
-    .getElementById("bookingAddress")
-    .value
-    .trim();
+  const name =
+    form.elements["name"].value.trim();
 
 
-    const pincode =
-    document
-    .getElementById("bookingPincode")
-    .value
-    .trim();
+  const phone =
+    form.elements["phone"].value.trim();
 
 
-    const service =
-    document
-    .getElementById("bookingService")
-    .value;
+  const address =
+    form.elements["address"].value.trim();
 
 
-    const details =
-    document
-    .getElementById("bookingDetails")
-    .value
-    .trim();
+  const pincode =
+    form.elements["pincode"].value.trim();
 
 
-
-    if(
-        !name ||
-        !phone ||
-        !address ||
-        !pincode ||
-        !service
-    ){
-
-        alert(
-        "Please fill all required fields."
-        );
-
-        return;
-
-    }
+  const service =
+    form.elements["service"].value;
 
 
-    const bookingId =
-    "BK" + Date.now();
+  const details =
+    form.elements["details"].value.trim();
 
 
-    try{
+  if(
+    !name ||
+    !phone ||
+    !address ||
+    !pincode ||
+    !service
+  ){
 
-        await addDoc(
+    alert(
+      "Please fill all required details ❌"
+    );
 
-            collection(
-                db,
-                "bookings"
-            ),
+    return;
 
-            {
-
-                bookingId:bookingId,
-
-                name:name,
-
-                phone:phone,
-
-                address:address,
-
-                pincode:pincode,
-
-                service:service,
-
-                details:details,
-
-                status:"Pending",
-
-                time:serverTimestamp()
-
-            }
-
-        );
+  }
 
 
-        const message =
-
-`🔧 NEW SERVICE BOOKING
-
-Booking ID:
-${bookingId}
-
-Name:
-${name}
-
-Phone:
-${phone}
-
-Address:
-${address}
-
-PIN:
-${pincode}
-
-Service:
-${service}
-
-Details:
-${details || "Not provided"}`;
+  const button =
+    document.getElementById("submitBtn");
 
 
-        sendWhatsApp(message);
+  button.disabled = true;
+
+  button.innerText =
+    "Submitting...";
 
 
-        alert(
-
-        "Booking Successful ✅\n\n"+
-        "Booking ID: "+
-        bookingId
-
-        );
+  try{
 
 
-        document
-        .getElementById("bookingForm")
-        .reset();
+    await addDoc(
+      collection(db,"bookings"),
+      {
+
+        name:name,
+
+        phone:phone,
+
+        address:address,
+
+        pincode:pincode,
+
+        service:service,
+
+        details:details,
+
+        status:"Pending",
+
+        time:new Date()
+
+      }
+    );
 
 
-    }
-    catch(error){
+    const message =
 
-        console.error(error);
+`📋 NEW SERVICE BOOKING
 
-        alert(
+👤 Name: ${name}
 
-        "Booking failed ❌\n\n"+
-        error.message
+📞 Phone: ${phone}
 
-        );
+🏠 Address: ${address}
 
-    }
+📍 PIN: ${pincode}
+
+🔧 Service: ${service}
+
+📝 Details:
+${details}
+
+Status: Pending`;
+
+
+    window.open(
+
+      "https://wa.me/919434852965?text="
+      +
+      encodeURIComponent(message),
+
+      "_blank"
+
+    );
+
+
+    alert(
+      "Booking Done Successfully ✅"
+    );
+
+
+    form.reset();
+
+
+  }catch(error){
+
+    console.error(error);
+
+    alert(
+      "Booking failed ❌\n\n"
+      + error.message
+    );
+
+
+  }finally{
+
+    button.disabled = false;
+
+    button.innerText =
+      "Submit Booking";
+
+  }
 
 });
 
 
 
 /* =====================================================
-                    PRODUCT IMAGES
-===================================================== */
-
-function getImages(product){
-
-    let images = [];
-
-
-    if(
-        Array.isArray(
-            product.images
-        )
-    ){
-
-        images =
-        product.images
-        .filter(Boolean);
-
-    }
-
-
-    if(
-        images.length === 0 &&
-        product.image
-    ){
-
-        images = [
-            product.image
-        ];
-
-    }
-
-
-    if(images.length === 0){
-
-        images = [
-
-        "https://via.placeholder.com/600x400?text=No+Image"
-
-        ];
-
-    }
-
-
-    return images;
-
-}
-
-
-
-/* =====================================================
-                    LOAD PRODUCTS
+   LOAD PRODUCTS
 ===================================================== */
 
 async function loadProducts(){
 
-    const container =
-    document
-    .getElementById("productContainer");
+
+  const container =
+    document.getElementById(
+      "productContainer"
+    );
 
 
-    container.innerHTML =
-    "<p>Loading products...</p>";
+  container.innerHTML = `
+
+    <div class="card">
+
+      ⏳ Loading Products...
+
+    </div>
+
+  `;
 
 
-    try{
-
-        const snapshot =
-        await getDocs(
-            collection(
-                db,
-                "products"
-            )
-        );
+  try{
 
 
-        allProducts = [];
+    const snap =
+      await getDocs(
+        collection(db,"products")
+      );
 
 
-        snapshot.forEach(
-        function(docSnap){
-
-            allProducts.push({
-
-                id:docSnap.id,
-
-                ...docSnap.data()
-
-            });
-
-        });
+    allProducts = [];
 
 
-        renderProducts(
-            allProducts
-        );
+    snap.forEach(docSnap=>{
 
 
-    }
-    catch(error){
-
-        console.error(error);
+      const d =
+        docSnap.data();
 
 
-        container.innerHTML = `
+      let images = [];
 
-        <div class="card">
+
+      /* NEW ARRAY FORMAT */
+
+      if(
+        Array.isArray(d.images)
+      ){
+
+        images =
+          d.images.filter(
+            img => img
+          );
+
+      }
+
+
+      /* OLD SINGLE IMAGE FORMAT */
+
+      if(
+        images.length === 0 &&
+        d.image
+      ){
+
+        images = [d.image];
+
+      }
+
+
+      /* NO IMAGE */
+
+      if(
+        images.length === 0
+      ){
+
+        images = [
+          "https://via.placeholder.com/500x400?text=No+Image"
+        ];
+
+      }
+
+
+      allProducts.push({
+
+        id:docSnap.id,
+
+        ...d,
+
+        images:images
+
+      });
+
+    });
+
+
+    renderProducts(allProducts);
+
+
+  }catch(error){
+
+    console.error(
+      "Product Loading Error:",
+      error
+    );
+
+
+    container.innerHTML = `
+
+      <div class="card">
 
         <h3>
-        ❌ Product Loading Failed
+          ❌ Product Loading Failed
         </h3>
 
         <p>
-        ${safe(error.message)}
+          ${escapeHTML(error.message)}
         </p>
 
-        </div>
+      </div>
 
-        `;
+    `;
 
-    }
+  }
 
 }
 
 
 
 /* =====================================================
-                RENDER PRODUCTS
+   RENDER PRODUCTS
 ===================================================== */
 
 function renderProducts(products){
 
-    const container =
-    document
-    .getElementById("productContainer");
+
+  const container =
+    document.getElementById(
+      "productContainer"
+    );
 
 
-    if(
-        products.length === 0
-    ){
+  if(!products.length){
 
-        container.innerHTML =
-        "<p>No Products Found ❌</p>";
+    container.innerHTML = `
 
-        return;
+      <div class="card">
 
-    }
+        <h3>
+          📦 No Products Found
+        </h3>
 
+      </div>
 
-    container.innerHTML =
+    `;
 
-    products.map(
-    function(product){
+    return;
 
-        const images =
-        getImages(product);
+  }
 
 
-        const encoded =
-        encodeURIComponent(
-
-            JSON.stringify({
-
-                name:
-                product.name || "",
-
-                price:
-                product.price || "",
-
-                images:
-                images,
-
-                desc:
-                product.desc || "",
-
-                generic:
-                product.generic || "",
-
-                brand:
-                product.brand || "",
-
-                country:
-                product.country || "",
-
-                manufacturer:
-                product.manufacturer || "",
-
-                model:
-                product.model || ""
-
-            })
-
-        );
+  let output = "";
 
 
-        const slider =
-
-        images.map(
-        function(img){
-
-            return `
-
-            <img
-            src="${safe(img)}"
-            alt="${safe(product.name)}"
-            onclick="zoomImage('${encodeURIComponent(img)}')"
-            >
-
-            `;
-
-        }).join("");
+  products.forEach(product=>{
 
 
-        return `
-
-        <div class="card">
-
-            <div class="slider">
-
-                ${slider}
-
-            </div>
+    const encoded =
+      encodeURIComponent(
+        JSON.stringify(product)
+      );
 
 
-            <h3>
-            ${safe(product.name || "Product")}
-            </h3>
+    const firstImage =
+      product.images[0];
 
 
-            <p>
-
-            <strong>
-            ₹${safe(product.price || "0")}
-            </strong>
-
-            </p>
+    const name =
+      product.name ||
+      "Unnamed Product";
 
 
-            <p>
-
-            ${safe(
-                String(
-                    product.desc || ""
-                ).substring(0,100)
-            )}
-
-            ${
-                String(
-                    product.desc || ""
-                ).length > 100
-                ? "..."
-                : ""
-            }
-
-            </p>
+    const price =
+      product.price || "";
 
 
-            <button
-            class="product-btn"
-            onclick="openFormEncoded('${encoded}')"
-            >
-            🛒 Order
-            </button>
+    const desc =
+      product.desc ||
+      "No description available";
 
 
-            <button
-            class="product-btn"
-            onclick="openGalleryEncoded('${encoded}')"
-            >
-            🖼 Images
-            </button>
+    output += `
+
+      <div class="card">
 
 
-            <button
-            class="product-btn"
-            onclick="openDetailsEncoded('${encoded}')"
-            >
-            📋 Details
-            </button>
+        <!-- PRODUCT IMAGE -->
+
+        <img
+
+          class="product-image"
+
+          src="${escapeHTML(firstImage)}"
+
+          alt="${escapeHTML(name)}"
+
+        >
 
 
-            <button
-            class="product-btn"
-            onclick="openDetailsEncoded('${encoded}')"
-            >
-            📖 View Product
-            </button>
+        <!-- PRODUCT NAME -->
+
+        <h4>
+
+          ${escapeHTML(name)}
+
+        </h4>
+
+
+        <!-- PRICE -->
+
+        <p>
+
+          <b>
+            ₹${escapeHTML(String(price))}
+          </b>
+
+        </p>
+
+
+        <!-- DESCRIPTION -->
+
+        <p
+          style="
+            font-size:12px;
+            min-height:34px;
+          ">
+
+          ${escapeHTML(
+            String(desc)
+          ).substring(0,75)}
+
+          ${
+            String(desc).length > 75
+            ? "..."
+            : ""
+          }
+
+        </p>
+
+
+        <!-- ONLY TWO BUTTONS -->
+
+        <div class="product-buttons">
+
+
+          <button
+
+            onclick="
+              event.stopPropagation();
+              openFormFromProduct('${encoded}')
+            ">
+
+            🛒 Order Now
+
+          </button>
+
+
+          <button
+
+            onclick="
+              event.stopPropagation();
+              openProductDetails('${encoded}')
+            ">
+
+            📄 View Details
+
+          </button>
+
 
         </div>
 
-        `;
 
-    }).join("");
+      </div>
+
+    `;
+
+  });
+
+
+  container.innerHTML =
+    output;
 
 }
 
@@ -2222,141 +1944,182 @@ function renderProducts(products){
 
 /*
 
-
 =====================================================
-                PRODUCT SEARCH
+   PRODUCT SEARCH
 ===================================================== */
 
-window.searchProducts =
-function(){
+window.searchProducts = function(){
 
-    const input =
+
+  const input =
     document
-    .getElementById("searchProduct")
+    .getElementById(
+      "searchProduct"
+    )
     .value
     .toLowerCase()
     .trim();
 
 
-    if(!input){
+  if(!input){
 
-        renderProducts(
-            allProducts
-        );
+    renderProducts(
+      allProducts
+    );
 
-        return;
+    return;
 
-    }
+  }
 
 
-    const filtered =
-    allProducts.filter(
-    function(product){
+  const filtered =
+    allProducts.filter(product=>{
 
-        return (
 
-            String(
-                product.name || ""
-            )
-            .toLowerCase()
-            .includes(input)
+      const name =
+        String(
+          product.name || ""
+        ).toLowerCase();
 
-            ||
 
-            String(
-                product.brand || ""
-            )
-            .toLowerCase()
-            .includes(input)
+      const desc =
+        String(
+          product.desc || ""
+        ).toLowerCase();
 
-            ||
 
-            String(
-                product.generic || ""
-            )
-            .toLowerCase()
-            .includes(input)
+      const brand =
+        String(
+          product.brand || ""
+        ).toLowerCase();
 
-        );
+
+      const generic =
+        String(
+          product.generic || ""
+        ).toLowerCase();
+
+
+      return (
+
+        name.includes(input) ||
+
+        desc.includes(input) ||
+
+        brand.includes(input) ||
+
+        generic.includes(input)
+
+      );
 
     });
 
 
-    renderProducts(
-        filtered
-    );
+  renderProducts(
+    filtered
+  );
 
 };
 
 
 
 /* =====================================================
-                OPEN ORDER FORM
+   OPEN ORDER FORM
 ===================================================== */
 
-window.openFormEncoded =
+window.openFormFromProduct =
 function(encoded){
 
-    try{
 
-        selectedProduct =
-        JSON.parse(
-            decodeURIComponent(
-                encoded
-            )
-        );
+  try{
 
 
-        document
-        .getElementById(
-            "selectedProductName"
-        )
-        .textContent =
-        selectedProduct.name;
+    const product =
+      JSON.parse(
+        decodeURIComponent(encoded)
+      );
 
 
-        document
-        .getElementById(
-            "selectedProductPrice"
-        )
-        .textContent =
-        selectedProduct.price;
+    productName =
+      product.name || "";
 
 
-        document
-        .getElementById(
-            "orderForm"
-        )
-        .style.display =
-        "flex";
+    productPrice =
+      product.price || "";
 
-    }
-    catch(error){
 
-        console.error(error);
+    productImage =
 
-        alert(
-        "Could not open order form."
-        );
+      (
+        product.images &&
+        product.images.length
+      )
 
-    }
+      ?
+
+      product.images[0]
+
+      :
+
+      (
+        product.image || ""
+      );
+
+
+    productDesc =
+      product.desc || "";
+
+
+    document
+    .getElementById(
+      "orderProductName"
+    )
+    .innerText =
+      productName;
+
+
+    document
+    .getElementById(
+      "orderProductPrice"
+    )
+    .innerText =
+      productPrice;
+
+
+    document
+    .getElementById(
+      "orderForm"
+    )
+    .style.display =
+      "flex";
+
+
+  }catch(error){
+
+    console.error(error);
+
+    alert(
+      "Order form খুলতে সমস্যা হয়েছে ❌"
+    );
+
+  }
 
 };
 
 
 
 /* =====================================================
-                CLOSE ORDER FORM
+   CLOSE ORDER FORM
 ===================================================== */
 
 window.closeForm =
 function(){
 
-    document
-    .getElementById(
-        "orderForm"
-    )
-    .style.display =
+  document
+  .getElementById(
+    "orderForm"
+  )
+  .style.display =
     "none";
 
 };
@@ -2364,958 +2127,1051 @@ function(){
 
 
 /* =====================================================
-                    PLACE ORDER
+   PLACE ORDER
 ===================================================== */
 
 window.placeOrder =
 async function(){
 
-    const payment =
+
+  const payment =
     document
     .getElementById(
-        "paymentMethod"
+      "paymentMethod"
     )
     .value;
 
 
-    if(!payment){
+  if(!payment){
 
-        alert(
-        "Please select payment method."
-        );
+    alert(
+      "Please select payment method ❌"
+    );
 
-        return;
+    return;
 
-    }
+  }
 
 
-    if(payment === "COD"){
+  if(!productName){
 
-        await submitCOD();
+    alert(
+      "Product not selected ❌"
+    );
 
-    }
-    else{
+    return;
 
-        await payOnline();
+  }
 
-    }
+
+  if(payment === "COD"){
+
+    await submitCOD();
+
+  }
+
+  else if(payment === "ONLINE"){
+
+    payNow();
+
+  }
 
 };
 
 
 
 /* =====================================================
-                    COD ORDER
+   COD ORDER
 ===================================================== */
 
 async function submitCOD(){
 
-    const name =
+
+  const name =
     document
-    .getElementById("custName")
+    .getElementById(
+      "custName"
+    )
     .value
     .trim();
 
 
-    const phone =
+  const phone =
     document
-    .getElementById("custPhone")
+    .getElementById(
+      "custPhone"
+    )
     .value
     .trim();
 
 
-    const address =
+  const address =
     document
-    .getElementById("custAddress")
+    .getElementById(
+      "custAddress"
+    )
     .value
     .trim();
 
 
-    const pincode =
+  const pincode =
     document
-    .getElementById("custPincode")
+    .getElementById(
+      "custPincode"
+    )
     .value
     .trim();
 
 
-    if(
-        !name ||
-        !phone ||
-        !address ||
-        !pincode
-    ){
+  if(
+    !name ||
+    !phone ||
+    !address ||
+    !pincode
+  ){
 
-        alert(
-        "Please fill all delivery details."
-        );
+    alert(
+      "Please fill all details ❌"
+    );
 
-        return;
+    return;
 
-    }
+  }
 
 
-    const orderId =
+  const orderId =
     "ORD" + Date.now();
 
 
-    try{
+  try{
 
-        await addDoc(
 
-            collection(
-                db,
-                "orders"
-            ),
+    /* =========================================
+       SAVE ORDER TO FIREBASE
+    ========================================= */
 
-            {
 
-                orderId:orderId,
+    await addDoc(
+      collection(db,"orders"),
+      {
 
-                name:name,
+        orderId:orderId,
 
-                phone:phone,
+        name:name,
 
-                address:address,
+        phone:phone,
 
-                pincode:pincode,
+        address:address,
 
-                product:
-                selectedProduct.name,
+        pincode:pincode,
 
-                price:
-                selectedProduct.price,
 
-                image:
-                selectedProduct.images[0] || "",
+        /* PRODUCT */
 
-                description:
-                selectedProduct.desc || "",
+        product:productName,
 
-                payment:"COD",
+        price:productPrice,
 
-                paymentStatus:
-                "Pending",
+        description:productDesc,
 
-                deliveryStatus:
-                "Pending",
+        image:productImage,
 
-                time:
-                serverTimestamp()
 
-            }
+        /* PAYMENT */
 
-        );
+        payment:"COD",
 
+        paymentStatus:"Pending",
 
-        const message =
+        deliveryStatus:"Pending",
 
-`🛒 NEW COD ORDER
 
-Order ID:
-${orderId}
+        time:new Date()
 
-Product:
-${selectedProduct.name}
-
-Price:
-₹${selectedProduct.price}
-
-Customer:
-${name}
-
-Phone:
-${phone}
-
-Address:
-${address}
-
-PIN:
-${pincode}
-
-Payment:
-Cash on Delivery`;
-
-
-        sendWhatsApp(
-            message
-        );
-
-
-        alert(
-
-        "Order Placed Successfully ✅\n\n"+
-        "Order ID: "+
-        orderId
-
-        );
-
-
-        closeForm();
-
-
-        clearOrderForm();
-
-
-    }
-    catch(error){
-
-        console.error(error);
-
-        alert(
-
-        "COD Order Failed ❌\n\n"+
-        error.message
-
-        );
-
-    }
-
-}
-
-
-
-/* =====================================================
-                CLEAR ORDER FORM
-===================================================== */
-
-function clearOrderForm(){
-
-    document
-    .getElementById("custName")
-    .value = "";
-
-
-    document
-    .getElementById("custPhone")
-    .value = "";
-
-
-    document
-    .getElementById("custAddress")
-    .value = "";
-
-
-    document
-    .getElementById("custPincode")
-    .value = "";
-
-
-    document
-    .getElementById("paymentMethod")
-    .value = "";
-
-}
-
-
-
-/* =====================================================
-                ONLINE PAYMENT
-===================================================== */
-
-async function payOnline(){
-
-    const name =
-    document
-    .getElementById("custName")
-    .value
-    .trim();
-
-
-    const phone =
-    document
-    .getElementById("custPhone")
-    .value
-    .trim();
-
-
-    const address =
-    document
-    .getElementById("custAddress")
-    .value
-    .trim();
-
-
-    const pincode =
-    document
-    .getElementById("custPincode")
-    .value
-    .trim();
-
-
-    if(
-        !name ||
-        !phone ||
-        !address ||
-        !pincode
-    ){
-
-        alert(
-        "Please fill all delivery details."
-        );
-
-        return;
-
-    }
-
-
-    if(
-        typeof Razorpay ===
-        "undefined"
-    ){
-
-        alert(
-        "Razorpay is not loaded."
-        );
-
-        return;
-
-    }
-
-
-    const amount =
-    Number(
-        String(
-            selectedProduct.price
-        )
-        .replace(/[^\d.]/g,"")
+      }
     );
 
 
-    if(
-        !amount ||
-        amount <= 0
-    ){
-
-        alert(
-        "Invalid product price."
-        );
-
-        return;
-
-    }
+    /* =========================================
+       WHATSAPP MESSAGE
+    ========================================= */
 
 
-    /*
-       IMPORTANT:
-       Replace this with your actual
-       Razorpay TEST/LIVE Key.
-    */
+    const message =
 
-    const razorpayKey =
+`🛒 NEW COD ORDER
+
+🆔 Order ID:
+${orderId}
+
+📦 Product:
+${productName}
+
+💰 Price:
+₹${productPrice}
+
+👤 Customer:
+${name}
+
+📞 Phone:
+${phone}
+
+🏠 Address:
+${address}
+
+📍 PIN Code:
+${pincode}
+
+📝 Description:
+${productDesc}
+
+🖼️ PRODUCT IMAGE:
+${productImage}
+
+💳 Payment:
+Cash on Delivery
+
+💰 Payment Status:
+Pending
+
+🚚 Delivery Status:
+Pending`;
+
+
+    /* =========================================
+       WHATSAPP
+    ========================================= */
+
+
+    window.open(
+
+      "https://wa.me/919434852965?text="
+      +
+      encodeURIComponent(message),
+
+      "_blank"
+
+    );
+
+
+    alert(
+
+      "Order Placed Successfully ✅\n\n"
+      +
+      "Order ID: "
+      +
+      orderId
+
+    );
+
+
+    closeForm();
+
+
+    /* CLEAR */
+
+    document
+    .getElementById(
+      "custName"
+    )
+    .value = "";
+
+
+    document
+    .getElementById(
+      "custPhone"
+    )
+    .value = "";
+
+
+    document
+    .getElementById(
+      "custAddress"
+    )
+    .value = "";
+
+
+    document
+    .getElementById(
+      "custPincode"
+    )
+    .value = "";
+
+
+    document
+    .getElementById(
+      "paymentMethod"
+    )
+    .value = "";
+
+
+  }catch(error){
+
+    console.error(
+      "Order Error:",
+      error
+    );
+
+
+    alert(
+
+      "Order failed ❌\n\n"
+      +
+      error.message
+
+    );
+
+  }
+
+}
+
+
+
+/* =====================================================
+   ONLINE PAYMENT
+===================================================== */
+
+function payNow(){
+
+
+  const name =
+    document
+    .getElementById(
+      "custName"
+    )
+    .value
+    .trim();
+
+
+  const phone =
+    document
+    .getElementById(
+      "custPhone"
+    )
+    .value
+    .trim();
+
+
+  const address =
+    document
+    .getElementById(
+      "custAddress"
+    )
+    .value
+    .trim();
+
+
+  const pincode =
+    document
+    .getElementById(
+      "custPincode"
+    )
+    .value
+    .trim();
+
+
+  if(
+    !name ||
+    !phone ||
+    !address ||
+    !pincode
+  ){
+
+    alert(
+      "Please fill all details ❌"
+    );
+
+    return;
+
+  }
+
+
+  /*
+    IMPORTANT:
+    Replace this with your REAL
+    Razorpay Key ID.
+  */
+
+
+  const razorpayKey =
     "rzp_test_xxx";
 
 
-    if(
-        razorpayKey ===
-        "rzp_test_xxx"
-    ){
+  if(
+    razorpayKey === "rzp_test_xxx"
+  ){
 
-        alert(
+    alert(
+      "Online payment is not configured yet.\n\n"
+      +
+      "Please add your Razorpay Key ID."
+    );
 
-        "Razorpay Key set করা হয়নি.\n\n"+
-        "Code-এর razorpayKey variable-এ "+
-        "তোমার Razorpay Key বসাও."
+    return;
 
-        );
+  }
 
-        return;
+
+  if(
+    typeof Razorpay === "undefined"
+  ){
+
+    alert(
+      "Payment system loading failed ❌"
+    );
+
+    return;
+
+  }
+
+
+  const numericPrice =
+    Number(
+      String(productPrice)
+      .replace(/[^0-9.]/g,"")
+    );
+
+
+  if(
+    !numericPrice ||
+    numericPrice <= 0
+  ){
+
+    alert(
+      "Invalid product price ❌"
+    );
+
+    return;
+
+  }
+
+
+  const options = {
+
+    key:razorpayKey,
+
+    amount:
+      Math.round(
+        numericPrice * 100
+      ),
+
+    currency:"INR",
+
+    name:
+      "Electrical Hub Center",
+
+    description:
+      productName,
+
+
+    handler:
+    async function(response){
+
+      await saveOnlineOrder(
+        response.razorpay_payment_id
+      );
+
+    },
+
+
+    prefill:{
+
+      name:name,
+
+      contact:phone
+
+    },
+
+
+    theme:{
+
+      color:"#0072ff"
 
     }
 
+  };
 
-    const orderId =
-    "ORD" + Date.now();
 
-
-    const options = {
-
-        key:
-        razorpayKey,
-
-        amount:
-        Math.round(
-            amount * 100
-        ),
-
-        currency:
-        "INR",
-
-        name:
-        "Electrical Hub Center",
-
-        description:
-        selectedProduct.name,
-
-        prefill:{
-
-            name:name,
-
-            contact:phone
-
-        },
-
-
-        handler:
-        async function(response){
-
-            try{
-
-                await addDoc(
-
-                    collection(
-                        db,
-                        "orders"
-                    ),
-
-                    {
-
-                        orderId:
-                        orderId,
-
-                        name:
-                        name,
-
-                        phone:
-                        phone,
-
-                        address:
-                        address,
-
-                        pincode:
-                        pincode,
-
-                        product:
-                        selectedProduct.name,
-
-                        price:
-                        selectedProduct.price,
-
-                        image:
-                        selectedProduct.images[0] || "",
-
-                        description:
-                        selectedProduct.desc || "",
-
-                        payment:
-                        "ONLINE",
-
-                        paymentStatus:
-                        "Paid",
-
-                        paymentId:
-                        response.razorpay_payment_id,
-
-                        deliveryStatus:
-                        "Pending",
-
-                        time:
-                        serverTimestamp()
-
-                    }
-
-                );
-
-
-                const message =
-
-`💳 NEW ONLINE ORDER
-
-Order ID:
-${orderId}
-
-Product:
-${selectedProduct.name}
-
-Price:
-₹${selectedProduct.price}
-
-Customer:
-${name}
-
-Phone:
-${phone}
-
-Address:
-${address}
-
-PIN:
-${pincode}
-
-Payment:
-Online
-
-Payment ID:
-${response.razorpay_payment_id}`;
-
-
-                sendWhatsApp(
-                    message
-                );
-
-
-                alert(
-
-                "Payment Successful ✅\n\n"+
-                "Order ID: "+
-                orderId
-
-                );
-
-
-                closeForm();
-
-                clearOrderForm();
-
-
-            }
-            catch(error){
-
-                console.error(error);
-
-                alert(
-
-                "Payment successful, but order save failed.\n\n"+
-                error.message
-
-                );
-
-            }
-
-        }
-
-    };
-
-
-    const razorpay =
+  const payment =
     new Razorpay(options);
 
 
-    razorpay.on(
-    "payment.failed",
-    function(){
-
-        alert(
-        "Payment Failed ❌"
-        );
-
-    });
-
-
-    razorpay.open();
+  payment.open();
 
 }
 
 
 
 /*
+
 =====================================================
-                PRODUCT DETAILS
+   SAVE ONLINE ORDER
 ===================================================== */
 
-window.openDetailsEncoded =
-function(encoded){
-
-    try{
-
-        const product =
-        JSON.parse(
-            decodeURIComponent(
-                encoded
-            )
-        );
-
-
-        const images =
-        product.images || [];
-
-
-        const imageHTML =
-        images.map(
-        function(img){
-
-            return `
-
-            <img
-            src="${safe(img)}"
-            onclick="zoomImage('${encodeURIComponent(img)}')"
-            >
-
-            `;
-
-        }).join("");
-
-
-        const desc =
-        product.desc ||
-        "No description available.";
-
-
-        const shortDesc =
-        desc.length > 250
-        ?
-        desc.substring(0,250)
-        :
-        desc;
-
-
-        const encodedProduct =
-        encodeURIComponent(
-            JSON.stringify(product)
-        );
-
-
-        document
-        .getElementById(
-            "productDetailsContent"
-        )
-        .innerHTML = `
-
-        <div class="details-slider">
-
-            ${imageHTML}
-
-        </div>
-
-
-        <h2 style="color:#0d47a1;">
-
-        ${safe(product.name)}
-
-        </h2>
-
-
-        <div class="detail-price">
-
-        ₹${safe(product.price)}
-
-        </div>
-
-
-        <h3>
-        Description
-        </h3>
-
-
-        <p
-        id="descText"
-        class="detail-description"
-        >
-
-        ${safe(shortDesc)}
-
-        ${
-            desc.length > 250
-            ? "..."
-            : ""
-        }
-
-        </p>
-
-
-        ${
-            desc.length > 250
-            ?
-
-            `
-            <button
-            class="read-btn"
-            id="readBtn"
-            onclick="toggleDescription('${encodeURIComponent(desc)}')"
-            >
-            Read More
-            </button>
-            `
-
-            :
-
-            ""
-
-        }
-
-
-        <div class="additional">
-
-        <h3>
-        📋 Additional Details
-        </h3>
-
-
-        ${detailRow(
-            "Generic Name",
-            product.generic
-        )}
-
-
-        ${detailRow(
-            "Brand",
-            product.brand
-        )}
-
-
-        ${detailRow(
-            "Country of Manufacture",
-            product.country
-        )}
-
-
-        ${detailRow(
-            "Manufacturer",
-            product.manufacturer
-        )}
-
-
-        ${detailRow(
-            "Model",
-            product.model
-        )}
-
-
-        </div>
-
-
-        <br>
-
-
-        <button
-        onclick="openFormEncoded('${encodedProduct}');closeDetails();"
-        style="background:#198754;"
-        >
-        🛒 Order Now
-        </button>
-
-        `;
-
-
-        document
-        .getElementById(
-            "productDetails"
-        )
-        .style.display =
-        "flex";
-
-    }
-    catch(error){
-
-        console.error(error);
-
-        alert(
-        "Could not open product details."
-        );
-
-    }
-
-};
-
-
-
-/* =====================================================
-                DETAIL ROW
-===================================================== */
-
-function detailRow(
-    label,
-    value
+async function saveOnlineOrder(
+  paymentId
 ){
 
-    if(
-        !value ||
-        String(value).trim() === ""
-    ){
 
-        return "";
+  const name =
+    document
+    .getElementById(
+      "custName"
+    )
+    .value
+    .trim();
 
-    }
+
+  const phone =
+    document
+    .getElementById(
+      "custPhone"
+    )
+    .value
+    .trim();
 
 
-    return `
+  const address =
+    document
+    .getElementById(
+      "custAddress"
+    )
+    .value
+    .trim();
 
-    <div class="detail-row">
 
-        <span>
-        ${safe(label)}
-        </span>
+  const pincode =
+    document
+    .getElementById(
+      "custPincode"
+    )
+    .value
+    .trim();
 
-        <span>
-        ${safe(value)}
-        </span>
 
-    </div>
+  const orderId =
+    "ORD" + Date.now();
 
-    `;
+
+  try{
+
+
+    await addDoc(
+      collection(db,"orders"),
+      {
+
+        orderId:orderId,
+
+        name:name,
+
+        phone:phone,
+
+        address:address,
+
+        pincode:pincode,
+
+        product:productName,
+
+        price:productPrice,
+
+        description:productDesc,
+
+        image:productImage,
+
+        payment:"ONLINE",
+
+        paymentStatus:"Paid",
+
+        paymentId:paymentId,
+
+        deliveryStatus:"Pending",
+
+        time:new Date()
+
+      }
+    );
+
+
+    const message =
+
+`🛒 NEW ONLINE ORDER
+
+🆔 Order ID:
+${orderId}
+
+📦 Product:
+${productName}
+
+💰 Price:
+₹${productPrice}
+
+👤 Customer:
+${name}
+
+📞 Phone:
+${phone}
+
+🏠 Address:
+${address}
+
+📍 PIN:
+${pincode}
+
+📝 Description:
+${productDesc}
+
+🖼️ PRODUCT IMAGE:
+${productImage}
+
+💳 Payment:
+ONLINE
+
+💰 Payment Status:
+Paid
+
+💳 Payment ID:
+${paymentId}
+
+🚚 Delivery Status:
+Pending`;
+
+
+    window.open(
+
+      "https://wa.me/919434852965?text="
+      +
+      encodeURIComponent(message),
+
+      "_blank"
+
+    );
+
+
+    alert(
+
+      "Payment Successful ✅\n\n"
+      +
+      "Order ID: "
+      +
+      orderId
+
+    );
+
+
+    closeForm();
+
+
+  }catch(error){
+
+    console.error(error);
+
+    alert(
+      "Order save failed ❌\n\n"
+      + error.message
+    );
+
+  }
 
 }
 
 
 
 /* =====================================================
-                READ MORE
+   PRODUCT DETAILS
 ===================================================== */
 
-window.toggleDescription =
-function(encodedDesc){
-
-    const desc =
-    decodeURIComponent(
-        encodedDesc
-    );
+window.openProductDetails =
+function(encoded){
 
 
-    const text =
+  try{
+
+
+    const product =
+      JSON.parse(
+        decodeURIComponent(encoded)
+      );
+
+
+    currentProduct =
+      product;
+
+
+    const images =
+      product.images || [];
+
+
+    /* MAIN IMAGE */
+
     document
     .getElementById(
-        "descText"
-    );
+      "dImage"
+    )
+    .src =
+      images[0] || "";
 
 
-    const button =
+    /* NAME */
+
     document
     .getElementById(
-        "readBtn"
-    );
+      "dName"
+    )
+    .innerText =
+      product.name ||
+      "Product";
 
 
-    if(
-        button.textContent.trim()
-        ===
-        "Read More"
-    ){
+    /* PRICE */
 
-        text.textContent =
-        desc;
+    document
+    .getElementById(
+      "dPrice"
+    )
+    .innerText =
+      "Price: ₹"
+      +
+      (
+        product.price || ""
+      );
 
-        button.textContent =
-        "Read Less";
+
+    /* DESCRIPTION */
+
+    document
+    .getElementById(
+      "dDesc"
+    )
+    .innerText =
+      product.desc ||
+      "No description available";
+
+
+    /* =============================================
+       ADDITIONAL DETAILS
+    ============================================= */
+
+
+    let additional = "";
+
+
+    if(product.generic){
+
+      additional += `
+
+        <p>
+          <b>Generic Name:</b>
+          ${escapeHTML(product.generic)}
+        </p>
+
+      `;
 
     }
+
+
+    if(product.brand){
+
+      additional += `
+
+        <p>
+          <b>Brand:</b>
+          ${escapeHTML(product.brand)}
+        </p>
+
+      `;
+
+    }
+
+
+    if(product.country){
+
+      additional += `
+
+        <p>
+          <b>Country of Origin:</b>
+          ${escapeHTML(product.country)}
+        </p>
+
+      `;
+
+    }
+
+
+    if(product.manufacturer){
+
+      additional += `
+
+        <p>
+          <b>Manufacturer:</b>
+          ${escapeHTML(product.manufacturer)}
+        </p>
+
+      `;
+
+    }
+
+
+    if(product.model){
+
+      additional += `
+
+        <p>
+          <b>Model:</b>
+          ${escapeHTML(product.model)}
+        </p>
+
+      `;
+
+    }
+
+
+    if(product.category){
+
+      additional += `
+
+        <p>
+          <b>Category:</b>
+          ${escapeHTML(product.category)}
+        </p>
+
+      `;
+
+    }
+
+
+    if(product.material){
+
+      additional += `
+
+        <p>
+          <b>Material:</b>
+          ${escapeHTML(product.material)}
+        </p>
+
+      `;
+
+    }
+
+
+    if(product.warranty){
+
+      additional += `
+
+        <p>
+          <b>Warranty:</b>
+          ${escapeHTML(product.warranty)}
+        </p>
+
+      `;
+
+    }
+
+
+    if(additional){
+
+      document
+      .getElementById(
+        "additionalDetails"
+      )
+      .innerHTML = `
+
+        <div class="additionalBox">
+
+          <h3>
+            📋 Additional Details
+          </h3>
+
+          ${additional}
+
+        </div>
+
+      `;
+
+    }
+
     else{
 
-        text.textContent =
-        desc.substring(0,250)
-        +
-        (
-            desc.length > 250
-            ?
-            "..."
-            :
-            ""
-        );
-
-        button.textContent =
-        "Read More";
+      document
+      .getElementById(
+        "additionalDetails"
+      )
+      .innerHTML = "";
 
     }
+
+
+    /* =============================================
+       ORDER BUTTON
+    ============================================= */
+
+
+    document
+    .getElementById(
+      "detailsOrderBtn"
+    )
+    .onclick =
+    function(){
+
+      openFormFromProduct(
+        encodeURIComponent(
+          JSON.stringify(product)
+        )
+      );
+
+      closeDetails();
+
+    };
+
+
+    /* =============================================
+       IMAGE BUTTON
+    ============================================= */
+
+
+    document
+    .getElementById(
+      "detailsImageBtn"
+    )
+    .onclick =
+    function(){
+
+      openGallery(
+        images.join("|")
+      );
+
+    };
+
+
+    /* SHOW */
+
+    document
+    .getElementById(
+      "productDetails"
+    )
+    .style.display =
+      "block";
+
+
+    document.body.style.overflow =
+      "hidden";
+
+
+  }catch(error){
+
+    console.error(error);
+
+    alert(
+      "Product Details খুলতে সমস্যা হয়েছে ❌"
+    );
+
+  }
 
 };
 
 
 
 /* =====================================================
-                CLOSE DETAILS
+   CLOSE PRODUCT DETAILS
 ===================================================== */
 
 window.closeDetails =
 function(){
 
-    document
-    .getElementById(
-        "productDetails"
-    )
-    .style.display =
+
+  document
+  .getElementById(
+    "productDetails"
+  )
+  .style.display =
     "none";
 
+
+  document.body.style.overflow =
+    "auto";
+
 };
 
 
 
 /* =====================================================
-                OPEN GALLERY
+   IMAGE GALLERY
 ===================================================== */
 
-window.openGalleryEncoded =
-function(encoded){
-
-    try{
-
-        const product =
-        JSON.parse(
-            decodeURIComponent(
-                encoded
-            )
-        );
+window.openGallery =
+function(imgString){
 
 
-        const images =
-        product.images || [];
+  const images =
+    String(imgString)
+    .split("|")
+    .filter(Boolean);
 
 
-        const html =
-        `
+  if(!images.length){
 
-        <div class="gallery-slider">
+    alert(
+      "No images available ❌"
+    );
 
-        ${
-            images.map(
-            function(img){
+    return;
 
-                return `
-
-                <img
-                src="${safe(img)}"
-                onclick="zoomImage('${encodeURIComponent(img)}')"
-                >
-
-                `;
-
-            }).join("")
-        }
-
-        </div>
-
-        `;
+  }
 
 
-        document
-        .getElementById(
-            "imgContainer"
-        )
-        .innerHTML =
-        html;
+  let output =
+    `<div class="gallery-slider">`;
 
 
-        document
-        .getElementById(
-            "imgModal"
-        )
-        .style.display =
-        "flex";
+  images.forEach(img=>{
 
-    }
-    catch(error){
+    output += `
 
-        console.error(error);
+      <img
+        src="${escapeHTML(img)}"
+        alt="Product Image">
 
-        alert(
-        "Could not open gallery."
-        );
+    `;
 
-    }
+  });
+
+
+  output +=
+    `</div>`;
+
+
+  document
+  .getElementById(
+    "imgContainer"
+  )
+  .innerHTML =
+    output;
+
+
+  document
+  .getElementById(
+    "imgModal"
+  )
+  .style.display =
+    "block";
+
 
 };
 
 
 
 /* =====================================================
-                CLOSE GALLERY
+   CLOSE GALLERY
 ===================================================== */
 
 window.closeGallery =
 function(){
 
-    document
-    .getElementById(
-        "imgModal"
-    )
-    .style.display =
+
+  document
+  .getElementById(
+    "imgModal"
+  )
+  .style.display =
     "none";
 
 };
@@ -3323,331 +3179,253 @@ function(){
 
 
 /* =====================================================
-                    IMAGE ZOOM
-===================================================== */
-
-window.zoomImage =
-function(encodedImage){
-
-    const image =
-    decodeURIComponent(
-        encodedImage
-    );
-
-
-    document
-    .getElementById(
-        "zoomImage"
-    )
-    .src =
-    image;
-
-
-    document
-    .getElementById(
-        "zoomModal"
-    )
-    .style.display =
-    "flex";
-
-};
-
-
-
-/* =====================================================
-                    CLOSE ZOOM
-===================================================== */
-
-window.closeZoom =
-function(){
-
-    document
-    .getElementById(
-        "zoomModal"
-    )
-    .style.display =
-    "none";
-
-};
-
-
-
-/* =====================================================
-                    TRACK ORDER
+   TRACK ORDER
 ===================================================== */
 
 window.trackOrder =
 async function(){
 
-    const input =
+
+  const input =
     document
     .getElementById(
-        "trackInput"
+      "trackInput"
     )
     .value
     .trim();
 
 
-    const result =
+  const result =
     document
     .getElementById(
-        "trackResult"
+      "trackResult"
     );
 
 
-    if(!input){
+  if(!input){
 
-        alert(
-        "Enter Order ID or Phone Number."
-        );
+    alert(
+      "Enter Order ID or Phone Number"
+    );
 
-        return;
+    return;
 
-    }
-
-
-    result.innerHTML =
-    "<p>Checking order...</p>";
+  }
 
 
-    try{
+  result.innerHTML =
+    "⏳ Searching order...";
 
-        const snapshot =
-        await getDocs(
-            collection(
-                db,
-                "orders"
+
+  try{
+
+
+    const snap =
+      await getDocs(
+        collection(db,"orders")
+      );
+
+
+    let output = "";
+
+
+    snap.forEach(docSnap=>{
+
+
+      const d =
+        docSnap.data();
+
+
+      if(
+
+        String(d.orderId || "")
+        .toLowerCase() ===
+        input.toLowerCase()
+
+        ||
+
+        String(d.phone || "") ===
+        input
+
+      ){
+
+
+        let dateText =
+          "N/A";
+
+
+        if(
+          d.time &&
+          d.time.seconds
+        ){
+
+          dateText =
+            new Date(
+              d.time.seconds * 1000
             )
-        );
+            .toLocaleString();
 
+        }
 
-        let found = [];
+        else if(d.time){
 
-
-        snapshot.forEach(
-        function(docSnap){
-
-            const data =
-            docSnap.data();
-
-
-            if(
-
-                String(
-                    data.orderId || ""
-                )
-                .toLowerCase()
-                ===
-                input.toLowerCase()
-
-                ||
-
-                String(
-                    data.phone || ""
-                )
-                ===
-                input
-
-            ){
-
-                found.push(data);
-
-            }
-
-        });
-
-
-        if(found.length === 0){
-
-            result.innerHTML = `
-
-            <div class="track-card">
-
-            ❌ No Order Found
-
-            </div>
-
-            `;
-
-            return;
+          dateText =
+            new Date(
+              d.time
+            )
+            .toLocaleString();
 
         }
 
 
-        result.innerHTML =
-
-        found.map(
-        function(order){
-
-            let dateText =
-            "Not available";
+        const delivery =
+          d.deliveryStatus ||
+          "Pending";
 
 
-            if(
-                order.time &&
-                typeof order.time.toDate
-                ===
-                "function"
-            ){
-
-                dateText =
-                order.time
-                .toDate()
-                .toLocaleString();
-
-            }
+        const paymentStatus =
+          d.paymentStatus ||
+          "Pending";
 
 
-            return `
+        output += `
 
-            <div class="track-card">
+          <div class="card">
 
             <h3>
-            📦 Order Details
+              🆔 ${escapeHTML(d.orderId || "")}
             </h3>
 
-
             <p>
-            <strong>Order ID:</strong>
-            ${safe(order.orderId)}
+              📦 Product:
+              ${escapeHTML(d.product || "")}
             </p>
 
-
             <p>
-            <strong>Product:</strong>
-            ${safe(order.product)}
+              💰 Price:
+              ₹${escapeHTML(
+                String(d.price || "")
+              )}
             </p>
 
-
             <p>
-            <strong>Price:</strong>
-            ₹${safe(order.price)}
+              💳 Payment:
+              ${escapeHTML(
+                d.payment || ""
+              )}
             </p>
 
-
             <p>
-            <strong>Payment:</strong>
-            ${safe(order.payment)}
+              💰 Payment Status:
+              ${escapeHTML(
+                paymentStatus
+              )}
             </p>
 
-
             <p>
-            <strong>Payment Status:</strong>
-            ${safe(order.paymentStatus)}
+              🚚 Delivery Status:
+              ${escapeHTML(
+                delivery
+              )}
             </p>
 
-
             <p>
-            <strong>Delivery Status:</strong>
-
-            <span style="
-            color:
-            ${
-                order.deliveryStatus === "Delivered"
-                ?
-                "green"
-                :
-                order.deliveryStatus === "Shipped"
-                ?
-                "orange"
-                :
-                "red"
-            };
-            font-weight:bold;
-            ">
-
-            ${safe(
-                order.deliveryStatus ||
-                "Pending"
-            )}
-
-            </span>
-
+              📅 Date:
+              ${escapeHTML(dateText)}
             </p>
 
-
-            <p>
-            <strong>Order Date:</strong>
-            ${safe(dateText)}
-            </p>
-
-
-            </div>
-
-            `;
-
-        }).join("");
-
-
-    }
-    catch(error){
-
-        console.error(error);
-
-        result.innerHTML = `
-
-        <div class="track-card">
-
-        ❌ Tracking failed.
-
-        <br><br>
-
-        ${safe(error.message)}
-
-        </div>
+          </div>
 
         `;
 
-    }
+      }
+
+    });
+
+
+    result.innerHTML =
+      output ||
+      "❌ No Order Found";
+
+
+  }catch(error){
+
+    console.error(error);
+
+    result.innerHTML =
+      "❌ Tracking failed";
+
+
+    alert(
+      "Tracking failed ❌\n\n"
+      +
+      error.message
+    );
+
+  }
 
 };
 
 
 
 /*
+
 =====================================================
-                    LOGOUT
+   LOGOUT
 ===================================================== */
 
 window.logout =
 function(){
 
-    const ok =
+  if(
     confirm(
-        "Are you sure you want to logout?"
-    );
-
-
-    if(!ok){
-
-        return;
-
-    }
-
+      "Are you sure you want to logout?"
+    )
+  ){
 
     localStorage.removeItem(
-        "user"
+      "user"
     );
 
-
     localStorage.removeItem(
-        "userLoggedIn"
+      "userLoggedIn"
     );
 
 
     window.location.href =
-    "login.html";
+      "login.html";
+
+  }
 
 };
 
 
 
 /* =====================================================
-                    LOAD PRODUCTS
+   LOAD PRODUCTS
 ===================================================== */
 
 loadProducts();
 
+
+</script>
+
+
+
+<!-- =====================================================
+     LOGIN CHECK
+===================================================== -->
+
+<script>
+
+if(
+  !localStorage.getItem("user")
+){
+
+  window.location.href =
+    "login.html";
+
+}
 
 </script>
 
